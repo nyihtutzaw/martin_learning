@@ -19,7 +19,7 @@ class KColors {
 
 KColors colorScheme1 = KColors(
   primary: const Color(0xFF2366C9),
-  secondary: Colors.teal,
+  secondary: Colors.teal.shade300,
   grey: Colors.grey.shade300,
   black: const Color(0xFF1C1C1C),
   white: Colors.white,

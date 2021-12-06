@@ -48,25 +48,25 @@ class _HomeState extends State<Home> {
         child: _pages.elementAt(_selectedIndex),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
+        items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.storage_rounded),
+            icon: activeIcons.diamond,
             label: 'Featured',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.calendar_today_outlined),
+            icon: activeIcons.calendar,
             label: '+1',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.insert_drive_file),
+            icon: activeIcons.file,
             label: 'PN',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.play_circle_outline_rounded),
+            icon: activeIcons.player,
             label: '101',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.check_circle),
+            icon: activeIcons.heart,
             label: 'My Lists',
           ),
         ],

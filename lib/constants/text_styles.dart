@@ -7,6 +7,9 @@ class KTextStyles {
   final TextStyle title;
   final TextStyle description;
   final TextStyle caption;
+  final TextStyle author;
+  final TextStyle actions;
+  final TextStyle small;
   final TextStyle muted;
 
   const KTextStyles({
@@ -15,6 +18,9 @@ class KTextStyles {
     required this.title,
     required this.description,
     required this.caption,
+    required this.author,
+    required this.actions,
+    required this.small,
     required this.muted,
   });
 }
@@ -22,13 +28,14 @@ class KTextStyles {
 KTextStyles textStyles1 = KTextStyles(
   header: TextStyle(
     fontWeight: FontWeight.bold,
-    fontSize: 21.0,
+    fontSize: 36.0,
     color: activeColors.black,
   ),
   drawer: TextStyle(
-    fontWeight: FontWeight.w500,
-    fontSize: 18.0,
-    color: activeColors.white,
+    letterSpacing: 0.3,
+    fontSize: 14.0,
+    fontWeight: FontWeight.w100,
+    color: activeColors.grey,
   ),
   title: TextStyle(
     fontWeight: FontWeight.w600,
@@ -36,12 +43,29 @@ KTextStyles textStyles1 = KTextStyles(
     color: activeColors.black,
   ),
   description: TextStyle(
+    height: 1.5,
+    fontWeight: FontWeight.w600,
     fontSize: 16.0,
-    color: activeColors.black,
+    color: Colors.grey.shade700,
   ),
   caption: TextStyle(
+    height: 1.4,
+    fontSize: 16.0,
+    color: Colors.grey.shade700,
+  ),
+  author: TextStyle(
     fontSize: 14.0,
-    color: activeColors.black,
+    color: Colors.grey.shade700,
+    fontStyle: FontStyle.italic,
+  ),
+  actions: TextStyle(
+    height: 1.4,
+    fontSize: 16.0,
+    color: activeColors.secondary,
+  ),
+  small: TextStyle(
+    fontSize: 12.0,
+    color: Colors.grey.shade500,
   ),
   muted: TextStyle(
     fontSize: 14.0,

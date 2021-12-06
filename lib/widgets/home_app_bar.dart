@@ -91,11 +91,7 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
                           ),
                         );
                       },
-                      child: const Icon(
-                        Icons.search,
-                        color: Colors.white,
-                        size: 24.0,
-                      ),
+                      child: activeIcons.search,
                     )
                   : Container(
                       decoration: BoxDecoration(

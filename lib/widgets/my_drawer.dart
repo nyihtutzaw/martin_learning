@@ -20,33 +20,33 @@ class MyDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<DrawerItem> drawerItems = [
-      const DrawerItem(
-        icon: Icons.home,
+      DrawerItem(
+        icon: activeIcons.home,
         pageName: 'Home',
         route: '/home',
       ),
-      const DrawerItem(
-        icon: Icons.storage_rounded,
+      DrawerItem(
+        icon: activeIcons.diam,
         pageName: 'Featured',
         route: '/featured',
       ),
-      const DrawerItem(
-        icon: Icons.notifications_none,
+      DrawerItem(
+        icon: activeIcons.noti,
         pageName: 'Notifications',
         route: '/noti',
       ),
-      const DrawerItem(
-        icon: Icons.cloud_outlined,
+      DrawerItem(
+        icon: activeIcons.cloud,
         pageName: 'Offline content',
         route: '/offline_content',
       ),
-      const DrawerItem(
-        icon: Icons.account_circle_outlined,
+      DrawerItem(
+        icon: activeIcons.profile,
         pageName: 'Manage Profile',
         route: '/profile',
       ),
-      const DrawerItem(
-        icon: Icons.directions_walk_rounded,
+      DrawerItem(
+        icon: activeIcons.walker,
         pageName: 'Log Out',
         route: '/log_out',
       ),
@@ -130,11 +130,11 @@ class MyDrawer extends StatelessWidget {
                   )
                 ],
               ),
-              const Padding(
-                padding: EdgeInsets.only(top: 10.0, left: 16, right: 16),
+              Padding(
+                padding: const EdgeInsets.only(top: 10.0, left: 16, right: 16),
                 child: DrawerTile(
                   title: 'Optimize Podcast',
-                  icon: Icons.podcasts_rounded,
+                  icon: activeIcons.podcast,
                   route: '/podcast',
                 ),
               ),
@@ -179,12 +179,7 @@ class DrawerTile extends StatelessWidget {
               padding: const EdgeInsets.only(left: 5.0),
               child: Text(
                 title,
-                style: TextStyle(
-                  letterSpacing: 0.3,
-                  fontSize: 14.0,
-                  fontWeight: FontWeight.w100,
-                  color: activeColors.grey,
-                ),
+                style: activeTextStyles.drawer,
               ),
             ),
           ],
