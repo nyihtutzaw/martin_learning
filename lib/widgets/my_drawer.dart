@@ -15,9 +15,7 @@ class DrawerItem {
 }
 
 class MyDrawer extends StatelessWidget {
-  final String currentPage;
-
-  const MyDrawer({Key? key, required this.currentPage}) : super(key: key);
+  const MyDrawer({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

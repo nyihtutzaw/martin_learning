@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'widgets/my_app_bar.dart';
+import 'widgets/home_app_bar.dart';
+import 'widgets/my_drawer.dart';
 import 'constants/active_constants.dart';
 
 // screens
@@ -38,16 +39,18 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: _selectedIndex == 3
-          ? MyAppBar(title: 'Home', bgColor: activeColors.secondary)
-          : MyAppBar(title: 'Home', bgColor: activeColors.primary),
+      appBar: HomeAppBar(
+        currentIndex: _selectedIndex,
+        bgColor: activeColors.primary,
+      ),
+      drawer: const MyDrawer(),
       body: Center(
         child: _pages.elementAt(_selectedIndex),
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.storage),
+            icon: Icon(Icons.storage_rounded),
             label: 'Featured',
           ),
           BottomNavigationBarItem(

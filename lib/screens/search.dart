@@ -12,7 +12,7 @@ class _SearchState extends State<Search> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: activeColors.primary,
+      backgroundColor: activeColors.white,
       appBar: AppBar(
         elevation: 0.0,
         title: Column(
@@ -50,21 +50,20 @@ class _SearchState extends State<Search> {
       ),
       body: Card(
         elevation: 1.0,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(
-            vertical: 1.0,
-            horizontal: 15.0,
-          ),
-          child: Row(
-            children: [
-              const Icon(
-                Icons.search,
-                color: Colors.black,
-                size: 25.0,
+        child: Row(
+          children: [
+            const Icon(
+              Icons.search,
+              color: Colors.black,
+              size: 25.0,
+            ),
+            const SizedBox(width: 5.0),
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                vertical: 10.0,
+                horizontal: 15.0,
               ),
-              const SizedBox(width: 5.0),
-              Container(
-                margin: const EdgeInsets.only(top: 15.0),
+              child: SizedBox(
                 height: 30.0,
                 width: 250.0,
                 child: TextField(
@@ -80,6 +79,7 @@ class _SearchState extends State<Search> {
                   },
                   autofocus: true,
                   decoration: const InputDecoration(
+                    // contentPadding: EdgeInsets.all(10.0),
                     hintText: 'Search here!',
                     enabledBorder:
                         OutlineInputBorder(borderSide: BorderSide.none),
@@ -95,8 +95,8 @@ class _SearchState extends State<Search> {
                   ),
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
