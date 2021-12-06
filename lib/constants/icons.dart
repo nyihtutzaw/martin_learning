@@ -20,6 +20,7 @@ class KIcons {
   final Widget file;
   final Widget player;
   final Widget playerFill;
+  final Widget playerCircleFill;
   final Widget heart;
   final Widget download;
   final Widget filter;
@@ -41,6 +42,7 @@ class KIcons {
     required this.file,
     required this.player,
     required this.playerFill,
+    required this.playerCircleFill,
     required this.heart,
     required this.download,
     required this.filter,
@@ -68,6 +70,11 @@ KIcons icon1 = KIcons(
   file: const Icon(CupertinoIcons.doc_text),
   player: const Icon(CupertinoIcons.play_rectangle),
   playerFill: const Icon(CupertinoIcons.play_rectangle_fill),
+  playerCircleFill: Icon(
+    Icons.play_circle_rounded,
+    size: 39.0,
+    color: activeColors.primary,
+  ),
   heart: const Icon(CupertinoIcons.suit_heart_fill),
   download: Container(
     decoration: BoxDecoration(

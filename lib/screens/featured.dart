@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../widgets/plus_one_widget.dart';
 import '../widgets/pn_widget.dart';
+import '../widgets/one_z_one_widget.dart';
 import '../constants/active_constants.dart';
 
 class Featured extends StatefulWidget {
@@ -49,7 +50,9 @@ class _FeaturedState extends State<Featured> {
             const SizedBox(height: 36.0),
             PNWidget(categories: _categories),
             const SizedBox(height: 25.0),
-            PlusOneWidget(),
+            const PlusOneWidget(),
+            const SizedBox(height: 25.0),
+            const OneZOneWidget(),
           ],
         ),
       ),
