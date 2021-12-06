@@ -22,6 +22,7 @@ class KIcons {
   final Widget playerFill;
   final Widget heart;
   final Widget download;
+  final Widget filter;
 
   const KIcons({
     required this.doc,
@@ -42,6 +43,7 @@ class KIcons {
     required this.playerFill,
     required this.heart,
     required this.download,
+    required this.filter,
   });
 }
 
@@ -82,6 +84,19 @@ KIcons icon1 = KIcons(
         color: activeColors.primary,
         size: 16.0,
       ),
+    ),
+  ),
+  filter: Container(
+    decoration: BoxDecoration(
+      border: Border.all(
+        width: 2.0,
+        color: activeColors.white,
+      ),
+      shape: BoxShape.circle,
+    ),
+    child: const Icon(
+      Icons.filter_list,
+      size: 14.0,
     ),
   ),
 );

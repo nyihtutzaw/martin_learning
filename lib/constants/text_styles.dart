@@ -68,7 +68,7 @@ KTextStyles textStyles1 = KTextStyles(
     color: Colors.grey.shade500,
   ),
   muted: TextStyle(
-    fontSize: 14.0,
+    fontSize: 16.0,
     color: activeColors.grey,
   ),
 );

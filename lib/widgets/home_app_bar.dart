@@ -72,15 +72,15 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
                         ),
                       ],
                     ),
-              const SizedBox(width: 5.0),
-              const SizedBox(width: 5.0),
-              const SizedBox(width: 5.0),
-              const SizedBox(width: 5.0),
+              const SizedBox(width: 1.0),
+              const SizedBox(width: 1.0),
+              const SizedBox(width: 1.0),
+              const SizedBox(width: 1.0),
               Text(_pageNames[currentIndex]),
-              const SizedBox(width: 10.0),
-              const SizedBox(width: 10.0),
-              const SizedBox(width: 10.0),
-              const SizedBox(width: 10.0),
+              const SizedBox(width: 5.0),
+              const SizedBox(width: 5.0),
+              const SizedBox(width: 5.0),
+              const SizedBox(width: 5.0),
               currentIndex == 0 || currentIndex == 4
                   ? GestureDetector(
                       onTap: () {
@@ -93,19 +93,7 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
                       },
                       child: activeIcons.search,
                     )
-                  : Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          width: 2.0,
-                          color: activeColors.white,
-                        ),
-                        shape: BoxShape.circle,
-                      ),
-                      child: const Icon(
-                        Icons.filter_list,
-                        size: 14.0,
-                      ),
-                    ),
+                  : activeIcons.filter,
               const SizedBox(width: 1.0),
             ],
           ),
