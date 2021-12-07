@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:optimize/constants/active_constants.dart';
 
+import '../constants/active_constants.dart';
 import '../screens/search.dart';
 
 class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {

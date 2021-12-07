@@ -6,6 +6,7 @@ import 'constants/active_constants.dart';
 import 'onboarding.dart';
 import 'home.dart';
 import 'screens/featured_full.dart';
+import 'screens/noti.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -52,6 +53,7 @@ class MyApp extends StatelessWidget {
         "/": (BuildContext context) => const Onboarding(),
         "/home": (BuildContext context) => const Home(),
         "/featured": (BuildContext context) => const FeaturedFull(),
+        "/noti": (BuildContext context) => const Noti(),
       },
     );
   }
