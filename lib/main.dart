@@ -3,8 +3,9 @@ import 'package:flutter/services.dart';
 
 import 'constants/active_constants.dart';
 // screens
-import 'home.dart';
 import 'onboarding.dart';
+import 'home.dart';
+import 'screens/featured_full.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -50,6 +51,7 @@ class MyApp extends StatelessWidget {
       routes: <String, WidgetBuilder>{
         "/": (BuildContext context) => const Onboarding(),
         "/home": (BuildContext context) => const Home(),
+        "/featured": (BuildContext context) => const FeaturedFull(),
       },
     );
   }

@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../widgets/home_app_bar.dart';
+import '../widgets/my_drawer.dart';
 import '../widgets/plus_one_widget.dart';
 import '../widgets/pn_widget.dart';
 import '../widgets/one_z_one_widget.dart';
@@ -17,6 +19,11 @@ class _FeaturedFullState extends State<FeaturedFull> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: HomeAppBar(
+        currentIndex: 0,
+        bgColor: activeColors.primary,
+      ),
+      drawer: const MyDrawer(),
       body: SingleChildScrollView(
         child: Column(
           children: [
