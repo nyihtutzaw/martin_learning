@@ -70,10 +70,25 @@ KIcons icon1 = KIcons(
   file: const Icon(CupertinoIcons.doc_text),
   player: const Icon(CupertinoIcons.play_rectangle),
   playerFill: const Icon(CupertinoIcons.play_rectangle_fill),
-  playerCircleFill: Icon(
-    Icons.play_circle_rounded,
-    size: 39.0,
-    color: activeColors.primary,
+  // playerCircleFill: Icon(
+  //   Icons.play_circle_rounded,
+  //   size: 39.0,
+  //   color: activeColors.primary,
+  // ),
+  playerCircleFill: Align(
+    alignment: Alignment.center,
+    child: Container(
+      width: 30.0,
+      height: 30.0,
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        color: activeColors.primary,
+      ),
+      child: Icon(
+        Icons.play_arrow_rounded,
+        color: activeColors.white,
+      ),
+    ),
   ),
   heart: const Icon(CupertinoIcons.suit_heart_fill),
   download: Container(

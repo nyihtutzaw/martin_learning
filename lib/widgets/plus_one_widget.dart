@@ -17,20 +17,25 @@ class PlusOneWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
-              width: 120,
-              height: 90,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(5),
-                // shape: BoxShape.circle,
-                image: const DecorationImage(
-                  image: NetworkImage(
-                    "https://images.unsplash.com/photo-1541329164087-0283eda68eda?fit=crop&w=634&q=80",
+            GestureDetector(
+              onTap: () {
+                // print('Its work!');
+              },
+              child: Container(
+                width: 123.0,
+                height: 75.0,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5),
+                  // shape: BoxShape.circle,
+                  image: const DecorationImage(
+                    image: NetworkImage(
+                      "https://images.unsplash.com/photo-1541329164087-0283eda68eda?fit=crop&w=634&q=80",
+                    ),
+                    fit: BoxFit.fill,
                   ),
-                  fit: BoxFit.fill,
                 ),
+                child: activeIcons.playerCircleFill,
               ),
-              child: activeIcons.playerCircleFill,
             ),
             const SizedBox(width: 5.0),
             Column(
