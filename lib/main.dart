@@ -7,6 +7,7 @@ import 'onboarding.dart';
 import 'home.dart';
 import 'screens/featured_full.dart';
 import 'screens/noti.dart';
+import 'screens/offline_content.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -54,6 +55,7 @@ class MyApp extends StatelessWidget {
         "/home": (BuildContext context) => const Home(),
         "/featured": (BuildContext context) => const FeaturedFull(),
         "/noti": (BuildContext context) => const Noti(),
+        "/offline_content": (BuildContext context) => const OfflineContent(),
       },
     );
   }
