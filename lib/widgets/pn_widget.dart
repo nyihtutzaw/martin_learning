@@ -9,6 +9,8 @@ class PNWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final deviceWidth = MediaQuery.of(context).size.width;
+
     final List<String> _categories = [
       'algorithms',
       'habits',
@@ -16,6 +18,7 @@ class PNWidget extends StatelessWidget {
       'willpower',
       'best-of-optimize',
     ];
+
     return SizedBox(
       height: _categories.length > 4 ? 230.0 : 200.0,
       child: Padding(
@@ -24,17 +27,21 @@ class PNWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
-              width: 100,
-              height: 136,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(5),
-                // shape: BoxShape.circle,
-                image: const DecorationImage(
-                  image: NetworkImage(
-                    "https://images.unsplash.com/photo-1487029413235-e3f7a0e8e140?fit=crop&w=1050&q=80",
+            GestureDetector(
+              onTap: () {
+                print('PN!');
+              },
+              child: Container(
+                width: deviceWidth < 400.0 ? 100.0 : 120.0,
+                height: deviceWidth < 400.0 ? 136.0 : 150.0,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5),
+                  image: const DecorationImage(
+                    image: NetworkImage(
+                      "https://images.unsplash.com/photo-1487029413235-e3f7a0e8e140?fit=crop&w=1050&q=80",
+                    ),
+                    fit: BoxFit.fill,
                   ),
-                  fit: BoxFit.fill,
                 ),
               ),
             ),
@@ -48,7 +55,7 @@ class PNWidget extends StatelessWidget {
                   style: activeTextStyles.title,
                 ),
                 SizedBox(
-                  width: 200.0,
+                  width: deviceWidth < 400.0 ? 200.0 : 220.0,
                   child: Text(
                     'The Small Changes That Change Everything',
                     style: activeTextStyles.caption,
@@ -122,7 +129,7 @@ class PNWidget extends StatelessWidget {
                   ],
                 ),
                 SizedBox(
-                  width: 200.0,
+                  width: deviceWidth < 400.0 ? 200.0 : 220.0,
                   child: Wrap(
                     spacing: 5.0,
                     runSpacing: 6.0,

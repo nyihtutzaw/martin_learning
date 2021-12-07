@@ -9,6 +9,8 @@ class PlusOneWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final deviceWidth = MediaQuery.of(context).size.width;
+
     return SizedBox(
       height: 90.0,
       child: Padding(
@@ -19,14 +21,13 @@ class PlusOneWidget extends StatelessWidget {
           children: [
             GestureDetector(
               onTap: () {
-                // print('Its work!');
+                print('Plus One!');
               },
               child: Container(
-                width: 123.0,
-                height: 75.0,
+                width: deviceWidth < 400.0 ? 123.0 : 133.0,
+                height: deviceWidth < 400.0 ? 75.0 : 90.0,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5),
-                  // shape: BoxShape.circle,
                   image: const DecorationImage(
                     image: NetworkImage(
                       "https://images.unsplash.com/photo-1541329164087-0283eda68eda?fit=crop&w=634&q=80",
@@ -43,7 +44,7 @@ class PlusOneWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(
-                  width: 180.0,
+                  width: deviceWidth < 400.0 ? 180.0 : 200.0,
                   child: Wrap(
                     children: [
                       Text(
