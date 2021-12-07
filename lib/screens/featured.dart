@@ -14,13 +14,6 @@ class Featured extends StatefulWidget {
 }
 
 class _FeaturedState extends State<Featured> {
-  final List<String> _categories = [
-    'algorithms',
-    'habits',
-    'best-of-optimize',
-    'celebrate',
-    'willpower',
-  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,7 +41,7 @@ class _FeaturedState extends State<Featured> {
               ),
             ),
             const SizedBox(height: 36.0),
-            PNWidget(categories: _categories),
+            const PNWidget(),
             const SizedBox(height: 25.0),
             const PlusOneWidget(),
             const SizedBox(height: 25.0),

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'constants/active_constants.dart';
-
 // screens
 import 'home.dart';
 import 'onboarding.dart';

@@ -5,14 +5,17 @@ import '../constants/active_constants.dart';
 class PNWidget extends StatelessWidget {
   const PNWidget({
     Key? key,
-    required List<String> categories,
-  })  : _categories = categories,
-        super(key: key);
-
-  final List<String> _categories;
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final List<String> _categories = [
+      'algorithms',
+      'habits',
+      'celebrate',
+      'willpower',
+      'best-of-optimize',
+    ];
     return SizedBox(
       height: _categories.length > 4 ? 230.0 : 200.0,
       child: Padding(
@@ -23,13 +26,13 @@ class PNWidget extends StatelessWidget {
           children: [
             Container(
               width: 100,
-              height: 130,
+              height: 136,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(5),
                 // shape: BoxShape.circle,
                 image: const DecorationImage(
                   image: NetworkImage(
-                    'https://images.unsplash.com/photo-1479064555552-3ef4979f8908?fit=crop&w=1350&q=80',
+                    "https://images.unsplash.com/photo-1487029413235-e3f7a0e8e140?fit=crop&w=1050&q=80",
                   ),
                   fit: BoxFit.fill,
                 ),
@@ -57,37 +60,64 @@ class PNWidget extends StatelessWidget {
                 ),
                 Row(
                   children: [
-                    Icon(
-                      activeIcons.doc,
-                      color: activeColors.secondary,
-                      size: 18.0,
-                    ),
-                    const SizedBox(width: 3.0),
-                    Text(
-                      'Read',
-                      style: activeTextStyles.actions,
-                    ),
-                    const SizedBox(width: 10.0),
-                    Icon(
-                      activeIcons.volume,
-                      color: activeColors.secondary,
-                      size: 18.0,
-                    ),
-                    const SizedBox(width: 3.0),
-                    Text(
-                      'Listen',
-                      style: activeTextStyles.actions,
+                    GestureDetector(
+                      onTap: () {
+                        // print('Its work!');
+                      },
+                      child: Row(
+                        children: [
+                          Icon(
+                            activeIcons.doc,
+                            color: activeColors.secondary,
+                            size: 18.0,
+                          ),
+                          const SizedBox(width: 3.0),
+                          Text(
+                            'Read',
+                            style: activeTextStyles.actions,
+                          ),
+                        ],
+                      ),
                     ),
                     const SizedBox(width: 10.0),
-                    Icon(
-                      activeIcons.playFill,
-                      color: activeColors.secondary,
-                      size: 18.0,
+                    GestureDetector(
+                      onTap: () {
+                        // print('Its ok!');
+                      },
+                      child: Row(
+                        children: [
+                          Icon(
+                            activeIcons.volume,
+                            color: activeColors.secondary,
+                            size: 18.0,
+                          ),
+                          const SizedBox(width: 3.0),
+                          Text(
+                            'Listen',
+                            style: activeTextStyles.actions,
+                          ),
+                        ],
+                      ),
                     ),
-                    const SizedBox(width: 3.0),
-                    Text(
-                      'Watch',
-                      style: activeTextStyles.actions,
+                    const SizedBox(width: 10.0),
+                    GestureDetector(
+                      onTap: () {
+                        // print('Yeah!');
+                      },
+                      child: Row(
+                        children: [
+                          Icon(
+                            activeIcons.playFill,
+                            color: activeColors.secondary,
+                            size: 18.0,
+                          ),
+                          const SizedBox(width: 3.0),
+                          Text(
+                            'Watch',
+                            style: activeTextStyles.actions,
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),

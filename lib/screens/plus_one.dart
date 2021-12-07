@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:optimize/constants/active_constants.dart';
 
+import '../constants/active_constants.dart';
 import '../widgets/plus_one_widget.dart';
 
 class PlusOne extends StatefulWidget {
@@ -27,7 +27,6 @@ class _PlusOneState extends State<PlusOne> {
                 thickness: 1.0,
                 color: activeColors.grey,
               ),
-              // const SizedBox(height: 10.0),
             ],
           );
         },
