@@ -39,10 +39,12 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: HomeAppBar(
-        currentIndex: _selectedIndex,
-        bgColor: activeColors.primary,
-      ),
+      appBar: _selectedIndex == 4
+          ? null
+          : HomeAppBar(
+              currentIndex: _selectedIndex,
+              bgColor: activeColors.primary,
+            ),
       drawer: const MyDrawer(),
       body: Center(
         child: _pages.elementAt(_selectedIndex),

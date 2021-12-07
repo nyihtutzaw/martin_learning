@@ -24,6 +24,10 @@ class KIcons {
   final Widget heart;
   final Widget download;
   final Widget filter;
+  final Widget refresh;
+  final Widget heartCircleFill;
+  final Widget checkCircleFill;
+  final Widget saveCircleFill;
 
   const KIcons({
     required this.doc,
@@ -46,6 +50,10 @@ class KIcons {
     required this.heart,
     required this.download,
     required this.filter,
+    required this.refresh,
+    required this.heartCircleFill,
+    required this.checkCircleFill,
+    required this.saveCircleFill,
   });
 }
 
@@ -91,34 +99,76 @@ KIcons icon1 = KIcons(
     ),
   ),
   heart: const Icon(CupertinoIcons.suit_heart_fill),
-  download: Container(
-    decoration: BoxDecoration(
-      border: Border.all(
-        width: 2.0,
-        color: activeColors.grey,
-      ),
-      shape: BoxShape.circle,
-    ),
-    child: Padding(
-      padding: const EdgeInsets.all(3.0),
-      child: Icon(
-        CupertinoIcons.cloud_download,
-        color: activeColors.primary,
-        size: 16.0,
-      ),
+  download: Circle(
+    padding: 3.0,
+    child: Icon(
+      CupertinoIcons.cloud_download,
+      color: activeColors.primary,
+      size: 16.0,
     ),
   ),
-  filter: Container(
-    decoration: BoxDecoration(
-      border: Border.all(
-        width: 2.0,
-        color: activeColors.white,
-      ),
-      shape: BoxShape.circle,
-    ),
-    child: const Icon(
+  filter: const Circle(
+    padding: 1.0,
+    child: Icon(
       Icons.filter_list,
       size: 14.0,
     ),
   ),
+  refresh: Icon(
+    Icons.refresh_rounded,
+    color: activeColors.primary,
+    size: 23.0,
+  ),
+  heartCircleFill: Circle(
+    padding: 5.0,
+    child: Icon(
+      CupertinoIcons.suit_heart_fill,
+      color: Colors.red.shade400,
+      size: 18.0,
+    ),
+  ),
+  checkCircleFill: const Circle(
+    padding: 5.0,
+    child: Icon(
+      CupertinoIcons.checkmark_alt,
+      color: Colors.blue,
+      size: 18.0,
+    ),
+  ),
+  saveCircleFill: Circle(
+    padding: 5.0,
+    child: Icon(
+      CupertinoIcons.bookmark_fill,
+      color: Colors.yellow.shade700,
+      size: 18.0,
+    ),
+  ),
 );
+
+class Circle extends StatelessWidget {
+  const Circle({
+    required this.padding,
+    required this.child,
+    Key? key,
+  }) : super(key: key);
+
+  final double padding;
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        border: Border.all(
+          width: 2.0,
+          color: activeColors.grey,
+        ),
+        shape: BoxShape.circle,
+      ),
+      child: Padding(
+        padding: EdgeInsets.all(padding),
+        child: child,
+      ),
+    );
+  }
+}
