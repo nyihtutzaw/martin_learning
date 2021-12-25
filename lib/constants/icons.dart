@@ -26,9 +26,11 @@ class KIcons {
   final Widget filter;
   final Widget refresh;
   final Widget heartCircleFill;
+  final Widget heartCircle;
   final Widget checkCircleFill;
   final Widget saveCircleFill;
-
+  final Widget checkCircle;
+  final Widget saveCircle;
   const KIcons({
     required this.doc,
     required this.volume,
@@ -54,6 +56,9 @@ class KIcons {
     required this.heartCircleFill,
     required this.checkCircleFill,
     required this.saveCircleFill,
+    required this.heartCircle,
+    required this.checkCircle,
+    required this.saveCircle,
   });
 }
 
@@ -127,6 +132,13 @@ KIcons icon1 = KIcons(
       size: 18.0,
     ),
   ),
+  heartCircle: const Circle(
+    padding: 5.0,
+    child: Icon(
+      CupertinoIcons.suit_heart_fill,
+      size: 18.0,
+    ),
+  ),
   checkCircleFill: const Circle(
     padding: 5.0,
     child: Icon(
@@ -135,11 +147,25 @@ KIcons icon1 = KIcons(
       size: 18.0,
     ),
   ),
+  checkCircle: const Circle(
+    padding: 5.0,
+    child: Icon(
+      CupertinoIcons.checkmark_alt,
+      size: 18.0,
+    ),
+  ),
   saveCircleFill: Circle(
     padding: 5.0,
     child: Icon(
       CupertinoIcons.bookmark_fill,
       color: Colors.yellow.shade700,
+      size: 18.0,
+    ),
+  ),
+  saveCircle: const Circle(
+    padding: 5.0,
+    child: Icon(
+      CupertinoIcons.bookmark_fill,
       size: 18.0,
     ),
   ),

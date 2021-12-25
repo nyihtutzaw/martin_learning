@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:optimize/providers/auth_provider.dart';
+import 'package:optimize/screens/user_profile_screen.dart';
+import 'package:provider/provider.dart';
 
 import '../constants/active_constants.dart';
+import '../home.dart';
 
 class DrawerItem {
   final IconData icon;
   final String pageName;
-  final String route;
 
-  const DrawerItem({
-    required this.icon,
-    required this.pageName,
-    required this.route,
-  });
+  final Function onPress;
+
+  const DrawerItem(
+      {required this.icon, required this.pageName, required this.onPress});
 }
 
 class MyDrawer extends StatelessWidget {
@@ -21,35 +23,39 @@ class MyDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     List<DrawerItem> drawerItems = [
       DrawerItem(
-        icon: activeIcons.home,
-        pageName: 'Home',
-        route: '/home',
-      ),
+          icon: activeIcons.home,
+          pageName: 'Home',
+          onPress: () {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => Home(),
+              ),
+            );
+          }),
       DrawerItem(
-        icon: activeIcons.diam,
-        pageName: 'Featured',
-        route: '/featured',
-      ),
+          icon: activeIcons.noti, pageName: 'Notifications', onPress: () {}),
+      // DrawerItem(
+      //     icon: activeIcons.cloud, pageName: 'Offline content', onPress: () {}),
       DrawerItem(
-        icon: activeIcons.noti,
-        pageName: 'Notifications',
-        route: '/noti',
-      ),
+          icon: activeIcons.profile,
+          pageName: 'Manage Profile',
+          onPress: () {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => UserProfileScreen(),
+              ),
+            );
+          }),
       DrawerItem(
-        icon: activeIcons.cloud,
-        pageName: 'Offline content',
-        route: '/offline_content',
-      ),
-      DrawerItem(
-        icon: activeIcons.profile,
-        pageName: 'Manage Profile',
-        route: '/profile',
-      ),
-      DrawerItem(
-        icon: activeIcons.walker,
-        pageName: 'Log Out',
-        route: '/log_out',
-      ),
+          icon: activeIcons.walker,
+          pageName: 'Log Out',
+          onPress: () async {
+            await Provider.of<Auth>(context, listen: false).logout();
+
+            Navigator.of(context).popUntil((route) => route.isFirst);
+          }),
     ];
 
     return Drawer(
@@ -103,7 +109,7 @@ class MyDrawer extends StatelessWidget {
                         (item) => DrawerTile(
                           title: item.pageName,
                           icon: item.icon,
-                          route: item.route,
+                          onPress: item.onPress,
                         ),
                       )
                       .toList(),
@@ -135,7 +141,7 @@ class MyDrawer extends StatelessWidget {
                 child: DrawerTile(
                   title: 'Optimize Podcast',
                   icon: activeIcons.podcast,
-                  route: '/podcast',
+                  onPress: () {},
                 ),
               ),
             ],
@@ -149,21 +155,19 @@ class MyDrawer extends StatelessWidget {
 class DrawerTile extends StatelessWidget {
   final String title;
   final IconData icon;
-  final String route;
+  final Function onPress;
 
   const DrawerTile({
     Key? key,
     required this.title,
     required this.icon,
-    required this.route,
+    required this.onPress,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        Navigator.pushReplacementNamed(context, route);
-      },
+      onTap: () => {onPress()},
       child: Padding(
         padding: const EdgeInsets.all(10.0),
         child: Row(

@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:optimize/providers/pn_provider.dart';
+import 'package:optimize/widgets/full_screen_preloader.dart';
+import 'package:provider/provider.dart';
 
 import '../constants/active_constants.dart';
 import '../widgets/pn_widget.dart';
@@ -11,26 +14,52 @@ class PN extends StatefulWidget {
 }
 
 class _PNState extends State<PN> {
+  bool _isInit = false;
+  bool _isPreloading = false;
+
+  void loadData() async {
+    setState(() {
+      _isPreloading = true;
+    });
+
+    await Provider.of<PnProvider>(context, listen: false).getAll();
+
+    setState(() {
+      _isPreloading = false;
+    });
+  }
+
+  void didChangeDependencies() {
+    if (!_isInit) {
+      loadData();
+      _isInit = true;
+    }
+    super.didChangeDependencies();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ListView.builder(
-        itemCount: 10,
-        itemBuilder: (context, index) {
-          return Column(
-            children: [
-              const SizedBox(height: 20.0),
-              const PNWidget(),
-              const SizedBox(height: 7.0),
-              Divider(
-                height: 2.0,
-                thickness: 1.0,
-                color: activeColors.grey,
-              ),
-            ],
-          );
-        },
-      ),
-    );
+        body: _isPreloading
+            ? FullScreenPreloader()
+            : Consumer<PnProvider>(builder: (context, appState, child) {
+                return ListView.builder(
+                  itemCount: appState.items.length,
+                  itemBuilder: (context, index) {
+                    return Column(
+                      children: [
+                        const SizedBox(height: 20.0),
+                        PNWidget(data: appState.items[index]),
+                        const SizedBox(height: 10.0),
+                        Divider(
+                          height: 2.0,
+                          thickness: 1.0,
+                          color: activeColors.grey,
+                        ),
+                      ],
+                    );
+                  },
+                );
+              }));
   }
 }
