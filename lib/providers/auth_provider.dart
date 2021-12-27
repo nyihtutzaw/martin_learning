@@ -57,4 +57,14 @@ class Auth with ChangeNotifier {
     prefs.clear();
     notifyListeners();
   }
+
+  Future<void> getUser() async {
+    var response = await AuthService.getUser();
+    ;
+    currentUser = User(
+      id: response["data"]["id"],
+      username: response["data"]["name"],
+      email: response["data"]["email"],
+    );
+  }
 }

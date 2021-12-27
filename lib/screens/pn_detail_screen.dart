@@ -5,8 +5,10 @@ import 'package:optimize/providers/pn_provider.dart';
 import 'package:optimize/screens/pdf_viewer.dart';
 import 'package:optimize/screens/video_view_screen.dart';
 import 'package:optimize/widgets/full_screen_preloader.dart';
+import 'package:optimize/widgets/premium_message.dart';
 import 'package:provider/provider.dart';
 import '../constants/active_constants.dart';
+import 'music_player_screen.dart';
 
 class PnDetail extends StatefulWidget {
   final Pn data;
@@ -65,9 +67,7 @@ class _PnDetailState extends State<PnDetail> {
             child: _isPreloading
                 ? FullScreenPreloader()
                 : _hideScreen
-                    ? Center(
-                        child: Text("You need to subscribe premium"),
-                      )
+                    ? const PremiumMessage()
                     : Consumer<PnProvider>(builder: (context, appState, child) {
                         return Container(
                           child: Column(
@@ -268,7 +268,22 @@ class _PnDetailState extends State<PnDetail> {
                                                 MaterialStateProperty.all<
                                                     Color>(Colors.blue),
                                           ),
-                                          onPressed: () {},
+                                          onPressed: () {
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    MusicPlayerScreen(
+                                                  link: appState.item.audio,
+                                                  cover:
+                                                      appState.item.coverImage,
+                                                  title: appState.item.title,
+                                                  subTitle:
+                                                      appState.item.subtitle,
+                                                ),
+                                              ),
+                                            );
+                                          },
                                           child: Column(
                                             children: [
                                               const Icon(Icons.music_note),

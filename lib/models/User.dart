@@ -1,7 +1,7 @@
 // ignore_for_file: file_names
 
 class User {
-  String id;
+  int id;
   String username;
   String email;
 

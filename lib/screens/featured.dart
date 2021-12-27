@@ -73,21 +73,31 @@ class _FeaturedState extends State<Featured> {
                       const SizedBox(height: 36.0),
                       Column(
                         children: [
-                          for (var item in appState.pns) PNWidget(data: item),
+                          for (var item in appState.pns)
+                            PNWidget(
+                              data: item,
+                              marginBottom: 10,
+                            ),
                         ],
                       ),
                       const SizedBox(height: 25.0),
                       Column(
                         children: [
                           for (var item in appState.plusOnes)
-                            PlusOneWidget(data: item),
+                            PlusOneWidget(
+                              data: item,
+                              marginBottom: 10,
+                            ),
                         ],
                       ),
                       const SizedBox(height: 25.0),
                       Column(
                         children: [
                           for (var item in appState.ozOnes)
-                            OneZOneWidget(data: item),
+                            OneZOneWidget(
+                              data: item,
+                              marginBottom: 10,
+                            ),
                         ],
                       ),
                     ],

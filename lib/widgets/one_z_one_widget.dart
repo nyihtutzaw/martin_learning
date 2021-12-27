@@ -6,7 +6,9 @@ import '../constants/active_constants.dart';
 
 class OneZOneWidget extends StatelessWidget {
   final OneZOne data;
-  OneZOneWidget({Key? key, required this.data}) : super(key: key);
+  final double marginBottom;
+  OneZOneWidget({Key? key, required this.data, this.marginBottom = 0})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,8 +24,9 @@ class OneZOneWidget extends StatelessWidget {
         );
       },
       child: SizedBox(
-        child: Padding(
+        child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 20.0),
+          margin: EdgeInsets.only(bottom: marginBottom),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             crossAxisAlignment: CrossAxisAlignment.start,

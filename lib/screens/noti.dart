@@ -1,20 +1,46 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:optimize/models/Noti.dart';
+import 'package:optimize/providers/notification_provider.dart';
+import 'package:optimize/widgets/full_screen_preloader.dart';
+import 'package:provider/provider.dart';
 
 import '../constants/active_constants.dart';
 
 import '../widgets/minor_app_bar.dart';
 import '../widgets/my_drawer.dart';
 
-class Noti extends StatefulWidget {
-  const Noti({Key? key}) : super(key: key);
+class NotiScreen extends StatefulWidget {
+  const NotiScreen({Key? key}) : super(key: key);
 
   @override
-  _NotiState createState() => _NotiState();
+  _NotiScreenState createState() => _NotiScreenState();
 }
 
-class _NotiState extends State<Noti> {
+class _NotiScreenState extends State<NotiScreen> {
   bool _noti = false;
+  bool _isInit = false;
+  bool _isPreloading = false;
+
+  void loadData() async {
+    setState(() {
+      _isPreloading = true;
+    });
+
+    await Provider.of<NotificationProvider>(context, listen: false).getAll();
+
+    setState(() {
+      _isPreloading = false;
+    });
+  }
+
+  void didChangeDependencies() {
+    if (!_isInit) {
+      loadData();
+      _isInit = true;
+    }
+    super.didChangeDependencies();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,11 +67,6 @@ class _NotiState extends State<Noti> {
                     print(_noti);
                   },
                 ),
-                // onTap: () {
-                //   setState(() {
-                //     _noti = !_noti;
-                //   });
-                // },
               ),
             ),
           ),
@@ -55,13 +76,17 @@ class _NotiState extends State<Noti> {
             color: activeColors.grey,
           ),
           Expanded(
-            child: ListView.builder(
-              itemCount: 10,
-              itemBuilder: (context, index) {
-                return const NotiTile();
-              },
-            ),
-          ),
+              child: _isPreloading
+                  ? FullScreenPreloader()
+                  : Consumer<NotificationProvider>(
+                      builder: (context, appState, child) {
+                      return ListView.builder(
+                        itemCount: appState.items.length,
+                        itemBuilder: (context, index) {
+                          return NotiTile(data: appState.items[index]);
+                        },
+                      );
+                    })),
         ],
       ),
     );
@@ -69,8 +94,10 @@ class _NotiState extends State<Noti> {
 }
 
 class NotiTile extends StatelessWidget {
+  final Noti data;
   const NotiTile({
     Key? key,
+    required this.data,
   }) : super(key: key);
 
   @override
@@ -79,22 +106,25 @@ class NotiTile extends StatelessWidget {
       children: [
         const SizedBox(height: 5.0),
         ListTile(
-          contentPadding: const EdgeInsets.symmetric(
-            horizontal: 25.0,
-            vertical: 3.0,
-          ),
-          title: Text(
-            'Dec 6 Hellobar (non-members)',
-            style: activeTextStyles.title.copyWith(
-              fontSize: 16.0,
+            contentPadding: const EdgeInsets.symmetric(
+              horizontal: 25.0,
+              vertical: 3.0,
             ),
-          ),
-          subtitle: const Padding(
-            padding: EdgeInsets.only(top: 7.0),
-            child: Text(
-                'Big news! Optimize is now FREE! No credit card required. 100% ad-free. No strings attached. Get your free Optimize Premium membership today.'),
-          ),
-        ),
+            title: Text(
+              data.title,
+              style: activeTextStyles.title.copyWith(
+                fontSize: 16.0,
+              ),
+            ),
+            subtitle: Padding(
+              padding: EdgeInsets.only(top: 7.0),
+              child: Text(data.body),
+            ),
+            trailing: Image.network(
+              data.image,
+              width: 50,
+              height: 50,
+            )),
         const SizedBox(height: 5.0),
         Divider(
           height: 2.0,

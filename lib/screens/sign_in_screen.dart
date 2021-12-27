@@ -160,7 +160,7 @@ class _SignInScreenState extends State<SignInScreen> {
                         ),
                         FlatButton(
                           child: Text(
-                            'Let\'s gooo!',
+                            _actionLoading ? 'Loading..' : 'Let\'s gooo!',
                             style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 16,

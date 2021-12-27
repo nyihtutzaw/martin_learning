@@ -68,12 +68,18 @@ class PnProvider with ChangeNotifier {
         isTipped: response["data"]["isTiped"],
         categories: categories);
 
+    // for detail screen when it reached from my list
+    if (items.length == 0) {
+      items.add(item);
+    }
+
     notifyListeners();
   }
 
   Future<void> markData(String type, int id, int value) async {
     var response = await PnService.markData(type, id, value);
     item = items.firstWhere((element) => element.id == id);
+
     if (type == "like") {
       item.isLiked = value == 1 ? true : false;
     } else if (type == "bookmark") {
@@ -81,6 +87,7 @@ class PnProvider with ChangeNotifier {
     } else if (type == "tip") {
       item.isTipped = value == 1 ? true : false;
     }
+
     notifyListeners();
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:optimize/models/Pn.dart';
+import 'package:optimize/screens/music_player_screen.dart';
 import 'package:optimize/screens/pdf_viewer.dart';
 import 'package:optimize/screens/pn_detail_screen.dart';
 import 'package:optimize/screens/video_view_screen.dart';
@@ -8,8 +9,10 @@ import '../constants/active_constants.dart';
 
 class PNWidget extends StatelessWidget {
   final Pn data;
+  final double marginBottom;
   const PNWidget({
     required this.data,
+    this.marginBottom = 0,
     Key? key,
   }) : super(key: key);
 
@@ -36,8 +39,9 @@ class PNWidget extends StatelessWidget {
       },
       child: SizedBox(
         height: _categories.length > 4 ? 230.0 : 200.0,
-        child: Padding(
+        child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 20.0),
+          margin: EdgeInsets.only(bottom: marginBottom),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -66,7 +70,9 @@ class PNWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    data.title,
+                    data.title.length > 15
+                        ? data.title.substring(0, 12) + "..."
+                        : data.title,
                     style: activeTextStyles.title,
                   ),
                   SizedBox(
@@ -112,7 +118,17 @@ class PNWidget extends StatelessWidget {
                       const SizedBox(width: 10.0),
                       GestureDetector(
                         onTap: () {
-                          // print('Its ok!');
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => MusicPlayerScreen(
+                                link: data.audio,
+                                cover: data.coverImage,
+                                title: data.title,
+                                subTitle: data.subtitle,
+                              ),
+                            ),
+                          );
                         },
                         child: Row(
                           children: [

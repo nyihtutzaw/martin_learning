@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:optimize/models/PlusOne.dart';
 import 'package:optimize/providers/plus_one_provider.dart';
+import 'package:optimize/screens/music_player_screen.dart';
 import 'package:optimize/screens/video_view_screen.dart';
 import 'package:optimize/widgets/full_screen_preloader.dart';
 
@@ -47,6 +48,7 @@ class _PlusOneDetailState extends State<PlusOneDetail> {
 
   @override
   Widget build(BuildContext context) {
+    final deviceWidth = MediaQuery.of(context).size.width;
     return Scaffold(
         appBar: AppBar(
           backgroundColor: activeColors.primary,
@@ -77,25 +79,17 @@ class _PlusOneDetailState extends State<PlusOneDetail> {
                             );
                           },
                           child: Container(
-                            padding: const EdgeInsets.symmetric(vertical: 20),
-                            alignment: Alignment.center,
-                            child: Container(
-                              decoration: BoxDecoration(
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.black.withOpacity(0.2),
-                                    spreadRadius: 3,
-                                    blurRadius: 2,
-                                    offset: const Offset(
-                                        0, 1), // changes position of shadow
-                                  ),
-                                ],
-                              ),
-                              child: Image.network(
-                                appState.item.thumbnail,
-                                width: MediaQuery.of(context).size.width * 0.85,
+                            width: MediaQuery.of(context).size.width * 0.95,
+                            height: 180,
+                            margin: const EdgeInsets.symmetric(vertical: 15),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5),
+                              image: DecorationImage(
+                                image: NetworkImage(appState.item.thumbnail),
+                                fit: BoxFit.fill,
                               ),
                             ),
+                            child: activeIcons.playerCircleFill,
                           ),
                         ),
                         Container(
@@ -215,7 +209,19 @@ class _PlusOneDetailState extends State<PlusOneDetail> {
                                     MaterialStateProperty.all<Color>(
                                         Colors.blue),
                               ),
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => MusicPlayerScreen(
+                                      link: appState.item.audio,
+                                      cover: appState.item.thumbnail,
+                                      title: appState.item.title,
+                                      subTitle: appState.item.subtitle,
+                                    ),
+                                  ),
+                                );
+                              },
                               child: Column(
                                 children: [
                                   const Icon(Icons.music_note),

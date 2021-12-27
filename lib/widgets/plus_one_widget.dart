@@ -7,7 +7,9 @@ import '../constants/active_constants.dart';
 
 class PlusOneWidget extends StatelessWidget {
   final PlusOne data;
-  const PlusOneWidget({Key? key, required this.data}) : super(key: key);
+  final double marginBottom;
+  const PlusOneWidget({Key? key, required this.data, this.marginBottom = 0})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,9 +27,9 @@ class PlusOneWidget extends StatelessWidget {
         );
       },
       child: SizedBox(
-        height: 90.0,
-        child: Padding(
+        child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 20.0),
+          margin: EdgeInsets.only(bottom: marginBottom),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             crossAxisAlignment: CrossAxisAlignment.start,

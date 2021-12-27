@@ -50,7 +50,10 @@ class OneZOneProvider with ChangeNotifier {
       isLiked: response["data"]["isLiked"],
       isTipped: response["data"]["isTiped"],
     );
-
+    // for detail screen when it reached from my list
+    if (items.length == 0) {
+      items.add(item);
+    }
     notifyListeners();
   }
 

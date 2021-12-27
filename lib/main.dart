@@ -1,9 +1,13 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:optimize/providers/feature_provider.dart';
 import 'package:optimize/providers/my_list_provider.dart';
+import 'package:optimize/providers/notification_provider.dart';
 import 'package:optimize/providers/one_z_one_provider.dart';
 import 'package:optimize/providers/pn_provider.dart';
+import 'package:optimize/screens/music_player_screen.dart';
 import 'package:optimize/screens/one_z_one_detail_screen.dart';
 import 'package:optimize/screens/pdf_viewer.dart';
 import 'package:optimize/screens/photo_view_screen.dart';
@@ -32,6 +36,7 @@ void main() {
       DeviceOrientation.portraitDown,
     ],
   );
+
   runApp(const MyApp());
 }
 
@@ -61,6 +66,9 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider.value(
             value: MyListProvider(),
           ),
+          ChangeNotifierProvider.value(
+            value: NotificationProvider(),
+          ),
         ],
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
@@ -85,6 +93,7 @@ class MyApp extends StatelessWidget {
               ),
             ),
           ),
+
           home: Consumer<Auth>(
             builder: (context, auth, child) {
               if (auth.isAuth) {

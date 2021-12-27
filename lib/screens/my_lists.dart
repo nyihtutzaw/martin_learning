@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:optimize/providers/my_list_provider.dart';
+import 'package:optimize/widgets/full_screen_preloader.dart';
 
 import 'package:optimize/widgets/one_z_one_widget.dart';
 import 'package:optimize/widgets/plus_one_widget.dart';
@@ -113,101 +114,103 @@ class _MyListsState extends State<MyLists> with SingleTickerProviderStateMixin {
         ),
         drawer: const MyDrawer(),
         body: Consumer<MyListProvider>(builder: (context, appState, child) {
-          return TabBarView(
-            controller: _tabController,
-            children: [
-              _fav.isEmpty
-                  ? const NoItemsMessage(
-                      title: 'Favorited',
-                      verb: 'faves',
-                    )
-                  : SingleChildScrollView(
-                      child: Column(
-                        children: [
-                          SizedBox(height: 20),
-                          Column(
-                            children: [
-                              for (var item in appState.favPlusOnes)
-                                PlusOneWidget(data: item),
-                            ],
-                          ),
-                          Column(
-                            children: [
-                              for (var item in appState.favPns)
-                                PNWidget(data: item),
-                            ],
-                          ),
-                          Column(
-                            children: [
-                              for (var item in appState.favOneZOnes)
-                                OneZOneWidget(data: item),
-                            ],
+          return _isPreloading
+              ? FullScreenPreloader()
+              : TabBarView(
+                  controller: _tabController,
+                  children: [
+                    _fav.isEmpty
+                        ? const NoItemsMessage(
+                            title: 'Favorited',
+                            verb: 'faves',
                           )
-                        ],
-                      ),
-                    ),
-              _com.isEmpty
-                  ? const NoItemsMessage(
-                      title: 'Completed',
-                      verb: 'completed',
-                    )
-                  : SingleChildScrollView(
-                      child: Column(
-                        children: [
-                          SizedBox(height: 20),
-                          Column(
-                            children: [
-                              for (var item in appState.tipPlusOnes)
-                                PlusOneWidget(data: item),
-                            ],
+                        : SingleChildScrollView(
+                            child: Column(
+                              children: [
+                                SizedBox(height: 20),
+                                Column(
+                                  children: [
+                                    for (var item in appState.favPlusOnes)
+                                      PlusOneWidget(data: item),
+                                  ],
+                                ),
+                                Column(
+                                  children: [
+                                    for (var item in appState.favPns)
+                                      PNWidget(data: item),
+                                  ],
+                                ),
+                                Column(
+                                  children: [
+                                    for (var item in appState.favOneZOnes)
+                                      OneZOneWidget(data: item),
+                                  ],
+                                )
+                              ],
+                            ),
                           ),
-                          Column(
-                            children: [
-                              for (var item in appState.tipPns)
-                                PNWidget(data: item),
-                            ],
-                          ),
-                          Column(
-                            children: [
-                              for (var item in appState.tipOneZOnes)
-                                OneZOneWidget(data: item),
-                            ],
+                    _com.isEmpty
+                        ? const NoItemsMessage(
+                            title: 'Completed',
+                            verb: 'completed',
                           )
-                        ],
-                      ),
-                    ),
-              _sav.isEmpty
-                  ? const NoItemsMessage(
-                      title: 'Saved',
-                      verb: 'saved',
-                    )
-                  : SingleChildScrollView(
-                      child: Column(
-                        children: [
-                          SizedBox(height: 20),
-                          Column(
-                            children: [
-                              for (var item in appState.bookPlusOnes)
-                                PlusOneWidget(data: item),
-                            ],
+                        : SingleChildScrollView(
+                            child: Column(
+                              children: [
+                                SizedBox(height: 20),
+                                Column(
+                                  children: [
+                                    for (var item in appState.tipPlusOnes)
+                                      PlusOneWidget(data: item),
+                                  ],
+                                ),
+                                Column(
+                                  children: [
+                                    for (var item in appState.tipPns)
+                                      PNWidget(data: item),
+                                  ],
+                                ),
+                                Column(
+                                  children: [
+                                    for (var item in appState.tipOneZOnes)
+                                      OneZOneWidget(data: item),
+                                  ],
+                                )
+                              ],
+                            ),
                           ),
-                          Column(
-                            children: [
-                              for (var item in appState.bookPns)
-                                PNWidget(data: item),
-                            ],
-                          ),
-                          Column(
-                            children: [
-                              for (var item in appState.bookOneZOnes)
-                                OneZOneWidget(data: item),
-                            ],
+                    _sav.isEmpty
+                        ? const NoItemsMessage(
+                            title: 'Saved',
+                            verb: 'saved',
                           )
-                        ],
-                      ),
-                    ),
-            ],
-          );
+                        : SingleChildScrollView(
+                            child: Column(
+                              children: [
+                                SizedBox(height: 20),
+                                Column(
+                                  children: [
+                                    for (var item in appState.bookPlusOnes)
+                                      PlusOneWidget(data: item),
+                                  ],
+                                ),
+                                Column(
+                                  children: [
+                                    for (var item in appState.bookPns)
+                                      PNWidget(data: item),
+                                  ],
+                                ),
+                                Column(
+                                  children: [
+                                    for (var item in appState.bookOneZOnes)
+                                      OneZOneWidget(data: item),
+                                  ],
+                                )
+                              ],
+                            ),
+                          ),
+                  ],
+                );
         }));
   }
 }

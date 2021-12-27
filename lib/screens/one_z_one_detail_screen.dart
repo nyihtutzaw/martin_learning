@@ -7,8 +7,10 @@ import 'package:optimize/screens/photo_view_screen.dart';
 import 'package:optimize/screens/video_view_screen.dart';
 import 'package:optimize/widgets/full_screen_preloader.dart';
 import 'package:optimize/widgets/home_app_bar.dart';
+import 'package:optimize/widgets/premium_message.dart';
 import 'package:provider/provider.dart';
 import '../constants/active_constants.dart';
+import 'music_player_screen.dart';
 
 class OneZOneDetailScreen extends StatefulWidget {
   final OneZOne data;
@@ -67,7 +69,7 @@ class _OneZOneDetailScreenState extends State<OneZOneDetailScreen> {
             child: _isPreloading
                 ? FullScreenPreloader()
                 : _hideScreen
-                    ? Center(child: Text("You Need to subscribe "))
+                    ? const PremiumMessage()
                     : Consumer<OneZOneProvider>(
                         builder: (context, appState, child) {
                         return Container(
@@ -84,27 +86,20 @@ class _OneZOneDetailScreenState extends State<OneZOneDetailScreen> {
                                   );
                                 },
                                 child: Container(
-                                  padding:
-                                      const EdgeInsets.symmetric(vertical: 20),
-                                  alignment: Alignment.center,
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: Colors.black.withOpacity(0.2),
-                                          spreadRadius: 3,
-                                          blurRadius: 2,
-                                          offset: const Offset(0,
-                                              1), // changes position of shadow
-                                        ),
-                                      ],
-                                    ),
-                                    child: Image.network(
-                                      appState.item.thumbnail,
-                                      width: MediaQuery.of(context).size.width *
-                                          0.85,
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.95,
+                                  height: 180,
+                                  margin:
+                                      const EdgeInsets.symmetric(vertical: 15),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(5),
+                                    image: DecorationImage(
+                                      image:
+                                          NetworkImage(appState.item.thumbnail),
+                                      fit: BoxFit.fill,
                                     ),
                                   ),
+                                  child: activeIcons.playerCircleFill,
                                 ),
                               ),
                               Container(
@@ -244,7 +239,22 @@ class _OneZOneDetailScreenState extends State<OneZOneDetailScreen> {
                                                 MaterialStateProperty.all<
                                                     Color>(Colors.blue),
                                           ),
-                                          onPressed: () {},
+                                          onPressed: () {
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    MusicPlayerScreen(
+                                                  link: appState.item.audio,
+                                                  cover:
+                                                      appState.item.thumbnail,
+                                                  title: appState.item.title,
+                                                  subTitle:
+                                                      appState.item.subtitle,
+                                                ),
+                                              ),
+                                            );
+                                          },
                                           child: Column(
                                             children: [
                                               const Icon(Icons.music_note),

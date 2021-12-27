@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:optimize/providers/auth_provider.dart';
+import 'package:optimize/screens/noti.dart';
 import 'package:optimize/screens/user_profile_screen.dart';
 import 'package:provider/provider.dart';
 
@@ -34,7 +35,16 @@ class MyDrawer extends StatelessWidget {
             );
           }),
       DrawerItem(
-          icon: activeIcons.noti, pageName: 'Notifications', onPress: () {}),
+          icon: activeIcons.noti,
+          pageName: 'Notifications',
+          onPress: () {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => NotiScreen(),
+              ),
+            );
+          }),
       // DrawerItem(
       //     icon: activeIcons.cloud, pageName: 'Offline content', onPress: () {}),
       DrawerItem(
@@ -80,7 +90,7 @@ class MyDrawer extends StatelessWidget {
                       ),
                       child: Center(
                         child: Text(
-                          'YN',
+                          'Logo',
                           style: TextStyle(
                             color: activeColors.white,
                             fontSize: 18.0,
@@ -90,7 +100,7 @@ class MyDrawer extends StatelessWidget {
                     ),
                     const SizedBox(width: 10.0),
                     Text(
-                      'Your Name',
+                      'Martin',
                       style: TextStyle(
                         color: activeColors.white,
                         fontSize: 16.0,
