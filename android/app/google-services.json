@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "930127590428",
+    "project_id": "optimze-noti",
+    "storage_bucket": "optimze-noti.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:930127590428:android:7d3a1ee950c0856aa89bd9",
+        "android_client_info": {
+          "package_name": "com.rcsmm.optimize"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "930127590428-gviqepnuf81o5eua0dek2crsojiu742o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCxzkH_IIeuX9381-pzhs3iAHOOcsuw8IM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "930127590428-gviqepnuf81o5eua0dek2crsojiu742o.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

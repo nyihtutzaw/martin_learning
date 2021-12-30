@@ -1,3 +1,4 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:optimize/models/User.dart';
 import 'package:optimize/network/auth_service.dart';
@@ -38,6 +39,7 @@ class Auth with ChangeNotifier {
   }
 
   Future<void> login(var data) async {
+    String? token = await FirebaseMessaging.instance.getToken();
     var response = await AuthService.login(data);
     _token = response["data"]["access_token"];
     final prefs = await SharedPreferences.getInstance();
@@ -47,6 +49,8 @@ class Auth with ChangeNotifier {
   }
 
   Future<void> register(Map<String, String> _authData) async {
+    String? token = await FirebaseMessaging.instance.getToken();
+    print(token.toString() + " device token");
     await AuthService.register(_authData);
   }
 
