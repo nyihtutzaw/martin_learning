@@ -39,14 +39,14 @@ class MyListProvider with ChangeNotifier {
         title: response["data"][i]["title"],
         subtitle: response["data"][i]["subtitle"],
         description: response["data"][i]["description"],
-        audio: response["data"][i]["audio"],
-        video: response["data"][i]["video"],
         thumbnail: response["data"][i]["thumbnail"],
         poster_image: response["data"][i]["poster_image"],
-        workbook: response["data"][i]["workbook"],
         isBooked: response["data"][i]["isBooked"],
         isLiked: response["data"][i]["isLiked"],
         isTipped: response["data"][i]["isTiped"],
+        pdfFiles: [],
+        audioFiles: [],
+        videoFiles: [],
       );
       favOneZOnes.add(data);
     }
@@ -85,9 +85,6 @@ class MyListProvider with ChangeNotifier {
           authorName: response["data"][i]["author_name"],
           subtitle: response["data"][i]["subtitle"],
           description: response["data"][i]["description"],
-          audio: response["data"][i]["audio"],
-          video: response["data"][i]["watch"],
-          pdf: response["data"][i]["pdf"],
           coverImage: response["data"][i]["cover_image"],
           introVideo: response["data"][i]["intro_video"],
           introThumbnail: response["data"][i]["intro_video_thumbnail"],
@@ -95,6 +92,9 @@ class MyListProvider with ChangeNotifier {
           isBooked: response["data"][i]["isBooked"],
           isLiked: response["data"][i]["isLiked"],
           isTipped: response["data"][i]["isTiped"],
+          pdfFiles: [],
+          audioFiles: [],
+          videoFiles: [],
           categories: categories);
       favPns.add(data);
     }
@@ -109,14 +109,14 @@ class MyListProvider with ChangeNotifier {
         title: response["data"][i]["title"],
         subtitle: response["data"][i]["subtitle"],
         description: response["data"][i]["description"],
-        audio: response["data"][i]["audio"],
-        video: response["data"][i]["video"],
         thumbnail: response["data"][i]["thumbnail"],
         poster_image: response["data"][i]["poster_image"],
-        workbook: response["data"][i]["workbook"],
         isBooked: response["data"][i]["isBooked"],
         isLiked: response["data"][i]["isLiked"],
         isTipped: response["data"][i]["isTiped"],
+        pdfFiles: [],
+        audioFiles: [],
+        videoFiles: [],
       );
       tipOneZOnes.add(data);
     }
@@ -155,9 +155,6 @@ class MyListProvider with ChangeNotifier {
           authorName: response["data"][i]["author_name"],
           subtitle: response["data"][i]["subtitle"],
           description: response["data"][i]["description"],
-          audio: response["data"][i]["audio"],
-          video: response["data"][i]["watch"],
-          pdf: response["data"][i]["pdf"],
           coverImage: response["data"][i]["cover_image"],
           introVideo: response["data"][i]["intro_video"],
           introThumbnail: response["data"][i]["intro_video_thumbnail"],
@@ -165,6 +162,9 @@ class MyListProvider with ChangeNotifier {
           isBooked: response["data"][i]["isBooked"],
           isLiked: response["data"][i]["isLiked"],
           isTipped: response["data"][i]["isTiped"],
+          videoFiles: [],
+          pdfFiles: [],
+          audioFiles: [],
           categories: categories);
       tipPns.add(data);
     }
@@ -179,14 +179,14 @@ class MyListProvider with ChangeNotifier {
         title: response["data"][i]["title"],
         subtitle: response["data"][i]["subtitle"],
         description: response["data"][i]["description"],
-        audio: response["data"][i]["audio"],
-        video: response["data"][i]["video"],
         thumbnail: response["data"][i]["thumbnail"],
         poster_image: response["data"][i]["poster_image"],
-        workbook: response["data"][i]["workbook"],
         isBooked: response["data"][i]["isBooked"],
         isLiked: response["data"][i]["isLiked"],
         isTipped: response["data"][i]["isTiped"],
+        pdfFiles: [],
+        audioFiles: [],
+        videoFiles: [],
       );
       bookOneZOnes.add(data);
     }
@@ -225,9 +225,6 @@ class MyListProvider with ChangeNotifier {
           authorName: response["data"][i]["author_name"],
           subtitle: response["data"][i]["subtitle"],
           description: response["data"][i]["description"],
-          audio: response["data"][i]["audio"],
-          video: response["data"][i]["watch"],
-          pdf: response["data"][i]["pdf"],
           coverImage: response["data"][i]["cover_image"],
           introVideo: response["data"][i]["intro_video"],
           introThumbnail: response["data"][i]["intro_video_thumbnail"],
@@ -235,6 +232,9 @@ class MyListProvider with ChangeNotifier {
           isBooked: response["data"][i]["isBooked"],
           isLiked: response["data"][i]["isLiked"],
           isTipped: response["data"][i]["isTiped"],
+          pdfFiles: [],
+          audioFiles: [],
+          videoFiles: [],
           categories: categories);
       bookPns.add(data);
     }

@@ -39,7 +39,8 @@ class Auth with ChangeNotifier {
   }
 
   Future<void> login(var data) async {
-    String? token = await FirebaseMessaging.instance.getToken();
+    String? fireBaseToken = await FirebaseMessaging.instance.getToken();
+    data["register_id"] = fireBaseToken;
     var response = await AuthService.login(data);
     _token = response["data"]["access_token"];
     final prefs = await SharedPreferences.getInstance();
@@ -49,8 +50,8 @@ class Auth with ChangeNotifier {
   }
 
   Future<void> register(Map<String, String> _authData) async {
-    String? token = await FirebaseMessaging.instance.getToken();
-    print(token.toString() + " device token");
+    String? fireBaseToken = await FirebaseMessaging.instance.getToken();
+    _authData["register_id"] = fireBaseToken!;
     await AuthService.register(_authData);
   }
 

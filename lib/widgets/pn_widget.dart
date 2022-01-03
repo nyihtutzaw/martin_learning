@@ -38,7 +38,7 @@ class PNWidget extends StatelessWidget {
         );
       },
       child: SizedBox(
-        height: _categories.length > 4 ? 230.0 : 200.0,
+        height: data.categories.length > 4 ? 230.0 : 200.0,
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 20.0),
           margin: EdgeInsets.only(bottom: marginBottom),
@@ -86,92 +86,92 @@ class PNWidget extends StatelessWidget {
                     data.authorName,
                     style: activeTextStyles.author,
                   ),
-                  Row(
-                    children: [
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => PDFViewScreen(
-                                pdf: data.pdf,
-                                title: data.title,
-                              ),
-                            ),
-                          );
-                        },
-                        child: Row(
-                          children: [
-                            Icon(
-                              activeIcons.doc,
-                              color: activeColors.secondary,
-                              size: 18.0,
-                            ),
-                            const SizedBox(width: 3.0),
-                            Text(
-                              'Read',
-                              style: activeTextStyles.actions,
-                            ),
-                          ],
-                        ),
-                      ),
-                      const SizedBox(width: 10.0),
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => MusicPlayerScreen(
-                                link: data.audio,
-                                cover: data.coverImage,
-                                title: data.title,
-                                subTitle: data.subtitle,
-                              ),
-                            ),
-                          );
-                        },
-                        child: Row(
-                          children: [
-                            Icon(
-                              activeIcons.volume,
-                              color: activeColors.secondary,
-                              size: 18.0,
-                            ),
-                            const SizedBox(width: 3.0),
-                            Text(
-                              'Listen',
-                              style: activeTextStyles.actions,
-                            ),
-                          ],
-                        ),
-                      ),
-                      const SizedBox(width: 10.0),
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    VideoViewScreen(url: data.video)),
-                          );
-                        },
-                        child: Row(
-                          children: [
-                            Icon(
-                              activeIcons.playFill,
-                              color: activeColors.secondary,
-                              size: 18.0,
-                            ),
-                            const SizedBox(width: 3.0),
-                            Text(
-                              'Watch',
-                              style: activeTextStyles.actions,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
+                  // Row(
+                  //   children: [
+                  //     GestureDetector(
+                  //       onTap: () {
+                  //         // Navigator.push(
+                  //         //   context,
+                  //         //   MaterialPageRoute(
+                  //         //     builder: (context) => PDFViewScreen(
+                  //         //       pdf: data.pdf,
+                  //         //       title: data.title,
+                  //         //     ),
+                  //         //   ),
+                  //         // );
+                  //       },
+                  //       child: Row(
+                  //         children: [
+                  //           Icon(
+                  //             activeIcons.doc,
+                  //             color: activeColors.secondary,
+                  //             size: 18.0,
+                  //           ),
+                  //           const SizedBox(width: 3.0),
+                  //           Text(
+                  //             'Read',
+                  //             style: activeTextStyles.actions,
+                  //           ),
+                  //         ],
+                  //       ),
+                  //     ),
+                  //     const SizedBox(width: 10.0),
+                  //     GestureDetector(
+                  //       onTap: () {
+                  //         // Navigator.push(
+                  //         //   context,
+                  //         //   MaterialPageRoute(
+                  //         //     builder: (context) => MusicPlayerScreen(
+                  //         //       link: data.audio,
+                  //         //       cover: data.coverImage,
+                  //         //       title: data.title,
+                  //         //       subTitle: data.subtitle,
+                  //         //     ),
+                  //         //   ),
+                  //         // );
+                  //       },
+                  //       child: Row(
+                  //         children: [
+                  //           Icon(
+                  //             activeIcons.volume,
+                  //             color: activeColors.secondary,
+                  //             size: 18.0,
+                  //           ),
+                  //           const SizedBox(width: 3.0),
+                  //           Text(
+                  //             'Listen',
+                  //             style: activeTextStyles.actions,
+                  //           ),
+                  //         ],
+                  //       ),
+                  //     ),
+                  //     const SizedBox(width: 10.0),
+                  //     GestureDetector(
+                  //       onTap: () {
+                  //         // Navigator.push(
+                  //         //   context,
+                  //         //   MaterialPageRoute(
+                  //         //       builder: (context) =>
+                  //         //           VideoViewScreen(url: data.video)),
+                  //         // );
+                  //       },
+                  //       child: Row(
+                  //         children: [
+                  //           Icon(
+                  //             activeIcons.playFill,
+                  //             color: activeColors.secondary,
+                  //             size: 18.0,
+                  //           ),
+                  //           const SizedBox(width: 3.0),
+                  //           Text(
+                  //             'Watch',
+                  //             style: activeTextStyles.actions,
+                  //           ),
+                  //         ],
+                  //       ),
+                  //     ),
+                  //   ],
+                  // ),
                   SizedBox(
                     width: deviceWidth < 400.0 ? 200.0 : 220.0,
                     child: Wrap(

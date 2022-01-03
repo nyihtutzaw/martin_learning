@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:optimize/models/Pn.dart';
 import 'package:optimize/providers/pn_provider.dart';
+import 'package:optimize/screens/audio_list_screen.dart';
+import 'package:optimize/screens/pdf_list_screen.dart';
 import 'package:optimize/screens/pdf_viewer.dart';
+import 'package:optimize/screens/video_list_screen.dart';
 import 'package:optimize/screens/video_view_screen.dart';
 import 'package:optimize/widgets/full_screen_preloader.dart';
 import 'package:optimize/widgets/premium_message.dart';
@@ -233,11 +236,11 @@ class _PnDetailState extends State<PnDetail> {
                                               context,
                                               MaterialPageRoute(
                                                   builder: (context) =>
-                                                      PDFViewScreen(
-                                                          pdf:
-                                                              appState.item.pdf,
-                                                          title: appState
-                                                              .item.title)),
+                                                      PdfListScreen(
+                                                        type: "101",
+                                                        files: appState
+                                                            .item.pdfFiles,
+                                                      )),
                                             );
                                           },
                                           child: Column(
@@ -272,16 +275,16 @@ class _PnDetailState extends State<PnDetail> {
                                             Navigator.push(
                                               context,
                                               MaterialPageRoute(
-                                                builder: (context) =>
-                                                    MusicPlayerScreen(
-                                                  link: appState.item.audio,
-                                                  cover:
-                                                      appState.item.coverImage,
-                                                  title: appState.item.title,
-                                                  subTitle:
-                                                      appState.item.subtitle,
-                                                ),
-                                              ),
+                                                  builder: (context) =>
+                                                      AudioListScreen(
+                                                        type: "PN",
+                                                        cover: appState
+                                                            .item.coverImage,
+                                                        subTitle:
+                                                            appState.item.title,
+                                                        files: appState
+                                                            .item.audioFiles,
+                                                      )),
                                             );
                                           },
                                           child: Column(
@@ -317,9 +320,12 @@ class _PnDetailState extends State<PnDetail> {
                                               context,
                                               MaterialPageRoute(
                                                 builder: (context) =>
-                                                    VideoViewScreen(
-                                                        url: appState
-                                                            .item.video),
+                                                    VideoListScreen(
+                                                  type: "PN",
+                                                  subTitle: appState.item.title,
+                                                  files:
+                                                      appState.item.videoFiles,
+                                                ),
                                               ),
                                             );
                                           },

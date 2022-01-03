@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:optimize/models/AudioFile.dart';
 import 'package:optimize/models/OneZOne.dart';
+import 'package:optimize/models/PdfFile.dart';
 import 'package:optimize/models/PlusOne.dart';
+import 'package:optimize/models/VideoFile.dart';
 import 'package:optimize/network/one_z_one_service.dart';
 import 'package:optimize/network/plus_one_service.dart';
 import 'package:optimize/network/pn_service.dart';
@@ -19,14 +22,14 @@ class OneZOneProvider with ChangeNotifier {
         title: response["data"][i]["title"],
         subtitle: response["data"][i]["subtitle"],
         description: response["data"][i]["description"],
-        audio: response["data"][i]["audio"],
-        video: response["data"][i]["video"],
         thumbnail: response["data"][i]["thumbnail"],
         poster_image: response["data"][i]["poster_image"],
-        workbook: response["data"][i]["workbook"],
         isBooked: response["data"][i]["isBooked"],
         isLiked: response["data"][i]["isLiked"],
         isTipped: response["data"][i]["isTiped"],
+        pdfFiles: [],
+        audioFiles: [],
+        videoFiles: [],
       );
       items.add(data);
     }
@@ -36,19 +39,44 @@ class OneZOneProvider with ChangeNotifier {
 
   Future<void> getEach(int id) async {
     var response = await OneZOneService.getEach(id);
+    List<PdfFile> pdfFiles = [];
+    for (var y = 0; y < response["data"]["workbooks"].length; y++) {
+      pdfFiles.add(PdfFile(
+          id: response["data"]["workbooks"][y]["id"],
+          name: response["data"]["workbooks"][y]["title"],
+          url: response["data"]["workbooks"][y]["work_book"]));
+    }
+
+    List<AudioFile> audioFiles = [];
+    for (var y = 0; y < response["data"]["audios"].length; y++) {
+      audioFiles.add(AudioFile(
+          id: response["data"]["audios"][y]["id"],
+          name: response["data"]["audios"][y]["title"],
+          url: response["data"]["audios"][y]["audio"]));
+    }
+
+    List<VideoFile> videoFiles = [];
+    for (var y = 0; y < response["data"]["videos"].length; y++) {
+      videoFiles.add(VideoFile(
+          id: response["data"]["videos"][y]["id"],
+          name: response["data"]["videos"][y]["title"],
+          thumbnail: response["data"]["videos"][y]["thumbnail"],
+          url: response["data"]["videos"][y]["video"]));
+    }
+
     item = OneZOne(
       id: response["data"]["id"],
       title: response["data"]["title"],
       subtitle: response["data"]["subtitle"],
       description: response["data"]["description"],
-      audio: response["data"]["audio"],
-      video: response["data"]["video"],
       thumbnail: response["data"]["thumbnail"],
       poster_image: response["data"]["poster_image"],
-      workbook: response["data"]["workbook"],
       isBooked: response["data"]["isBooked"],
       isLiked: response["data"]["isLiked"],
       isTipped: response["data"]["isTiped"],
+      pdfFiles: pdfFiles,
+      audioFiles: audioFiles,
+      videoFiles: videoFiles,
     );
     // for detail screen when it reached from my list
     if (items.length == 0) {

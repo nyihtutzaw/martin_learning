@@ -2,14 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:optimize/models/OneZOne.dart';
 import 'package:optimize/providers/one_z_one_provider.dart';
+import 'package:optimize/screens/pdf_list_screen.dart';
 import 'package:optimize/screens/pdf_viewer.dart';
 import 'package:optimize/screens/photo_view_screen.dart';
+import 'package:optimize/screens/video_list_screen.dart';
 import 'package:optimize/screens/video_view_screen.dart';
 import 'package:optimize/widgets/full_screen_preloader.dart';
 import 'package:optimize/widgets/home_app_bar.dart';
 import 'package:optimize/widgets/premium_message.dart';
 import 'package:provider/provider.dart';
 import '../constants/active_constants.dart';
+import 'audio_list_screen.dart';
 import 'music_player_screen.dart';
 
 class OneZOneDetailScreen extends StatefulWidget {
@@ -77,13 +80,13 @@ class _OneZOneDetailScreenState extends State<OneZOneDetailScreen> {
                             children: [
                               GestureDetector(
                                 onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => VideoViewScreen(
-                                          url: appState.item.video),
-                                    ),
-                                  );
+                                  // Navigator.push(
+                                  //   context,
+                                  //   MaterialPageRoute(
+                                  //     builder: (context) => VideoViewScreen(
+                                  //         url: appState.item.video),
+                                  //   ),
+                                  // );
                                 },
                                 child: Container(
                                   width:
@@ -225,7 +228,7 @@ class _OneZOneDetailScreenState extends State<OneZOneDetailScreen> {
                                       SizedBox(
                                         width:
                                             MediaQuery.of(context).size.width *
-                                                0.25,
+                                                0.2,
                                         child: ElevatedButton(
                                           style: ButtonStyle(
                                             padding: MaterialStateProperty.all<
@@ -243,16 +246,16 @@ class _OneZOneDetailScreenState extends State<OneZOneDetailScreen> {
                                             Navigator.push(
                                               context,
                                               MaterialPageRoute(
-                                                builder: (context) =>
-                                                    MusicPlayerScreen(
-                                                  link: appState.item.audio,
-                                                  cover:
-                                                      appState.item.thumbnail,
-                                                  title: appState.item.title,
-                                                  subTitle:
-                                                      appState.item.subtitle,
-                                                ),
-                                              ),
+                                                  builder: (context) =>
+                                                      AudioListScreen(
+                                                        type: "101",
+                                                        cover: appState
+                                                            .item.thumbnail,
+                                                        subTitle:
+                                                            appState.item.title,
+                                                        files: appState
+                                                            .item.audioFiles,
+                                                      )),
                                             );
                                           },
                                           child: Column(
@@ -269,7 +272,7 @@ class _OneZOneDetailScreenState extends State<OneZOneDetailScreen> {
                                       SizedBox(
                                         width:
                                             MediaQuery.of(context).size.width *
-                                                0.25,
+                                                0.2,
                                         child: ElevatedButton(
                                           style: ButtonStyle(
                                             padding: MaterialStateProperty.all<
@@ -308,7 +311,7 @@ class _OneZOneDetailScreenState extends State<OneZOneDetailScreen> {
                                       SizedBox(
                                         width:
                                             MediaQuery.of(context).size.width *
-                                                0.25,
+                                                0.2,
                                         child: ElevatedButton(
                                           style: ButtonStyle(
                                             padding: MaterialStateProperty.all<
@@ -327,11 +330,10 @@ class _OneZOneDetailScreenState extends State<OneZOneDetailScreen> {
                                               context,
                                               MaterialPageRoute(
                                                 builder: (context) =>
-                                                    PDFViewScreen(
-                                                        pdf: appState
-                                                            .item.workbook,
-                                                        title: appState
-                                                            .item.title),
+                                                    PdfListScreen(
+                                                  type: "101",
+                                                  files: appState.item.pdfFiles,
+                                                ),
                                               ),
                                             );
                                           },
@@ -341,6 +343,48 @@ class _OneZOneDetailScreenState extends State<OneZOneDetailScreen> {
                                                   Icons.document_scanner),
                                               Text(
                                                 "Workbook",
+                                                style: TextStyle(fontSize: 10),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.2,
+                                        child: ElevatedButton(
+                                          style: ButtonStyle(
+                                            padding: MaterialStateProperty.all<
+                                                    EdgeInsets>(
+                                                EdgeInsets.symmetric(
+                                                    vertical: 5)),
+                                            backgroundColor:
+                                                MaterialStateProperty.all<
+                                                    Color>(Colors.white),
+                                            foregroundColor:
+                                                MaterialStateProperty.all<
+                                                    Color>(Colors.blue),
+                                          ),
+                                          onPressed: () {
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      VideoListScreen(
+                                                    type: "101",
+                                                    subTitle:
+                                                        appState.item.title,
+                                                    files: appState
+                                                        .item.videoFiles,
+                                                  ),
+                                                ));
+                                          },
+                                          child: Column(
+                                            children: [
+                                              const Icon(Icons.tv),
+                                              Text(
+                                                "Videos",
                                                 style: TextStyle(fontSize: 10),
                                               ),
                                             ],

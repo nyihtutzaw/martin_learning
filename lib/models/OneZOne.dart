@@ -1,14 +1,19 @@
 // ignore: file_names
+import 'package:optimize/models/PdfFile.dart';
+
+import 'AudioFile.dart';
+import 'VideoFile.dart';
+
 class OneZOne {
   int id;
   String title;
   String subtitle;
   String description;
   String thumbnail;
-  String video;
-  String audio;
+  List<PdfFile> pdfFiles;
+  List<AudioFile> audioFiles;
+  List<VideoFile> videoFiles;
   String poster_image;
-  String workbook;
   bool isLiked;
   bool isTipped;
   bool isBooked;
@@ -19,11 +24,11 @@ class OneZOne {
       required this.subtitle,
       required this.description,
       required this.thumbnail,
-      required this.video,
-      required this.audio,
       required this.poster_image,
-      required this.workbook,
       required this.isTipped,
       required this.isLiked,
+      required this.pdfFiles,
+      required this.audioFiles,
+      required this.videoFiles,
       required this.isBooked});
 }
