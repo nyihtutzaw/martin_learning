@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:optimize/constants/active_constants.dart';
 
 class PremiumMessage extends StatelessWidget {
-  const PremiumMessage({Key? key}) : super(key: key);
+  final Function onClick;
+  const PremiumMessage({Key? key, required this.onClick}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,17 +18,21 @@ class PremiumMessage extends StatelessWidget {
                   fontSize: 17,
                   fontWeight: FontWeight.bold,
                 )),
-            FlatButton(
-              color: activeColors.primary,
-              onPressed: () {},
-              child: Text(
-                "Get Now",
+            TextButton(
+              style: TextButton.styleFrom(
+                  textStyle: const TextStyle(fontSize: 20),
+                  backgroundColor: activeColors.primary),
+              onPressed: () {
+                onClick();
+              },
+              child: const Text(
+                'Get Now',
                 style: TextStyle(
                     color: Colors.white,
                     fontSize: 16,
                     fontWeight: FontWeight.bold),
               ),
-            )
+            ),
           ],
         ),
       ),

@@ -6,7 +6,7 @@ class PlusOneProvider with ChangeNotifier {
   List<PlusOne> items = [];
   late PlusOne item;
 
-  Future<void> getAll() async {
+  Future<void> getAll(bool sorted) async {
     items.clear();
     var response = await PlusOneService.getAll();
 
@@ -25,6 +25,11 @@ class PlusOneProvider with ChangeNotifier {
         isTipped: response["data"][i]["isTiped"],
       );
       items.add(data);
+    }
+
+    if (sorted) {
+      print("hi");
+      items = new List.from(items.reversed);
     }
 
     notifyListeners();

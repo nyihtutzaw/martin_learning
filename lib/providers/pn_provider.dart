@@ -11,7 +11,7 @@ class PnProvider with ChangeNotifier {
   List<Pn> items = [];
   late Pn item;
 
-  Future<void> getAll() async {
+  Future<void> getAll(bool sorted) async {
     items.clear();
     var response = await PnService.getAll();
 
@@ -35,6 +35,7 @@ class PnProvider with ChangeNotifier {
           isBooked: response["data"][i]["isBooked"],
           isLiked: response["data"][i]["isLiked"],
           isTipped: response["data"][i]["isTiped"],
+          isSub: response["data"][i]["isSubscribed"],
           pdfFiles: [],
           audioFiles: [],
           videoFiles: [],
@@ -42,6 +43,9 @@ class PnProvider with ChangeNotifier {
       items.add(data);
     }
 
+    if (sorted) {
+      items = new List.from(items.reversed);
+    }
     notifyListeners();
   }
 
@@ -92,6 +96,7 @@ class PnProvider with ChangeNotifier {
         isBooked: response["data"]["isBooked"],
         isLiked: response["data"]["isLiked"],
         isTipped: response["data"]["isTiped"],
+        isSub: response["data"]["isSubscribed"],
         pdfFiles: pdfFiles,
         audioFiles: audioFiles,
         videoFiles: videoFiles,
@@ -118,5 +123,10 @@ class PnProvider with ChangeNotifier {
     }
 
     notifyListeners();
+  }
+
+  Future<void> subscribeCourse(int id) async {
+    var response = await PnService.subscribeCourse(id);
+    print(response);
   }
 }

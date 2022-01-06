@@ -10,6 +10,7 @@ import 'package:optimize/providers/my_list_provider.dart';
 import 'package:optimize/providers/notification_provider.dart';
 import 'package:optimize/providers/one_z_one_provider.dart';
 import 'package:optimize/providers/pn_provider.dart';
+import 'package:optimize/providers/sort_provider.dart';
 import 'package:optimize/screens/music_player_screen.dart';
 import 'package:optimize/screens/one_z_one_detail_screen.dart';
 import 'package:optimize/screens/pdf_viewer.dart';
@@ -98,6 +99,9 @@ class MyApp extends StatelessWidget {
           ),
           ChangeNotifierProvider.value(
             value: NotificationProvider(),
+          ),
+          ChangeNotifierProvider.value(
+            value: SortProvider(),
           ),
         ],
         child: MaterialApp(

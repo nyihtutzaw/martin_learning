@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:optimize/models/PlusOne.dart';
 import 'package:optimize/screens/plus_one_detail.dart';
 import 'package:optimize/screens/pn_detail_screen.dart';
+import 'package:optimize/screens/video_view_screen.dart';
 
 import '../constants/active_constants.dart';
 
@@ -36,7 +37,12 @@ class PlusOneWidget extends StatelessWidget {
             children: [
               GestureDetector(
                 onTap: () {
-                  // print("hi");
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => VideoViewScreen(url: data.video),
+                    ),
+                  );
                 },
                 child: Container(
                   width: deviceWidth < 400.0 ? 123.0 : 133.0,

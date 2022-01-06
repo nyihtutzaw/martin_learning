@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:optimize/providers/one_z_one_provider.dart';
+import 'package:optimize/providers/plus_one_provider.dart';
+import 'package:optimize/providers/pn_provider.dart';
+import 'package:optimize/providers/sort_provider.dart';
+import 'package:provider/provider.dart';
 
 import '../constants/active_constants.dart';
 import '../screens/search.dart';
@@ -82,18 +87,49 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
               const SizedBox(width: 5.0),
               const SizedBox(width: 5.0),
               currentIndex == 0 || currentIndex == 4
-                  ? GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const Search(),
-                          ),
-                        );
-                      },
-                      child: activeIcons.search,
-                    )
-                  : activeIcons.filter,
+                  ? SizedBox()
+                  // ? GestureDetector(
+                  //     onTap: () {
+                  //       Navigator.push(
+                  //         context,
+                  //         MaterialPageRoute(
+                  //           builder: (context) => const Search(),
+                  //         ),
+                  //       );
+                  //     },
+                  //     child: activeIcons.search,
+                  //   )
+                  : Consumer<SortProvider>(
+                      builder: (context, sortState, child) {
+                      return GestureDetector(
+                          onTap: () async {
+                            Provider.of<SortProvider>(context, listen: false)
+                                .changeSort();
+                            if (currentIndex == 1) {
+                              await Provider.of<PlusOneProvider>(context,
+                                      listen: false)
+                                  .getAll(Provider.of<SortProvider>(context,
+                                          listen: false)
+                                      .sort);
+                            } else if (currentIndex == 2) {
+                              await Provider.of<PnProvider>(context,
+                                      listen: false)
+                                  .getAll(Provider.of<SortProvider>(context,
+                                          listen: false)
+                                      .sort);
+                            } else if (currentIndex == 3) {
+                              await Provider.of<OneZOneProvider>(context,
+                                      listen: false)
+                                  .getAll(Provider.of<SortProvider>(context,
+                                          listen: false)
+                                      .sort);
+                            }
+                          },
+                          child: sortState.sort
+                              ? RotatedBox(
+                                  quarterTurns: 6, child: activeIcons.filter)
+                              : activeIcons.filter);
+                    }),
               const SizedBox(width: 1.0),
             ],
           ),

@@ -76,4 +76,14 @@ class PnService {
         await ApiService.getApiHandler(storedData['token']).get('pn-bookmarks');
     return response.data;
   }
+
+  static subscribeCourse(int id) async {
+    final prefs = await SharedPreferences.getInstance();
+    String? token = prefs.getString('userToken');
+    final storedData = json.decode(token!);
+
+    Response response = await ApiService.getApiHandler(storedData['token'])
+        .get('pn-subscription/' + id.toString());
+    return response.data;
+  }
 }

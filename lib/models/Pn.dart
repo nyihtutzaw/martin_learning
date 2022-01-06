@@ -19,6 +19,7 @@ class Pn {
   bool isLiked;
   bool isTipped;
   bool isBooked;
+  bool isSub;
   List<Category> categories;
   List<PdfFile> pdfFiles;
   List<AudioFile> audioFiles;
@@ -41,5 +42,6 @@ class Pn {
     required this.pdfFiles,
     required this.audioFiles,
     required this.videoFiles,
+    required this.isSub,
   });
 }

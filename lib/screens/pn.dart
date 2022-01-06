@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:optimize/providers/pn_provider.dart';
+import 'package:optimize/providers/sort_provider.dart';
 import 'package:optimize/widgets/full_screen_preloader.dart';
 import 'package:provider/provider.dart';
 
@@ -21,8 +22,8 @@ class _PNState extends State<PN> {
     setState(() {
       _isPreloading = true;
     });
-
-    await Provider.of<PnProvider>(context, listen: false).getAll();
+    bool sorted = Provider.of<SortProvider>(context, listen: true).sort;
+    await Provider.of<PnProvider>(context, listen: false).getAll(sorted);
 
     setState(() {
       _isPreloading = false;

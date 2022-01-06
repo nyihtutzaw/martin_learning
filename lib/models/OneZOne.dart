@@ -17,6 +17,7 @@ class OneZOne {
   bool isLiked;
   bool isTipped;
   bool isBooked;
+  bool isSub;
 
   OneZOne(
       {required this.id,
@@ -30,5 +31,6 @@ class OneZOne {
       required this.pdfFiles,
       required this.audioFiles,
       required this.videoFiles,
+      required this.isSub,
       required this.isBooked});
 }

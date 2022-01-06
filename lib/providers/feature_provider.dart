@@ -28,6 +28,7 @@ class FeatureProvider with ChangeNotifier {
         isBooked: response["data"][i]["isBooked"],
         isLiked: response["data"][i]["isLiked"],
         isTipped: response["data"][i]["isTiped"],
+        isSub: response["data"][i]["isSubscribed"],
         pdfFiles: [],
         audioFiles: [],
         videoFiles: [],
@@ -79,6 +80,7 @@ class FeatureProvider with ChangeNotifier {
           audioFiles: [],
           pdfFiles: [],
           videoFiles: [],
+          isSub: false,
           categories: categories);
       pns.add(data);
     }

@@ -46,6 +46,16 @@ class OneZOneService {
     return response.data;
   }
 
+  static subscribeCourse(int id) async {
+    final prefs = await SharedPreferences.getInstance();
+    String? token = prefs.getString('userToken');
+    final storedData = json.decode(token!);
+
+    Response response = await ApiService.getApiHandler(storedData['token'])
+        .get('one-zero-one-subscription/' + id.toString());
+    return response.data;
+  }
+
   static getAllLikes() async {
     final prefs = await SharedPreferences.getInstance();
     String? token = prefs.getString('userToken');

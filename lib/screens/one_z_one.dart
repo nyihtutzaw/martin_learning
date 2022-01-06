@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:optimize/providers/one_z_one_provider.dart';
+import 'package:optimize/providers/sort_provider.dart';
 import 'package:optimize/widgets/full_screen_preloader.dart';
 import 'package:provider/provider.dart';
 
@@ -21,8 +22,8 @@ class _OneZeroOneState extends State<OneZeroOne> {
     setState(() {
       _isPreloading = true;
     });
-
-    await Provider.of<OneZOneProvider>(context, listen: false).getAll();
+    bool sorted = Provider.of<SortProvider>(context, listen: true).sort;
+    await Provider.of<OneZOneProvider>(context, listen: false).getAll(sorted);
 
     setState(() {
       _isPreloading = false;

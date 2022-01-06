@@ -146,14 +146,14 @@ class MyDrawer extends StatelessWidget {
                   )
                 ],
               ),
-              Padding(
-                padding: const EdgeInsets.only(top: 10.0, left: 16, right: 16),
-                child: DrawerTile(
-                  title: 'Optimize Podcast',
-                  icon: activeIcons.podcast,
-                  onPress: () {},
-                ),
-              ),
+              // Padding(
+              //   padding: const EdgeInsets.only(top: 10.0, left: 16, right: 16),
+              //   child: DrawerTile(
+              //     title: 'Optimize Podcast',
+              //     icon: activeIcons.podcast,
+              //     onPress: () {},
+              //   ),
+              // ),
             ],
           ),
         ),
