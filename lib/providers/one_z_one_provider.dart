@@ -20,10 +20,18 @@ class OneZOneProvider with ChangeNotifier {
       OneZOne data = OneZOne(
         id: response["data"][i]["id"],
         title: response["data"][i]["title"],
-        subtitle: response["data"][i]["subtitle"],
-        description: response["data"][i]["description"],
-        thumbnail: response["data"][i]["thumbnail"],
-        poster_image: response["data"][i]["poster_image"],
+        subtitle: response["data"][i]["subtitle"] != null
+            ? response["data"][i]["subtitle"]
+            : "",
+        description: response["data"][i]["description"] != null
+            ? response["data"][i]["description"]
+            : "",
+        thumbnail: response["data"][i]["thumbnail"] != null
+            ? response["data"][i]["thumbnail"]
+            : "",
+        poster_image: response["data"][i]["poster_image"] != null
+            ? response["data"][i]["poster_image"]
+            : "",
         isBooked: response["data"][i]["isBooked"],
         isLiked: response["data"][i]["isLiked"],
         isTipped: response["data"][i]["isTiped"],
@@ -73,9 +81,15 @@ class OneZOneProvider with ChangeNotifier {
       id: response["data"]["id"],
       title: response["data"]["title"],
       subtitle: response["data"]["subtitle"],
-      description: response["data"]["description"],
-      thumbnail: response["data"]["thumbnail"],
-      poster_image: response["data"]["poster_image"],
+      description: response["data"]["description"] != null
+          ? response["data"]["description"]
+          : "",
+      thumbnail: response["data"]["thumbnail"] != null
+          ? response["data"]["thumbnail"]
+          : "",
+      poster_image: response["data"]["poster_image"] != null
+          ? response["data"]["poster_image"]
+          : "",
       isBooked: response["data"]["isBooked"],
       isLiked: response["data"]["isLiked"],
       isTipped: response["data"]["isTiped"],

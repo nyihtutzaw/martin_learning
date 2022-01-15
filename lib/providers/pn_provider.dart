@@ -25,13 +25,27 @@ class PnProvider with ChangeNotifier {
       Pn data = Pn(
           id: response["data"][i]["id"],
           title: response["data"][i]["title"],
-          authorName: response["data"][i]["author_name"],
-          subtitle: response["data"][i]["subtitle"],
-          description: response["data"][i]["description"],
-          coverImage: response["data"][i]["cover_image"],
-          introVideo: response["data"][i]["intro_video"],
-          introThumbnail: response["data"][i]["intro_video_thumbnail"],
-          introDescription: response["data"][i]["intro_description"],
+          authorName: response["data"][i]["author_name"] != null
+              ? response["data"][i]["author_name"]
+              : "",
+          subtitle: response["data"][i]["subtitle"] != null
+              ? response["data"][i]["subtitle"]
+              : "",
+          description: response["data"][i]["description"] != null
+              ? response["data"][i]["description"]
+              : "",
+          coverImage: response["data"][i]["cover_image"] != null
+              ? response["data"][i]["cover_image"]
+              : "",
+          introVideo: response["data"][i]["intro_video"] != null
+              ? response["data"][i]["intro_video"]
+              : "",
+          introThumbnail: response["data"][i]["intro_video_thumbnail"] != null
+              ? response["data"][i]["intro_video_thumbnail"]
+              : "",
+          introDescription: response["data"][i]["intro_description"] != null
+              ? response["data"][i]["intro_description"]
+              : "",
           isBooked: response["data"][i]["isBooked"],
           isLiked: response["data"][i]["isLiked"],
           isTipped: response["data"][i]["isTiped"],
@@ -85,14 +99,29 @@ class PnProvider with ChangeNotifier {
 
     item = Pn(
         id: response["data"]["id"],
-        title: response["data"]["title"],
-        authorName: response["data"]["author_name"],
-        subtitle: response["data"]["subtitle"],
-        description: response["data"]["description"],
-        coverImage: response["data"]["cover_image"],
-        introVideo: response["data"]["intro_video"],
-        introThumbnail: response["data"]["intro_video_thumbnail"],
-        introDescription: response["data"]["intro_description"],
+        title:
+            response["data"]["title"] != null ? response["data"]["title"] : "",
+        authorName: response["data"]["author_name"] != null
+            ? response["data"]["author_name"]
+            : "",
+        subtitle: response["data"]["subtitle"] != null
+            ? response["data"]["subtitle"]
+            : "",
+        description: response["data"]["description"] != null
+            ? response["data"]["description"]
+            : "",
+        coverImage: response["data"]["cover_image"] != null
+            ? response["data"]["cover_image"]
+            : "",
+        introVideo: response["data"]["intro_video"] != null
+            ? response["data"]["intro_video"]
+            : "",
+        introThumbnail: response["data"]["intro_video_thumbnail"] != null
+            ? response["data"]["intro_video_thumbnail"]
+            : "",
+        introDescription: response["data"]["intro_description"] != null
+            ? response["data"]["intro_description"]
+            : "",
         isBooked: response["data"]["isBooked"],
         isLiked: response["data"]["isLiked"],
         isTipped: response["data"]["isTiped"],

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:optimize/screens/three_minute.dart';
 import 'main.dart';
 import 'widgets/home_app_bar.dart';
 import 'widgets/my_drawer.dart';
@@ -28,6 +29,7 @@ class _HomeState extends State<Home> {
   static const List<Widget> _pages = <Widget>[
     Featured(),
     PlusOne(),
+    ThreeMinture(),
     PN(),
     OneZeroOne(),
     MyLists(),
@@ -88,7 +90,7 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: _selectedIndex == 4
+      appBar: _selectedIndex == 5
           ? null
           : HomeAppBar(
               currentIndex: _selectedIndex,
@@ -109,12 +111,16 @@ class _HomeState extends State<Home> {
             label: '+1',
           ),
           BottomNavigationBarItem(
+            icon: activeIcons.calendar,
+            label: '3min',
+          ),
+          BottomNavigationBarItem(
             icon: activeIcons.file,
-            label: 'PN',
+            label: 'Book',
           ),
           BottomNavigationBarItem(
             icon: activeIcons.player,
-            label: '101',
+            label: 'Course',
           ),
           BottomNavigationBarItem(
             icon: activeIcons.heart,

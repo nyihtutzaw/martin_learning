@@ -5,8 +5,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 class ApiService {
   static Dio getApiHandler(String token) {
     BaseOptions options = new BaseOptions(
-      baseUrl: "http://optimize.clovermandalay.org/api/v1/",
-      //baseUrl: "http://192.168.100.200:8000/api/v1/",
+      baseUrl: "http://yourlink.mar-thin.com/api/v1/",
+      //  baseUrl: "http://192.168.100.101:8000/api/v1/",
       // connectTimeout: 5000,
       // receiveTimeout: 3000,
     );

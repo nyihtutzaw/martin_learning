@@ -67,7 +67,7 @@ class _OneZOneDetailScreenState extends State<OneZOneDetailScreen> {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: activeColors.primary,
-          title: Text("101: " + widget.data.title.toString()),
+          title: Text("Course: " + widget.data.title.toString()),
           centerTitle: false,
           titleSpacing: 0.0,
           titleTextStyle: const TextStyle(
@@ -82,6 +82,8 @@ class _OneZOneDetailScreenState extends State<OneZOneDetailScreen> {
                     builder: (context, appState, child) {
                     return !appState.item.isSub
                         ? PremiumMessage(
+                            type: "101",
+                            id: widget.data.id,
                             onClick: () => {onSubscribe()},
                           )
                         : Container(
@@ -314,15 +316,19 @@ class _OneZOneDetailScreenState extends State<OneZOneDetailScreen> {
                                                       Color>(Colors.blue),
                                             ),
                                             onPressed: () {
-                                              Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      PhotoViewScreen(
-                                                          image: widget.data
-                                                              .poster_image),
-                                                ),
-                                              );
+                                              if (widget.data.poster_image
+                                                      .length >
+                                                  0) {
+                                                Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        PhotoViewScreen(
+                                                            image: widget.data
+                                                                .poster_image),
+                                                  ),
+                                                );
+                                              }
                                             },
                                             child: Column(
                                               children: [

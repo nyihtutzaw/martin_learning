@@ -74,39 +74,33 @@ class MyDrawer extends StatelessWidget {
           color: activeColors.black,
           child: Column(
             children: [
+              Container(
+                padding: EdgeInsets.symmetric(vertical: 20),
+                color: activeColors.white,
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Image.asset('assets/images/logo.png',
+                        width: 60, height: 60),
+                    const SizedBox(width: 10.0),
+                    Text(
+                      'မာသင်',
+                      style: TextStyle(
+                        color: activeColors.black,
+                        fontSize: 19.0,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
               Padding(
                 padding: const EdgeInsets.only(
                   left: 23.0,
                   top: 15.0,
                 ),
                 child: Row(
-                  children: [
-                    Container(
-                      width: 45.0,
-                      height: 45.0,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: activeColors.primary,
-                      ),
-                      child: Center(
-                        child: Text(
-                          'Logo',
-                          style: TextStyle(
-                            color: activeColors.white,
-                            fontSize: 18.0,
-                          ),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(width: 10.0),
-                    Text(
-                      'Martin',
-                      style: TextStyle(
-                        color: activeColors.white,
-                        fontSize: 16.0,
-                      ),
-                    ),
-                  ],
+                  children: [],
                 ),
               ),
               SizedBox(

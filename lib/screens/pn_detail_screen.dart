@@ -65,7 +65,7 @@ class _PnDetailState extends State<PnDetail> {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: activeColors.primary,
-          title: Text("PN:" + widget.data.title.toString()),
+          title: Text("Book:" + widget.data.title.toString()),
           centerTitle: false,
           titleSpacing: 0.0,
           titleTextStyle: const TextStyle(
@@ -79,6 +79,8 @@ class _PnDetailState extends State<PnDetail> {
                 : Consumer<PnProvider>(builder: (context, appState, child) {
                     return !appState.item.isSub
                         ? PremiumMessage(
+                            type: "pn",
+                            id: widget.data.id,
                             onClick: () => {onSubscribe()},
                           )
                         : Container(

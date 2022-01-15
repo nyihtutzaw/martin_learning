@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:optimize/models/PlusOne.dart';
 import 'package:optimize/providers/plus_one_provider.dart';
 import 'package:optimize/providers/sort_provider.dart';
 import 'package:optimize/widgets/full_screen_preloader.dart';
@@ -7,14 +8,14 @@ import 'package:provider/provider.dart';
 import '../constants/active_constants.dart';
 import '../widgets/plus_one_widget.dart';
 
-class PlusOne extends StatefulWidget {
-  const PlusOne({Key? key}) : super(key: key);
+class ThreeMinture extends StatefulWidget {
+  const ThreeMinture({Key? key}) : super(key: key);
 
   @override
-  _PlusOneState createState() => _PlusOneState();
+  _ThreeMintureState createState() => _ThreeMintureState();
 }
 
-class _PlusOneState extends State<PlusOne> {
+class _ThreeMintureState extends State<ThreeMinture> {
   bool _isInit = false;
   bool _isPreloading = false;
 
@@ -24,7 +25,7 @@ class _PlusOneState extends State<PlusOne> {
     });
     bool sorted = Provider.of<SortProvider>(context, listen: true).sort;
     await Provider.of<PlusOneProvider>(context, listen: false)
-        .getAll(1, sorted);
+        .getAll(0, sorted);
 
     setState(() {
       _isPreloading = false;

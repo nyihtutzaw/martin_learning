@@ -37,12 +37,14 @@ class PlusOneWidget extends StatelessWidget {
             children: [
               GestureDetector(
                 onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => VideoViewScreen(url: data.video),
-                    ),
-                  );
+                  if (data.video != null) {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => VideoViewScreen(url: data.video),
+                      ),
+                    );
+                  }
                 },
                 child: Container(
                   width: deviceWidth < 400.0 ? 123.0 : 133.0,
@@ -50,7 +52,10 @@ class PlusOneWidget extends StatelessWidget {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(5),
                     image: DecorationImage(
-                      image: NetworkImage(data.thumbnail),
+                      image: data.video != null
+                          ? NetworkImage(data.thumbnail)
+                          : NetworkImage(
+                              'https://thumbs.dreamstime.com/b/no-thumbnail-image-placeholder-forums-blogs-websites-148010362.jpg'),
                       fit: BoxFit.fill,
                     ),
                   ),

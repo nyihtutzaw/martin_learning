@@ -52,7 +52,7 @@ class _PlusOneDetailState extends State<PlusOneDetail> {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: activeColors.primary,
-          title: Text("+1: " + widget.data.title.toString()),
+          title: Text(widget.data.title.toString()),
           centerTitle: false,
           titleSpacing: 0.0,
           titleTextStyle: const TextStyle(
@@ -70,13 +70,15 @@ class _PlusOneDetailState extends State<PlusOneDetail> {
                       children: [
                         GestureDetector(
                           onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    VideoViewScreen(url: appState.item.video),
-                              ),
-                            );
+                            if (appState.item.video.length > 0) {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      VideoViewScreen(url: appState.item.video),
+                                ),
+                              );
+                            }
                           },
                           child: Container(
                             width: MediaQuery.of(context).size.width * 0.95,
@@ -210,17 +212,19 @@ class _PlusOneDetailState extends State<PlusOneDetail> {
                                         Colors.blue),
                               ),
                               onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => MusicPlayerScreen(
-                                      link: appState.item.audio,
-                                      cover: appState.item.thumbnail,
-                                      title: appState.item.title,
-                                      subTitle: appState.item.subtitle,
+                                if (appState.item.audio.length > 0) {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => MusicPlayerScreen(
+                                        link: appState.item.audio,
+                                        cover: appState.item.thumbnail,
+                                        title: appState.item.title,
+                                        subTitle: appState.item.subtitle,
+                                      ),
                                     ),
-                                  ),
-                                );
+                                  );
+                                }
                               },
                               child: Column(
                                 children: [

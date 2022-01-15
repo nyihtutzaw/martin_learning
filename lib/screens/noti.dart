@@ -49,27 +49,6 @@ class _NotiScreenState extends State<NotiScreen> {
       drawer: const MyDrawer(),
       body: Column(
         children: [
-          MergeSemantics(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 10.0,
-                vertical: 0.0,
-              ),
-              child: ListTile(
-                title: const Text('Receive app notifications'),
-                trailing: CupertinoSwitch(
-                  activeColor: activeColors.primary,
-                  value: _noti,
-                  onChanged: (bool value) {
-                    setState(() {
-                      _noti = value;
-                    });
-                    print(_noti);
-                  },
-                ),
-              ),
-            ),
-          ),
           Divider(
             height: 2.0,
             thickness: 1.0,
@@ -120,11 +99,13 @@ class NotiTile extends StatelessWidget {
               padding: EdgeInsets.only(top: 7.0),
               child: Text(data.body),
             ),
-            trailing: Image.network(
-              data.image,
-              width: 50,
-              height: 50,
-            )),
+            trailing: data.image.length > 0
+                ? Image.network(
+                    data.image,
+                    width: 50,
+                    height: 50,
+                  )
+                : SizedBox()),
         const SizedBox(height: 5.0),
         Divider(
           height: 2.0,

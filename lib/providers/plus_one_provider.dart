@@ -6,9 +6,9 @@ class PlusOneProvider with ChangeNotifier {
   List<PlusOne> items = [];
   late PlusOne item;
 
-  Future<void> getAll(bool sorted) async {
+  Future<void> getAll(int isPlusOne, bool sorted) async {
     items.clear();
-    var response = await PlusOneService.getAll();
+    var response = await PlusOneService.getAll(isPlusOne);
 
     for (var i = 0; i < response["data"].length; i++) {
       PlusOne data = PlusOne(
@@ -16,10 +16,18 @@ class PlusOneProvider with ChangeNotifier {
         title: response["data"][i]["title"],
         code: response["data"][i]["code"],
         subtitle: response["data"][i]["subtitle"],
-        description: response["data"][i]["description"],
-        audio: response["data"][i]["audio"],
-        video: response["data"][i]["video"],
-        thumbnail: response["data"][i]["thumbnail"],
+        description: response["data"][i]["description"] != null
+            ? response["data"][i]["description"]
+            : "",
+        audio: response["data"][i]["audio"] != null
+            ? response["data"][i]["audio"]
+            : "",
+        video: response["data"][i]["video"] != null
+            ? response["data"][i]["video"]
+            : "",
+        thumbnail: response["data"][i]["thumbnail"] != null
+            ? response["data"][i]["thumbnail"]
+            : "",
         isBooked: response["data"][i]["isBooked"],
         isLiked: response["data"][i]["isLiked"],
         isTipped: response["data"][i]["isTiped"],
@@ -42,10 +50,14 @@ class PlusOneProvider with ChangeNotifier {
       title: response["data"]["title"],
       code: response["data"]["code"],
       subtitle: response["data"]["subtitle"],
-      description: response["data"]["description"],
-      audio: response["data"]["audio"],
-      video: response["data"]["video"],
-      thumbnail: response["data"]["thumbnail"],
+      description: response["data"]["description"] != null
+          ? response["data"]["description"]
+          : "",
+      audio: response["data"]["audio"] != null ? response["data"]["audio"] : "",
+      video: response["data"]["video"] != null ? response["data"]["video"] : "",
+      thumbnail: response["data"]["thumbnail"] != null
+          ? response["data"]["thumbnail"]
+          : "",
       isBooked: response["data"]["isBooked"],
       isLiked: response["data"]["isLiked"],
       isTipped: response["data"]["isTiped"],

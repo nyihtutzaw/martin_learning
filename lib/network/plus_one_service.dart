@@ -6,13 +6,13 @@ import 'api_service.dart';
 class PlusOneService {
   static bool auth = true;
 
-  static getAll() async {
+  static getAll(int isPlusOne) async {
     final prefs = await SharedPreferences.getInstance();
     String? token = prefs.getString('userToken');
     final storedData = json.decode(token!);
 
-    Response response =
-        await ApiService.getApiHandler(storedData['token']).get('plus-ones');
+    Response response = await ApiService.getApiHandler(storedData['token'])
+        .get('plus-ones?is_plus_one=' + isPlusOne.toString());
     return response.data;
   }
 

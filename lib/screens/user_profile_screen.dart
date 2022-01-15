@@ -90,20 +90,20 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                           ],
                         ));
                   }),
-                  Expanded(
-                    child: ListView(children: <Widget>[
-                      InkWell(
-                        onTap: () {
-                          //Navigator.of(context).pushNamed(FontChangeScreen.routeName);
-                        },
-                        child: Card(
-                            child: ListTile(
-                          leading: Icon(Icons.lock),
-                          title: Text("Change Password"),
-                        )),
-                      ),
-                    ]),
-                  )
+                  // Expanded(
+                  //   child: ListView(children: <Widget>[
+                  //     InkWell(
+                  //       onTap: () {
+                  //         //Navigator.of(context).pushNamed(FontChangeScreen.routeName);
+                  //       },
+                  //       child: Card(
+                  //           child: ListTile(
+                  //         leading: Icon(Icons.lock),
+                  //         title: Text("Change Password"),
+                  //       )),
+                  //     ),
+                  //   ]),
+                  // )
                 ],
               )));
   }

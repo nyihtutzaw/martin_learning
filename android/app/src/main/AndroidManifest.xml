@@ -1,8 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.rcsmm.optimize">
+  package="com.rcsmm.optimize">
     <uses-permission android:name="android.permission.INTERNET"/>
    <application
-        android:label="Martin"
+        android:label="မာသင်"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
