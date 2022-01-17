@@ -63,7 +63,6 @@ class MyDrawer extends StatelessWidget {
           pageName: 'Log Out',
           onPress: () async {
             await Provider.of<Auth>(context, listen: false).logout();
-
             Navigator.of(context).popUntil((route) => route.isFirst);
           }),
     ];

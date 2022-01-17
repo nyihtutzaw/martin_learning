@@ -40,4 +40,30 @@ class AuthService {
         await ApiService.getApiHandler(storedData['token']).get('user');
     return response.data;
   }
+
+  static updateInfo(Map<String, String> _authData) async {
+    final prefs = await SharedPreferences.getInstance();
+    String? token = prefs.getString('userToken');
+    final storedData = json.decode(token!);
+    try {
+      Response response = await ApiService.getApiHandler(storedData['token'])
+          .put("user", data: _authData);
+      return response.data;
+    } on DioError catch (e) {
+      throw e.response!.data.toString();
+    }
+  }
+
+  static updatePassword(Map<String, String> _authData) async {
+    final prefs = await SharedPreferences.getInstance();
+    String? token = prefs.getString('userToken');
+    final storedData = json.decode(token!);
+    try {
+      Response response = await ApiService.getApiHandler(storedData['token'])
+          .post("io-change-password", data: _authData);
+      return response.data;
+    } on DioError catch (e) {
+      throw e.response!.data.toString();
+    }
+  }
 }

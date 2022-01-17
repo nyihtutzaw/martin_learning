@@ -1,0 +1,199 @@
+import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:optimize/constants/active_constants.dart';
+import 'package:optimize/providers/auth_provider.dart';
+import 'package:optimize/widgets/full_screen_preloader.dart';
+import 'package:optimize/widgets/message_dialog.dart';
+import 'package:provider/provider.dart';
+
+class UpdateProfileScreen extends StatefulWidget {
+  const UpdateProfileScreen({Key? key}) : super(key: key);
+
+  @override
+  State<UpdateProfileScreen> createState() => _UpdateProfileScreenState();
+}
+
+class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
+  bool _isInit = false;
+  bool _isPreloading = false;
+  bool _passwordVisible = false;
+  bool _actionLoading = false;
+  Map<String, String> _authData = {
+    'name': '',
+    'email': '',
+  };
+  Map<String, String> _initValues = {
+    'name': '',
+    'email': '',
+  };
+  final GlobalKey<FormState> _formKey = GlobalKey();
+
+  void loadData() async {
+    setState(() {
+      _isPreloading = true;
+    });
+
+    await Provider.of<Auth>(context, listen: false).getUser();
+
+    setState(() {
+      _isPreloading = false;
+    });
+  }
+
+  void didChangeDependencies() {
+    if (!_isInit) {
+      loadData();
+      _isInit = true;
+    }
+    super.didChangeDependencies();
+  }
+
+  bool isValidEmail(String email) {
+    String p =
+        r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+    RegExp regExp = new RegExp(p);
+    return regExp.hasMatch(email);
+  }
+
+  @override
+  void initState() {
+    _passwordVisible = false;
+  }
+
+  Future<void> _submit() async {
+    if (!_actionLoading) {
+      if (_formKey.currentState!.validate()) {
+        _formKey.currentState!.save();
+        try {
+          setState(() {
+            _actionLoading = true;
+          });
+          await Provider.of<Auth>(context, listen: false)
+              .updateProfile(_authData);
+          setState(() {
+            _actionLoading = false;
+          });
+          Fluttertoast.showToast(
+            msg: "Success. You can login now",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.CENTER,
+          );
+        } catch (error) {
+          setState(() {
+            _actionLoading = false;
+          });
+          MessageDialog.show(
+              context, error.toString(), "Sign Up Fails", "Try Again");
+        }
+      } else {
+        return;
+      }
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: activeColors.primary,
+        title: Text("   Update Profile"),
+        centerTitle: false,
+        titleSpacing: 0.0,
+        titleTextStyle: const TextStyle(
+          fontSize: 16.0,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+      body: _isPreloading
+          ? FullScreenPreloader()
+          : Consumer<Auth>(builder: (context, authState, child) {
+              return Container(
+                  padding: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+                  child: Form(
+                      key: _formKey,
+                      child: Container(
+                        child: Column(
+                          children: <Widget>[
+                            Container(
+                              margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
+                                  TextFormField(
+                                    initialValue:
+                                        authState.currentUser.username,
+                                    validator: (value) {
+                                      if (value!.isEmpty) {
+                                        return 'Name is  required';
+                                      }
+                                      return null;
+                                    },
+                                    onSaved: (value) =>
+                                        _authData['name'] = value!,
+                                    decoration: InputDecoration(
+                                      filled: true,
+                                      fillColor: Colors.white,
+                                      hintText: 'Type Your First Name',
+                                      hintStyle: TextStyle(
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Container(
+                              margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
+                                  TextFormField(
+                                    initialValue: authState.currentUser.email,
+                                    validator: (value) {
+                                      if (value!.isEmpty) {
+                                        return 'Email is  required';
+                                      } else if (!isValidEmail(value)) {
+                                        return 'Your email is invalid';
+                                      }
+                                      return null;
+                                    },
+                                    onSaved: (value) =>
+                                        _authData['email'] = value!,
+                                    decoration: InputDecoration(
+                                      filled: true,
+                                      fillColor: Colors.white,
+                                      hintText: 'Type Your Email',
+                                      hintStyle: TextStyle(
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            SizedBox(
+                              height: 30,
+                            ),
+                            FlatButton(
+                              child: Text(
+                                _actionLoading ? 'Loading...' : 'Update',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              color: activeColors.primary,
+                              onPressed: _submit,
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 60, vertical: 15),
+                            ),
+                            SizedBox(
+                              height: 30,
+                            ),
+                          ],
+                        ),
+                      )));
+            }),
+    );
+  }
+}

@@ -12,15 +12,7 @@ import 'package:optimize/providers/one_z_one_provider.dart';
 import 'package:optimize/providers/pn_provider.dart';
 import 'package:optimize/providers/sort_provider.dart';
 import 'package:optimize/providers/subscription_provider.dart';
-import 'package:optimize/screens/music_player_screen.dart';
-import 'package:optimize/screens/one_z_one_detail_screen.dart';
-import 'package:optimize/screens/pdf_viewer.dart';
-import 'package:optimize/screens/photo_view_screen.dart';
-import 'package:optimize/screens/plus_one_detail.dart';
-import 'package:optimize/screens/pn_detail_screen.dart';
-import 'package:optimize/screens/sign_in_screen.dart';
 import 'package:optimize/screens/sign_up_screen.dart';
-import 'package:optimize/screens/video_view_screen.dart';
 import 'package:provider/provider.dart';
 
 import 'constants/active_constants.dart';

@@ -53,20 +53,14 @@ class _FeaturedState extends State<Featured> {
                       const SizedBox(height: 25.0),
                       Center(
                         child: Text(
-                          'Daily Wisdom',
+                          'Today Special !',
                           style: activeTextStyles.header,
                         ),
                       ),
                       const SizedBox(height: 10.0),
                       Center(
                         child: Text(
-                          'A daily guided tour through the most',
-                          style: activeTextStyles.description,
-                        ),
-                      ),
-                      Center(
-                        child: Text(
-                          'life-changing wisdom from the Optimize library.',
+                          'New idea everyday for your business.',
                           style: activeTextStyles.description,
                         ),
                       ),

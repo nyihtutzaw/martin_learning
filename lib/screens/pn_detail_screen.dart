@@ -371,7 +371,7 @@ class _PnDetailState extends State<PnDetail> {
                                               children: [
                                                 const Icon(Icons.tv),
                                                 Text(
-                                                  "PNTV",
+                                                  "Video",
                                                   style:
                                                       TextStyle(fontSize: 10),
                                                 ),

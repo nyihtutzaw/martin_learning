@@ -55,6 +55,10 @@ class Auth with ChangeNotifier {
     await AuthService.register(_authData);
   }
 
+  Future<void> updateProfile(Map<String, String> _authData) async {
+    await AuthService.updateInfo(_authData);
+  }
+
   Future<void> logout() async {
     _token = "";
 
@@ -63,13 +67,17 @@ class Auth with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> getUser() async {
+  Future<User> getUser() async {
     var response = await AuthService.getUser();
-    ;
     currentUser = User(
       id: response["data"]["id"],
       username: response["data"]["name"],
       email: response["data"]["email"],
     );
+    return currentUser;
+  }
+
+  Future<void> changePassword(Map<String, String> _authData) async {
+    await AuthService.updatePassword(_authData);
   }
 }

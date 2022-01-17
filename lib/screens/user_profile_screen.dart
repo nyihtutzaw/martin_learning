@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:optimize/constants/active_constants.dart';
 import 'package:optimize/providers/auth_provider.dart';
+import 'package:optimize/screens/change_password_screen.dart';
+import 'package:optimize/screens/update_profile_screen.dart';
 import 'package:optimize/widgets/full_screen_preloader.dart';
 import 'package:optimize/widgets/my_drawer.dart';
 import 'package:provider/provider.dart';
@@ -90,20 +92,47 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                           ],
                         ));
                   }),
-                  // Expanded(
-                  //   child: ListView(children: <Widget>[
-                  //     InkWell(
-                  //       onTap: () {
-                  //         //Navigator.of(context).pushNamed(FontChangeScreen.routeName);
-                  //       },
-                  //       child: Card(
-                  //           child: ListTile(
-                  //         leading: Icon(Icons.lock),
-                  //         title: Text("Change Password"),
-                  //       )),
-                  //     ),
-                  //   ]),
-                  // )
+                  Expanded(
+                    child: ListView(children: <Widget>[
+                      Container(
+                        alignment: Alignment.center,
+                        padding: EdgeInsets.symmetric(vertical: 10),
+                        child: Text("Subscribed Course"),
+                      ),
+                      Card(child: ListTile(title: Text("Road So Far (Book)"))),
+                      Card(child: ListTile(title: Text("PN Title (Book)"))),
+                      InkWell(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ChangePasswordScreen(),
+                            ),
+                          );
+                        },
+                        child: Card(
+                            child: ListTile(
+                          leading: Icon(Icons.lock),
+                          title: Text("Change Password"),
+                        )),
+                      ),
+                      InkWell(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => UpdateProfileScreen(),
+                            ),
+                          );
+                        },
+                        child: Card(
+                            child: ListTile(
+                          leading: Icon(Icons.account_box),
+                          title: Text("Update Profile"),
+                        )),
+                      ),
+                    ]),
+                  )
                 ],
               )));
   }
