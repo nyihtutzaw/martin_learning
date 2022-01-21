@@ -5,6 +5,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:optimize/providers/blog_provider.dart';
 import 'package:optimize/providers/feature_provider.dart';
 import 'package:optimize/providers/my_list_provider.dart';
 import 'package:optimize/providers/notification_provider.dart';
@@ -12,6 +13,7 @@ import 'package:optimize/providers/one_z_one_provider.dart';
 import 'package:optimize/providers/pn_provider.dart';
 import 'package:optimize/providers/sort_provider.dart';
 import 'package:optimize/providers/subscription_provider.dart';
+import 'package:optimize/screens/sign_in_screen.dart';
 import 'package:optimize/screens/sign_up_screen.dart';
 import 'package:provider/provider.dart';
 
@@ -99,12 +101,15 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider.value(
             value: SubscriptionProvider(),
           ),
+          ChangeNotifierProvider.value(
+            value: BlogProvider(),
+          ),
         ],
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
           title: 'Real Code Solutions',
           theme: ThemeData(
-            fontFamily: 'Acumin',
+            // fontFamily: 'Acumin',
             primarySwatch: Colors.blue,
             elevatedButtonTheme: ElevatedButtonThemeData(
               style: ElevatedButton.styleFrom(
@@ -123,7 +128,6 @@ class MyApp extends StatelessWidget {
               ),
             ),
           ),
-
           home: Consumer<Auth>(
             builder: (context, auth, child) {
               if (auth.isAuth) {
@@ -143,28 +147,28 @@ class MyApp extends StatelessWidget {
               }
             },
           ),
-          // routes: <String, WidgetBuilder>{
-          //   "/": (BuildContext context) => const Onboarding(),
-          //   "/home": (BuildContext context) => const Home(),
-          //   "/featured": (BuildContext context) => const FeaturedFull(),
-          //   "/noti": (BuildContext context) => const Noti(),
-          //   "/offline_content": (BuildContext context) =>
-          //       const OfflineContent(),
-          //   "/plus_one_detail": (BuildContext context) => const PlusOneDetail(),
-          //   "/pn_detail_screen": (BuildContext context) => const PnDetail(),
-          //   "/sign_in_screen": (BuildContext context) => const SignInScreen(),
-          //   "/sign_up_screen": (BuildContext context) => const SignUpScreen(),
-          //   "/one_z_one_detail_screen": (BuildContext context) =>
-          //       const OneZOneDetailScreen(),
-          //   "/photo_view_screen": (BuildContext context) =>
-          //       const PhotoViewScreen(),
-          //   "/pdf_viewer_screen": (BuildContext context) =>
-          //       const PDFViewScreen(),
-          //   "/video_view_screen": (BuildContext context) => VideoViewScreen(
-          //         url:
-          //             'http://adminonline.clovermandalay.org/videos/Moe%20Sensei%20Intro.mp4',
-          //       ),
-          // },
+          routes: <String, WidgetBuilder>{
+            //   "/": (BuildContext context) => const Onboarding(),
+            //   "/home": (BuildContext context) => const Home(),
+            //   "/featured": (BuildContext context) => const FeaturedFull(),
+            //   "/noti": (BuildContext context) => const Noti(),
+            //   "/offline_content": (BuildContext context) =>
+            //       const OfflineContent(),
+            //   "/plus_one_detail": (BuildContext context) => const PlusOneDetail(),
+            //   "/pn_detail_screen": (BuildContext context) => const PnDetail(),
+            "/sign_in_screen": (BuildContext context) => const SignInScreen(),
+            //   "/sign_up_screen": (BuildContext context) => const SignUpScreen(),
+            //   "/one_z_one_detail_screen": (BuildContext context) =>
+            //       const OneZOneDetailScreen(),
+            //   "/photo_view_screen": (BuildContext context) =>
+            //       const PhotoViewScreen(),
+            //   "/pdf_viewer_screen": (BuildContext context) =>
+            //       const PDFViewScreen(),
+            //   "/video_view_screen": (BuildContext context) => VideoViewScreen(
+            //         url:
+            //             'http://adminonline.clovermandalay.org/videos/Moe%20Sensei%20Intro.mp4',
+            //       ),
+          },
         ));
   }
 }

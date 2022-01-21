@@ -22,6 +22,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
     });
 
     await Provider.of<Auth>(context, listen: false).getUser();
+    await Provider.of<Auth>(context, listen: false).getUserSubscription();
 
     setState(() {
       _isPreloading = false;
@@ -99,8 +100,14 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                         padding: EdgeInsets.symmetric(vertical: 10),
                         child: Text("Subscribed Course"),
                       ),
-                      Card(child: ListTile(title: Text("Road So Far (Book)"))),
-                      Card(child: ListTile(title: Text("PN Title (Book)"))),
+                      Consumer<Auth>(builder: (context, authStatte, child) {
+                        return Column(
+                          children: [
+                            for (var item in authStatte.subscribedCourses)
+                              Card(child: ListTile(title: Text(item.name))),
+                          ],
+                        );
+                      }),
                       InkWell(
                         onTap: () {
                           Navigator.push(

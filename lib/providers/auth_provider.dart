@@ -1,5 +1,6 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:optimize/models/SubscribedCourse.dart';
 import 'package:optimize/models/User.dart';
 import 'package:optimize/network/auth_service.dart';
 import 'dart:convert';
@@ -7,6 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class Auth with ChangeNotifier {
   String _token = "";
+  List<SubscribedCourse> subscribedCourses = [];
   late User currentUser;
 
   String get token {
@@ -79,5 +81,15 @@ class Auth with ChangeNotifier {
 
   Future<void> changePassword(Map<String, String> _authData) async {
     await AuthService.updatePassword(_authData);
+  }
+
+  Future<void> getUserSubscription() async {
+    var response = await AuthService.getUserSubscription();
+    for (int i = 0; i < response["data"].length; i++) {
+      subscribedCourses.add(SubscribedCourse(
+        id: response["data"][i]["subscription"]["id"],
+        name: response["data"][i]["subscription"]["title"],
+      ));
+    }
   }
 }

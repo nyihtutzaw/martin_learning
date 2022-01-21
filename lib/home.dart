@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:optimize/screens/blog_page_screen.dart';
 import 'package:optimize/screens/three_minute.dart';
 import 'main.dart';
 import 'widgets/home_app_bar.dart';
@@ -32,7 +33,7 @@ class _HomeState extends State<Home> {
     ThreeMinture(),
     PN(),
     OneZeroOne(),
-    MyLists(),
+    BlogPageScreen(),
   ];
 
   void _onItemTapped(int index) {
@@ -90,12 +91,10 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: _selectedIndex == 5
-          ? null
-          : HomeAppBar(
-              currentIndex: _selectedIndex,
-              bgColor: activeColors.primary,
-            ),
+      appBar: HomeAppBar(
+        currentIndex: _selectedIndex,
+        bgColor: activeColors.primary,
+      ),
       drawer: const MyDrawer(),
       body: Center(
         child: _pages.elementAt(_selectedIndex),
@@ -123,8 +122,8 @@ class _HomeState extends State<Home> {
             label: 'Course',
           ),
           BottomNavigationBarItem(
-            icon: activeIcons.heart,
-            label: 'My Lists',
+            icon: Icon(Icons.article),
+            label: 'Blog',
           ),
         ],
         backgroundColor: activeColors.black,

@@ -20,11 +20,9 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
   bool _actionLoading = false;
   Map<String, String> _authData = {
     'name': '',
-    'email': '',
   };
   Map<String, String> _initValues = {
     'name': '',
-    'email': '',
   };
   final GlobalKey<FormState> _formKey = GlobalKey();
 
@@ -74,7 +72,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
             _actionLoading = false;
           });
           Fluttertoast.showToast(
-            msg: "Success. You can login now",
+            msg: "Success",
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.CENTER,
           );
@@ -134,35 +132,6 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                                       filled: true,
                                       fillColor: Colors.white,
                                       hintText: 'Type Your First Name',
-                                      hintStyle: TextStyle(
-                                        color: Colors.black,
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Container(
-                              margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  TextFormField(
-                                    initialValue: authState.currentUser.email,
-                                    validator: (value) {
-                                      if (value!.isEmpty) {
-                                        return 'Email is  required';
-                                      } else if (!isValidEmail(value)) {
-                                        return 'Your email is invalid';
-                                      }
-                                      return null;
-                                    },
-                                    onSaved: (value) =>
-                                        _authData['email'] = value!,
-                                    decoration: InputDecoration(
-                                      filled: true,
-                                      fillColor: Colors.white,
-                                      hintText: 'Type Your Email',
                                       hintStyle: TextStyle(
                                         color: Colors.black,
                                       ),

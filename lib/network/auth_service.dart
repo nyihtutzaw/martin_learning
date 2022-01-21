@@ -66,4 +66,17 @@ class AuthService {
       throw e.response!.data.toString();
     }
   }
+
+  static getUserSubscription() async {
+    final prefs = await SharedPreferences.getInstance();
+    String? token = prefs.getString('userToken');
+    final storedData = json.decode(token!);
+    try {
+      Response response = await ApiService.getApiHandler(storedData['token'])
+          .get("user-subscriptions");
+      return response.data;
+    } on DioError catch (e) {
+      throw e.response!.data.toString();
+    }
+  }
 }

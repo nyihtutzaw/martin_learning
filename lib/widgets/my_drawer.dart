@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:optimize/providers/auth_provider.dart';
+import 'package:optimize/screens/my_lists.dart';
 import 'package:optimize/screens/noti.dart';
 import 'package:optimize/screens/user_profile_screen.dart';
 import 'package:provider/provider.dart';
@@ -59,11 +60,22 @@ class MyDrawer extends StatelessWidget {
             );
           }),
       DrawerItem(
+          icon: activeIcons.profile,
+          pageName: 'My List',
+          onPress: () {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => MyLists(),
+              ),
+            );
+          }),
+      DrawerItem(
           icon: activeIcons.walker,
           pageName: 'Log Out',
           onPress: () async {
             await Provider.of<Auth>(context, listen: false).logout();
-            Navigator.of(context).popUntil((route) => route.isFirst);
+            Navigator.of(context).popAndPushNamed('/sign_in_screen');
           }),
     ];
 

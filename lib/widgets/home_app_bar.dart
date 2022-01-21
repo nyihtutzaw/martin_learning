@@ -24,7 +24,7 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
     '3min',
     'Book',
     'Course',
-    'My Lists',
+    'Blog',
   ];
 
   @override
@@ -61,21 +61,21 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
                             ),
                           ),
                         ),
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const Search(),
-                              ),
-                            );
-                          },
-                          child: const Icon(
-                            Icons.search,
-                            color: Colors.white,
-                            size: 24.0,
-                          ),
-                        ),
+                        // GestureDetector(
+                        //   onTap: () {
+                        //     Navigator.push(
+                        //       context,
+                        //       MaterialPageRoute(
+                        //         builder: (context) => const Search(),
+                        //       ),
+                        //     );
+                        //   },
+                        //   child: const Icon(
+                        //     Icons.search,
+                        //     color: Colors.white,
+                        //     size: 24.0,
+                        //   ),
+                        // ),
                       ],
                     ),
               const SizedBox(width: 1.0),
@@ -87,7 +87,7 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
               const SizedBox(width: 5.0),
               const SizedBox(width: 5.0),
               const SizedBox(width: 5.0),
-              currentIndex == 0 || currentIndex == 4
+              currentIndex == 0 || currentIndex == 4 || currentIndex == 5
                   ? SizedBox()
                   : Consumer<SortProvider>(
                       builder: (context, sortState, child) {
