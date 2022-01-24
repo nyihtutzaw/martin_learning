@@ -20,14 +20,14 @@ class BlogPageScreen extends StatefulWidget {
 class _BlogPageScreenState extends State<BlogPageScreen> {
   bool _isInit = false;
   bool _isPreloading = false;
+  int page = 1;
 
   void loadData() async {
     setState(() {
       _isPreloading = true;
     });
 
-    bool sorted = Provider.of<SortProvider>(context, listen: true).sort;
-    await Provider.of<BlogProvider>(context, listen: false).getAll(sorted);
+    await Provider.of<BlogProvider>(context, listen: false).getAll(page);
 
     setState(() {
       _isPreloading = false;
@@ -45,51 +45,82 @@ class _BlogPageScreenState extends State<BlogPageScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: _isPreloading
-            ? FullScreenPreloader()
-            : Consumer<BlogProvider>(builder: (context, blogState, child) {
-                return ListView.builder(
-                  itemCount: blogState.blogs.length,
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 20),
-                      child: Column(
-                        children: [
-                          const SizedBox(height: 20.0),
-                          GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => BlogDetailScreen(
-                                      blog: blogState.blogs[index]),
-                                ),
-                              );
-                            },
-                            child: Card(
-                              child: Container(
-                                child: Column(
-                                  children: [
-                                    FadeInImage.memoryNetwork(
-                                        placeholder: kTransparentImage,
-                                        image: blogState.blogs[index].image),
-                                    Html(data: blogState.blogs[index].title),
-                                  ],
-                                ),
+        body: Column(
+      children: [
+        Expanded(
+            child: Consumer<BlogProvider>(builder: (context, blogState, child) {
+          return ListView.builder(
+            itemCount: blogState.blogs.length,
+            itemBuilder: (context, index) {
+              if (blogState.isExisted && index == blogState.blogs.length - 1) {
+                return Column(
+                  children: [
+                    _isPreloading
+                        ? CircularProgressIndicator()
+                        : Container(
+                            alignment: Alignment.center,
+                            padding: EdgeInsets.symmetric(vertical: 20),
+                            child: FlatButton(
+                              child: Text(
+                                "Load More",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold),
                               ),
+                              color: activeColors.primary,
+                              onPressed: () {
+                                setState(() {
+                                  page += 1;
+                                });
+                                loadData();
+                              },
                             ),
                           ),
-                          const SizedBox(height: 10.0),
-                          Divider(
-                            height: 2.0,
-                            thickness: 1.0,
-                            color: activeColors.grey,
-                          ),
-                        ],
-                      ),
-                    );
-                  },
+                  ],
                 );
-              }));
+              } else
+                return Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 20),
+                  child: Column(
+                    children: [
+                      const SizedBox(height: 20.0),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => BlogDetailScreen(
+                                  blog: blogState.blogs[index]),
+                            ),
+                          );
+                        },
+                        child: Card(
+                          child: Container(
+                            child: Column(
+                              children: [
+                                FadeInImage.memoryNetwork(
+                                    placeholder: kTransparentImage,
+                                    image: blogState.blogs[index].image),
+                                Html(data: blogState.blogs[index].title),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 10.0),
+                      Divider(
+                        height: 2.0,
+                        thickness: 1.0,
+                        color: activeColors.grey,
+                      ),
+                    ],
+                  ),
+                );
+            },
+          );
+        })),
+      ],
+    ));
   }
 }
