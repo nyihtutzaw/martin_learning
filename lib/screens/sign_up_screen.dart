@@ -129,7 +129,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 decoration: InputDecoration(
                                   filled: true,
                                   fillColor: Colors.white,
-                                  hintText: 'Type Your First Name',
+                                  hintText: 'Type Your Name',
                                   hintStyle: TextStyle(
                                     color: Colors.black,
                                   ),

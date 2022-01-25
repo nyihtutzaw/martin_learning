@@ -4,7 +4,7 @@ import 'package:optimize/screens/one_z_one_detail_screen.dart';
 
 import '../constants/active_constants.dart';
 
-class OneZOneWidget extends StatelessWidget {
+class  OneZOneWidget extends StatelessWidget {
   final OneZOne data;
   final double marginBottom;
   OneZOneWidget({Key? key, required this.data, this.marginBottom = 0})

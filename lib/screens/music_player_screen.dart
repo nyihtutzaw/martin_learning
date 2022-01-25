@@ -62,112 +62,77 @@ class _MusicPlayerScreenState extends State<MusicPlayerScreen> {
   Widget build(BuildContext context) {
     var screenWidth = MediaQuery.of(context).size.width;
 
-    return Scaffold(
-        appBar: AppBar(
-          backgroundColor: activeColors.primary,
-          title: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 30),
-            child: Text("Listen :" + widget.title),
+    return WillPopScope(
+      onWillPop: () async {
+        await audioPlayer.stop();
+        return true;
+      },
+      child: Scaffold(
+          appBar: AppBar(
+            backgroundColor: activeColors.primary,
+            title: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 30),
+              child: Text("Listen :" + widget.title),
+            ),
+            centerTitle: false,
+            titleSpacing: 0.0,
+            titleTextStyle: const TextStyle(
+              fontSize: 16.0,
+              fontWeight: FontWeight.bold,
+            ),
           ),
-          centerTitle: false,
-          titleSpacing: 0.0,
-          titleTextStyle: const TextStyle(
-            fontSize: 16.0,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        body: _isPreloading
-            ? FullScreenPreloader()
-            : Container(
-                child: Column(
-                children: [
-                  Container(
-                    padding: EdgeInsets.fromLTRB(0, 30, 0, 10),
-                    alignment: Alignment.center,
-                    child: Image.network(
-                      widget.cover,
-                      width: screenWidth * 0.35,
-                      height: 200,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                  Text(widget.title,
-                      style: const TextStyle(
-                        fontSize: 18,
-                        color: Colors.black,
-                        fontWeight: FontWeight.w600,
-                      )),
-                  Text(
-                    widget.subTitle,
-                    style: TextStyle(
-                      fontSize: 13,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                  Container(
-                    padding: EdgeInsets.symmetric(
-                        vertical: 20, horizontal: screenWidth * 0.2),
-                    child: ProgressBar(
-                      progress: duration,
-                      total: maxDuration,
-                      onSeek: (d) {
-                        setState(() {
-                          duration = d;
-                        });
-                        audioPlayer.seek(d);
-                      },
-                    ),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      IconButton(
-                          onPressed: () {
-                            Duration newDuration = Duration(
-                                milliseconds: duration.inMilliseconds - 10000);
-
-                            if (newDuration.inMilliseconds > 0) {
-                              setState(() {
-                                duration = newDuration;
-                              });
-                              audioPlayer.seek(newDuration);
-                            }
-                          },
-                          icon: const Icon(
-                              Icons.settings_backup_restore_rounded)),
-                      SizedBox(
-                        width: 20,
+          body: _isPreloading
+              ? FullScreenPreloader()
+              : Container(
+                  child: Column(
+                  children: [
+                    Container(
+                      padding: EdgeInsets.fromLTRB(0, 30, 0, 10),
+                      alignment: Alignment.center,
+                      child: Image.network(
+                        widget.cover,
+                        width: screenWidth * 0.35,
+                        height: 200,
+                        fit: BoxFit.cover,
                       ),
-                      playerState == PlayerState.PLAYING
-                          ? IconButton(
-                              onPressed: () async {
-                                int result = await audioPlayer.pause();
-                                if (result == 1) {
-                                  print("Pausing..");
-                                }
-                              },
-                              icon: const Icon(Icons.pause_circle))
-                          : IconButton(
-                              onPressed: () async {
-                                int result = await audioPlayer.resume();
-                                if (result == 1) {
-                                  print("Playing..");
-                                }
-                              },
-                              icon: const Icon(Icons.play_arrow)),
-                      SizedBox(
-                        width: 20,
+                    ),
+                    Text(widget.title,
+                        style: const TextStyle(
+                          fontSize: 18,
+                          color: Colors.black,
+                          fontWeight: FontWeight.w600,
+                        )),
+                    Text(
+                      widget.subTitle,
+                      style: TextStyle(
+                        fontSize: 13,
                       ),
-                      RotatedBox(
-                        quarterTurns: 6,
-                        child: IconButton(
+                      textAlign: TextAlign.center,
+                    ),
+                    Container(
+                      padding: EdgeInsets.symmetric(
+                          vertical: 20, horizontal: screenWidth * 0.2),
+                      child: ProgressBar(
+                        progress: duration,
+                        total: maxDuration,
+                        onSeek: (d) {
+                          setState(() {
+                            duration = d;
+                          });
+                          audioPlayer.seek(d);
+                        },
+                      ),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        IconButton(
                             onPressed: () {
                               Duration newDuration = Duration(
                                   milliseconds:
-                                      duration.inMilliseconds + 10000);
+                                      duration.inMilliseconds - 10000);
 
-                              if (maxDuration.inMilliseconds >
-                                  newDuration.inMilliseconds) {
+                              if (newDuration.inMilliseconds > 0) {
                                 setState(() {
                                   duration = newDuration;
                                 });
@@ -176,10 +141,52 @@ class _MusicPlayerScreenState extends State<MusicPlayerScreen> {
                             },
                             icon: const Icon(
                                 Icons.settings_backup_restore_rounded)),
-                      )
-                    ],
-                  )
-                ],
-              )));
+                        SizedBox(
+                          width: 20,
+                        ),
+                        playerState == PlayerState.PLAYING
+                            ? IconButton(
+                                onPressed: () async {
+                                  int result = await audioPlayer.pause();
+                                  if (result == 1) {
+                                    print("Pausing..");
+                                  }
+                                },
+                                icon: const Icon(Icons.pause_circle))
+                            : IconButton(
+                                onPressed: () async {
+                                  int result = await audioPlayer.resume();
+                                  if (result == 1) {
+                                    print("Playing..");
+                                  }
+                                },
+                                icon: const Icon(Icons.play_arrow)),
+                        SizedBox(
+                          width: 20,
+                        ),
+                        RotatedBox(
+                          quarterTurns: 6,
+                          child: IconButton(
+                              onPressed: () {
+                                Duration newDuration = Duration(
+                                    milliseconds:
+                                        duration.inMilliseconds + 10000);
+
+                                if (maxDuration.inMilliseconds >
+                                    newDuration.inMilliseconds) {
+                                  setState(() {
+                                    duration = newDuration;
+                                  });
+                                  audioPlayer.seek(newDuration);
+                                }
+                              },
+                              icon: const Icon(
+                                  Icons.settings_backup_restore_rounded)),
+                        )
+                      ],
+                    )
+                  ],
+                ))),
+    );
   }
 }
