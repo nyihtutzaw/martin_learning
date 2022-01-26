@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:optimize/models/OneZOne.dart';
 import 'package:optimize/screens/one_z_one_detail_screen.dart';
+import 'package:optimize/screens/video_view_screen.dart';
 
 import '../constants/active_constants.dart';
 
-class  OneZOneWidget extends StatelessWidget {
+class OneZOneWidget extends StatelessWidget {
   final OneZOne data;
   final double marginBottom;
   OneZOneWidget({Key? key, required this.data, this.marginBottom = 0})
@@ -33,7 +34,15 @@ class  OneZOneWidget extends StatelessWidget {
             children: [
               GestureDetector(
                 onTap: () {
-                  print('One Zero One!');
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => VideoViewScreen(
+                        url: data.video,
+                        isUbube: data.isUtube,
+                      ),
+                    ),
+                  );
                 },
                 child: Container(
                   width: deviceWidth < 400.0 ? 123.0 : 133.0,

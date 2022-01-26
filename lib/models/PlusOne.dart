@@ -11,6 +11,7 @@ class PlusOne {
   bool isLiked;
   bool isTipped;
   bool isBooked;
+  bool isUtube;
   PlusOne({
     required this.id,
     required this.title,
@@ -23,5 +24,6 @@ class PlusOne {
     required this.isBooked,
     required this.isTipped,
     required this.isLiked,
+    required this.isUtube,
   });
 }

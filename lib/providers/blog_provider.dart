@@ -1,14 +1,14 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:optimize/models/BlogModel.dart';
-import 'package:optimize/models/Noti.dart';
-import 'package:optimize/network/notification_service.dart';
-
 class BlogProvider with ChangeNotifier {
   List<BlogModel> blogs = [];
   bool isExisted = true;
   var imageUrl = 'https://mar-thin.com/wp-json/wp/v2/media';
   Future<void> getAll(int page) async {
+    if (page==1){
+      blogs.clear();
+    }
     BaseOptions options = new BaseOptions(
       baseUrl: "https://mar-thin.com/wp-json/wp/v2/",
     );

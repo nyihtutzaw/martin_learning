@@ -18,6 +18,8 @@ class OneZOne {
   bool isTipped;
   bool isBooked;
   bool isSub;
+  bool isUtube;
+  String video;
 
   OneZOne(
       {required this.id,
@@ -32,5 +34,7 @@ class OneZOne {
       required this.audioFiles,
       required this.videoFiles,
       required this.isSub,
+      required this.video,
+      required this.isUtube,
       required this.isBooked});
 }

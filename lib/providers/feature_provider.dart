@@ -21,6 +21,10 @@ class FeatureProvider with ChangeNotifier {
       OneZOne data = OneZOne(
         id: response["data"][i]["id"],
         title: response["data"][i]["title"],
+        video: response["data"][i]["video"] != null
+            ? response["data"][i]["video"]
+            : "",
+        isUtube: response["data"][i]["isYoutube"],
         subtitle: response["data"][i]["subtitle"],
         description: response["data"][i]["description"] != null
             ? response["data"][i]["description"]
@@ -57,6 +61,7 @@ class FeatureProvider with ChangeNotifier {
         video: response["data"][i]["video"] != null
             ? response["data"][i]["video"]
             : "",
+        isUtube: response["data"][i]["isYoutube"],
         thumbnail: response["data"][i]["thumbnail"] != null
             ? response["data"][i]["thumbnail"]
             : "",

@@ -1,12 +1,13 @@
 import 'package:fijkplayer/fijkplayer.dart';
 import 'package:flutter/material.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 // import 'custom_ui.dart';
 
 class VideoViewScreen extends StatefulWidget {
   final String url;
-
-  VideoViewScreen({required this.url});
+  final bool isUbube;
+  VideoViewScreen({required this.url, required this.isUbube});
 
   @override
   _VideoViewScreenState createState() => _VideoViewScreenState();
@@ -14,15 +15,24 @@ class VideoViewScreen extends StatefulWidget {
 
 class _VideoViewScreenState extends State<VideoViewScreen> {
   final FijkPlayer player = FijkPlayer();
+  late YoutubePlayerController _controller;
 
   _VideoViewScreenState();
 
   @override
   void initState() {
     super.initState();
-
-    player.setOption(FijkOption.playerCategory, "mediacodec-all-videos", 1);
-    startPlay();
+    if (widget.isUbube) {
+      _controller = YoutubePlayerController(
+        initialVideoId: widget.url,
+        flags: YoutubePlayerFlags(
+          autoPlay: true,
+        ),
+      );
+    } else {
+      player.setOption(FijkOption.playerCategory, "mediacodec-all-videos", 1);
+      startPlay();
+    }
   }
 
   void startPlay() async {
@@ -38,13 +48,29 @@ class _VideoViewScreenState extends State<VideoViewScreen> {
     return Scaffold(
       backgroundColor: Colors.black,
       body: Container(
-        child: Center(
-          child: FijkView(
-            player: player,
-            panelBuilder: fijkPanel2Builder(snapShot: true),
-            fsFit: FijkFit.fill,
-          ),
-        ),
+        child: widget.isUbube
+            ? YoutubePlayerBuilder(
+                player: YoutubePlayer(
+                  controller: _controller,
+                ),
+                builder: (context, player) {
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      // some widgets
+                      player,
+                      //some other widgets
+                    ],
+                  );
+                })
+            : Center(
+                child: FijkView(
+                  player: player,
+                  panelBuilder: fijkPanel2Builder(snapShot: true),
+                  fsFit: FijkFit.fill,
+                ),
+              ),
       ),
     );
   }

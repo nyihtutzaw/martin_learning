@@ -20,6 +20,10 @@ class OneZOneProvider with ChangeNotifier {
       OneZOne data = OneZOne(
         id: response["data"][i]["id"],
         title: response["data"][i]["title"],
+        video: response["data"][i]["video"] != null
+            ? response["data"][i]["video"]
+            : "",
+        isUtube: response["data"][i]["isYoutube"],
         subtitle: response["data"][i]["subtitle"] != null
             ? response["data"][i]["subtitle"]
             : "",
@@ -35,7 +39,9 @@ class OneZOneProvider with ChangeNotifier {
         isBooked: response["data"][i]["isBooked"],
         isLiked: response["data"][i]["isLiked"],
         isTipped: response["data"][i]["isTiped"],
-        isSub: response["data"][i]["isSubscribed"],
+        isSub: response["data"][i]["isSubscribed"] != null
+            ? response["data"][i]["isSubscribed"]
+            : "",
         pdfFiles: [],
         audioFiles: [],
         videoFiles: [],
@@ -70,17 +76,28 @@ class OneZOneProvider with ChangeNotifier {
 
     List<VideoFile> videoFiles = [];
     for (var y = 0; y < response["data"]["videos"].length; y++) {
+      print(response["data"]["videos"][y]["is_youtube"]);
       videoFiles.add(VideoFile(
           id: response["data"]["videos"][y]["id"],
+          isYouTube: response["data"]["videos"][y]["is_youtube"],
           name: response["data"]["videos"][y]["title"],
-          thumbnail: response["data"]["videos"][y]["thumbnail"],
-          url: response["data"]["videos"][y]["video"]));
+          subTitle: response["data"]["videos"][y]["subtitle"] != null
+              ? response["data"]["videos"][y]["subtitle"]
+              : "",
+          thumbnail: response["data"]["videos"][y]["thumbnail"] != null
+              ? response["data"]["videos"][y]["thumbnail"]
+              : "",
+          url: response["data"]["videos"][y]["video"] != null
+              ? response["data"]["videos"][y]["video"]
+              : ""));
     }
 
     item = OneZOne(
       id: response["data"]["id"],
       title: response["data"]["title"],
       subtitle: response["data"]["subtitle"],
+      video: response["data"]["video"] != null ? response["data"]["video"] : "",
+      isUtube: response["data"]["isYoutube"],
       description: response["data"]["description"] != null
           ? response["data"]["description"]
           : "",

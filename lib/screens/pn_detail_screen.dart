@@ -77,367 +77,349 @@ class _PnDetailState extends State<PnDetail> {
             child: _isPreloading
                 ? FullScreenPreloader()
                 : Consumer<PnProvider>(builder: (context, appState, child) {
-                    return !appState.item.isSub
-                        ? PremiumMessage(
-                            type: "pn",
-                            id: widget.data.id,
-                            onClick: () => {onSubscribe()},
-                          )
-                        : Container(
+                    return Container(
+                      child: Column(
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.symmetric(vertical: 20),
+                            alignment: Alignment.center,
+                            child: Container(
+                              decoration: BoxDecoration(
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(0.2),
+                                    spreadRadius: 3,
+                                    blurRadius: 2,
+                                    offset: const Offset(
+                                        0, 1), // changes position of shadow
+                                  ),
+                                ],
+                              ),
+                              child: Image.network(
+                                appState.item.coverImage,
+                                width: MediaQuery.of(context).size.width * 0.35,
+                                height: 200,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
+                          Container(
+                            padding: EdgeInsets.symmetric(
+                                horizontal:
+                                    MediaQuery.of(context).size.width * 0.1),
                             child: Column(
                               children: [
-                                Container(
-                                  padding:
-                                      const EdgeInsets.symmetric(vertical: 20),
-                                  alignment: Alignment.center,
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: Colors.black.withOpacity(0.2),
-                                          spreadRadius: 3,
-                                          blurRadius: 2,
-                                          offset: const Offset(0,
-                                              1), // changes position of shadow
-                                        ),
-                                      ],
-                                    ),
-                                    child: Image.network(
-                                      appState.item.coverImage,
-                                      width: MediaQuery.of(context).size.width *
-                                          0.35,
-                                      height: 200,
-                                      fit: BoxFit.cover,
-                                    ),
-                                  ),
+                                Text(appState.item.title,
+                                    style: const TextStyle(
+                                      fontSize: 18,
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.w600,
+                                    )),
+                                const SizedBox(
+                                  height: 5,
                                 ),
-                                Container(
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal:
-                                          MediaQuery.of(context).size.width *
-                                              0.1),
-                                  child: Column(
-                                    children: [
-                                      Text(appState.item.title,
-                                          style: const TextStyle(
-                                            fontSize: 18,
-                                            color: Colors.black,
-                                            fontWeight: FontWeight.w600,
-                                          )),
-                                      const SizedBox(
-                                        height: 5,
-                                      ),
-                                      Text(
-                                        appState.item.subtitle,
-                                        style: TextStyle(
-                                          fontSize: 13,
-                                        ),
-                                        textAlign: TextAlign.center,
-                                      ),
-                                      SizedBox(
-                                        height: 10,
-                                      ),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          appState.item.isLiked
-                                              ? GestureDetector(
-                                                  onTap: () async {
-                                                    await Provider.of<
-                                                                PnProvider>(
-                                                            context,
-                                                            listen: false)
-                                                        .markData(
-                                                            "like",
-                                                            appState.item.id,
-                                                            0);
-                                                  },
-                                                  child: activeIcons
-                                                      .heartCircleFill)
-                                              : GestureDetector(
-                                                  onTap: () async {
-                                                    await Provider.of<
-                                                                PnProvider>(
-                                                            context,
-                                                            listen: false)
-                                                        .markData(
-                                                            "like",
-                                                            appState.item.id,
-                                                            1);
-                                                  },
-                                                  child:
-                                                      activeIcons.heartCircle),
-                                          const SizedBox(width: 10.0),
-                                          appState.item.isTipped
-                                              ? GestureDetector(
-                                                  onTap: () async {
-                                                    await Provider.of<
-                                                                PnProvider>(
-                                                            context,
-                                                            listen: false)
-                                                        .markData(
-                                                            "tip",
-                                                            appState.item.id,
-                                                            0);
-                                                  },
-                                                  child: activeIcons
-                                                      .checkCircleFill)
-                                              : GestureDetector(
-                                                  onTap: () async {
-                                                    await Provider.of<
-                                                                PnProvider>(
-                                                            context,
-                                                            listen: false)
-                                                        .markData(
-                                                            "tip",
-                                                            appState.item.id,
-                                                            1);
-                                                  },
-                                                  child:
-                                                      activeIcons.checkCircle),
-                                          const SizedBox(width: 10.0),
-                                          appState.item.isBooked
-                                              ? GestureDetector(
-                                                  onTap: () async {
-                                                    await Provider.of<
-                                                                PnProvider>(
-                                                            context,
-                                                            listen: false)
-                                                        .markData(
-                                                            "bookmark",
-                                                            appState.item.id,
-                                                            0);
-                                                  },
-                                                  child: activeIcons
-                                                      .saveCircleFill)
-                                              : GestureDetector(
-                                                  onTap: () async {
-                                                    await Provider.of<
-                                                                PnProvider>(
-                                                            context,
-                                                            listen: false)
-                                                        .markData(
-                                                            "bookmark",
-                                                            appState.item.id,
-                                                            1);
-                                                  },
-                                                  child:
-                                                      activeIcons.saveCircle),
-                                        ],
-                                      ),
-                                    ],
+                                Text(
+                                  appState.item.subtitle,
+                                  style: TextStyle(
+                                    fontSize: 13,
                                   ),
+                                  textAlign: TextAlign.center,
                                 ),
                                 SizedBox(
                                   height: 10,
                                 ),
-                                Container(
-                                    width: double.infinity,
-                                    decoration: BoxDecoration(
-                                      color: Colors.blueGrey.withOpacity(0.1),
-                                    ),
-                                    padding: EdgeInsets.symmetric(
-                                        vertical: 15,
-                                        horizontal:
-                                            MediaQuery.of(context).size.width *
-                                                0.1),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        SizedBox(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              0.25,
-                                          child: ElevatedButton(
-                                            style: ButtonStyle(
-                                              padding: MaterialStateProperty
-                                                  .all<EdgeInsets>(
-                                                      EdgeInsets.symmetric(
-                                                          vertical: 5)),
-                                              backgroundColor:
-                                                  MaterialStateProperty.all<
-                                                      Color>(Colors.white),
-                                              foregroundColor:
-                                                  MaterialStateProperty.all<
-                                                      Color>(Colors.blue),
-                                            ),
-                                            onPressed: () {
-                                              Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        PdfListScreen(
-                                                          type: "101",
-                                                          files: appState
-                                                              .item.pdfFiles,
-                                                        )),
-                                              );
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    appState.item.isLiked
+                                        ? GestureDetector(
+                                            onTap: () async {
+                                              await Provider.of<PnProvider>(
+                                                      context,
+                                                      listen: false)
+                                                  .markData("like",
+                                                      appState.item.id, 0);
                                             },
-                                            child: Column(
-                                              children: [
-                                                const Icon(Icons.book),
-                                                Text(
-                                                  "Read",
-                                                  style:
-                                                      TextStyle(fontSize: 10),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              0.25,
-                                          child: ElevatedButton(
-                                            style: ButtonStyle(
-                                              padding: MaterialStateProperty
-                                                  .all<EdgeInsets>(
-                                                      EdgeInsets.symmetric(
-                                                          vertical: 5)),
-                                              backgroundColor:
-                                                  MaterialStateProperty.all<
-                                                      Color>(Colors.white),
-                                              foregroundColor:
-                                                  MaterialStateProperty.all<
-                                                      Color>(Colors.blue),
-                                            ),
-                                            onPressed: () {
-                                              Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        AudioListScreen(
-                                                          type: "PN",
-                                                          cover: appState
-                                                              .item.coverImage,
-                                                          subTitle: appState
-                                                              .item.title,
-                                                          files: appState
-                                                              .item.audioFiles,
-                                                        )),
-                                              );
+                                            child: activeIcons.heartCircleFill)
+                                        : GestureDetector(
+                                            onTap: () async {
+                                              await Provider.of<PnProvider>(
+                                                      context,
+                                                      listen: false)
+                                                  .markData("like",
+                                                      appState.item.id, 1);
                                             },
-                                            child: Column(
-                                              children: [
-                                                const Icon(Icons.music_note),
-                                                Text(
-                                                  "Listen",
-                                                  style:
-                                                      TextStyle(fontSize: 10),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              0.25,
-                                          child: ElevatedButton(
-                                            style: ButtonStyle(
-                                              padding: MaterialStateProperty
-                                                  .all<EdgeInsets>(
-                                                      EdgeInsets.symmetric(
-                                                          vertical: 5)),
-                                              backgroundColor:
-                                                  MaterialStateProperty.all<
-                                                      Color>(Colors.white),
-                                              foregroundColor:
-                                                  MaterialStateProperty.all<
-                                                      Color>(Colors.blue),
-                                            ),
-                                            onPressed: () {
-                                              Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      VideoListScreen(
-                                                    type: "PN",
-                                                    subTitle:
-                                                        appState.item.title,
-                                                    files: appState
-                                                        .item.videoFiles,
-                                                  ),
-                                                ),
-                                              );
+                                            child: activeIcons.heartCircle),
+                                    const SizedBox(width: 10.0),
+                                    appState.item.isTipped
+                                        ? GestureDetector(
+                                            onTap: () async {
+                                              await Provider.of<PnProvider>(
+                                                      context,
+                                                      listen: false)
+                                                  .markData("tip",
+                                                      appState.item.id, 0);
                                             },
-                                            child: Column(
-                                              children: [
-                                                const Icon(Icons.tv),
-                                                Text(
-                                                  "Video",
-                                                  style:
-                                                      TextStyle(fontSize: 10),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    )),
-                                Container(
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal:
-                                          MediaQuery.of(context).size.width *
-                                              0.1),
-                                  child: Html(
-                                    data: appState.item.description,
-                                  ),
+                                            child: activeIcons.checkCircleFill)
+                                        : GestureDetector(
+                                            onTap: () async {
+                                              await Provider.of<PnProvider>(
+                                                      context,
+                                                      listen: false)
+                                                  .markData("tip",
+                                                      appState.item.id, 1);
+                                            },
+                                            child: activeIcons.checkCircle),
+                                    const SizedBox(width: 10.0),
+                                    appState.item.isBooked
+                                        ? GestureDetector(
+                                            onTap: () async {
+                                              await Provider.of<PnProvider>(
+                                                      context,
+                                                      listen: false)
+                                                  .markData("bookmark",
+                                                      appState.item.id, 0);
+                                            },
+                                            child: activeIcons.saveCircleFill)
+                                        : GestureDetector(
+                                            onTap: () async {
+                                              await Provider.of<PnProvider>(
+                                                      context,
+                                                      listen: false)
+                                                  .markData("bookmark",
+                                                      appState.item.id, 1);
+                                            },
+                                            child: activeIcons.saveCircle),
+                                  ],
                                 ),
-                                GestureDetector(
-                                  onTap: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => VideoViewScreen(
-                                            url: appState.item.introVideo),
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Container(
+                              width: double.infinity,
+                              decoration: BoxDecoration(
+                                color: Colors.blueGrey.withOpacity(0.1),
+                              ),
+                              padding: EdgeInsets.symmetric(
+                                  vertical: 15,
+                                  horizontal:
+                                      MediaQuery.of(context).size.width * 0.1),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  SizedBox(
+                                    width: MediaQuery.of(context).size.width *
+                                        0.25,
+                                    child: ElevatedButton(
+                                      style: ButtonStyle(
+                                        padding: MaterialStateProperty.all<
+                                                EdgeInsets>(
+                                            EdgeInsets.symmetric(vertical: 5)),
+                                        backgroundColor:
+                                            MaterialStateProperty.all<Color>(
+                                                Colors.white),
+                                        foregroundColor:
+                                            MaterialStateProperty.all<Color>(
+                                                Colors.blue),
                                       ),
-                                    );
-                                  },
-                                  child: Container(
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 20),
-                                    alignment: Alignment.center,
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color:
-                                                Colors.black.withOpacity(0.2),
-                                            spreadRadius: 3,
-                                            blurRadius: 2,
-                                            offset: const Offset(0,
-                                                1), // changes position of shadow
+                                      onPressed: () {
+                                        if (appState.item.isSub) {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    PdfListScreen(
+                                                      type: "101",
+                                                      files: appState
+                                                          .item.pdfFiles,
+                                                    )),
+                                          );
+                                        } else {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    PremiumMessage(
+                                                        onClick: onSubscribe,
+                                                        type: "PN",
+                                                        id: appState.item.id)),
+                                          );
+                                        }
+                                      },
+                                      child: Column(
+                                        children: [
+                                          const Icon(Icons.book),
+                                          Text(
+                                            "Read",
+                                            style: TextStyle(fontSize: 10),
                                           ),
                                         ],
                                       ),
-                                      child: Image.network(
-                                        appState.item.introThumbnail,
-                                        width:
-                                            MediaQuery.of(context).size.width *
-                                                0.85,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: MediaQuery.of(context).size.width *
+                                        0.25,
+                                    child: ElevatedButton(
+                                      style: ButtonStyle(
+                                        padding: MaterialStateProperty.all<
+                                                EdgeInsets>(
+                                            EdgeInsets.symmetric(vertical: 5)),
+                                        backgroundColor:
+                                            MaterialStateProperty.all<Color>(
+                                                Colors.white),
+                                        foregroundColor:
+                                            MaterialStateProperty.all<Color>(
+                                                Colors.blue),
+                                      ),
+                                      onPressed: () {
+                                        if (appState.item.isSub) {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    AudioListScreen(
+                                                      type: "PN",
+                                                      cover: appState
+                                                          .item.coverImage,
+                                                      subTitle:
+                                                          appState.item.title,
+                                                      files: appState
+                                                          .item.audioFiles,
+                                                    )),
+                                          );
+                                        } else {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    PremiumMessage(
+                                                        onClick: onSubscribe,
+                                                        type: "PN",
+                                                        id: appState.item.id)),
+                                          );
+                                        }
+                                      },
+                                      child: Column(
+                                        children: [
+                                          const Icon(Icons.music_note),
+                                          Text(
+                                            "Listen",
+                                            style: TextStyle(fontSize: 10),
+                                          ),
+                                        ],
                                       ),
                                     ),
                                   ),
-                                ),
-                                Container(
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal:
-                                          MediaQuery.of(context).size.width *
-                                              0.1),
-                                  child: Html(
-                                    data: appState.item.introDescription,
+                                  SizedBox(
+                                    width: MediaQuery.of(context).size.width *
+                                        0.25,
+                                    child: ElevatedButton(
+                                      style: ButtonStyle(
+                                        padding: MaterialStateProperty.all<
+                                                EdgeInsets>(
+                                            EdgeInsets.symmetric(vertical: 5)),
+                                        backgroundColor:
+                                            MaterialStateProperty.all<Color>(
+                                                Colors.white),
+                                        foregroundColor:
+                                            MaterialStateProperty.all<Color>(
+                                                Colors.blue),
+                                      ),
+                                      onPressed: () {
+                                        if (appState.item.isSub) {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  VideoListScreen(
+                                                type: "PN",
+                                                files: appState.item.videoFiles,
+                                              ),
+                                            ),
+                                          );
+                                        } else {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    PremiumMessage(
+                                                        onClick: onSubscribe,
+                                                        type: "PN",
+                                                        id: appState.item.id)),
+                                          );
+                                        }
+                                      },
+                                      child: Column(
+                                        children: [
+                                          const Icon(Icons.tv),
+                                          Text(
+                                            "Video",
+                                            style: TextStyle(fontSize: 10),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
                                   ),
-                                )
-                              ],
+                                ],
+                              )),
+                          Container(
+                            padding: EdgeInsets.symmetric(
+                                horizontal:
+                                    MediaQuery.of(context).size.width * 0.1),
+                            child: Html(
+                              data: appState.item.description,
                             ),
-                          );
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => VideoViewScreen(
+                                      isUbube: false,
+                                      url: appState.item.introVideo),
+                                ),
+                              );
+                            },
+                            child: Container(
+                              padding: const EdgeInsets.symmetric(vertical: 20),
+                              alignment: Alignment.center,
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black.withOpacity(0.2),
+                                      spreadRadius: 3,
+                                      blurRadius: 2,
+                                      offset: const Offset(
+                                          0, 1), // changes position of shadow
+                                    ),
+                                  ],
+                                ),
+                                child: Image.network(
+                                  appState.item.introThumbnail,
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.85,
+                                ),
+                              ),
+                            ),
+                          ),
+                          Container(
+                            padding: EdgeInsets.symmetric(
+                                horizontal:
+                                    MediaQuery.of(context).size.width * 0.1),
+                            child: Html(
+                              data: appState.item.introDescription,
+                            ),
+                          )
+                        ],
+                      ),
+                    );
                   })));
   }
 }

@@ -85,13 +85,15 @@ class _OneZOneDetailScreenState extends State<OneZOneDetailScreen> {
                         children: [
                           GestureDetector(
                             onTap: () {
-                              // Navigator.push(
-                              //   context,
-                              //   MaterialPageRoute(
-                              //     builder: (context) => VideoViewScreen(
-                              //         url: appState.item.video),
-                              //   ),
-                              // );
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => VideoViewScreen(
+                                    url: appState.item.video,
+                                    isUbube: appState.item.isUtube,
+                                  ),
+                                ),
+                              );
                             },
                             child: Container(
                               width: MediaQuery.of(context).size.width * 0.95,
@@ -237,20 +239,32 @@ class _OneZOneDetailScreenState extends State<OneZOneDetailScreen> {
                                                 Colors.blue),
                                       ),
                                       onPressed: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  AudioListScreen(
-                                                    type: "101",
-                                                    cover:
-                                                        appState.item.thumbnail,
-                                                    subTitle:
-                                                        appState.item.title,
-                                                    files: appState
-                                                        .item.audioFiles,
-                                                  )),
-                                        );
+                                        if (appState.item.isSub) {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    AudioListScreen(
+                                                      type: "101",
+                                                      cover: appState
+                                                          .item.thumbnail,
+                                                      subTitle:
+                                                          appState.item.title,
+                                                      files: appState
+                                                          .item.audioFiles,
+                                                    )),
+                                          );
+                                        } else {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    PremiumMessage(
+                                                        onClick: onSubscribe,
+                                                        type: "101",
+                                                        id: appState.item.id)),
+                                          );
+                                        }
                                       },
                                       child: Column(
                                         children: [
@@ -279,16 +293,28 @@ class _OneZOneDetailScreenState extends State<OneZOneDetailScreen> {
                                                 Colors.blue),
                                       ),
                                       onPressed: () {
-                                        if (widget.data.poster_image.length >
-                                            0) {
+                                        if (appState.item.isSub) {
+                                          if (widget.data.poster_image.length >
+                                              0) {
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    PhotoViewScreen(
+                                                        image: widget
+                                                            .data.poster_image),
+                                              ),
+                                            );
+                                          }
+                                        } else {
                                           Navigator.push(
                                             context,
                                             MaterialPageRoute(
-                                              builder: (context) =>
-                                                  PhotoViewScreen(
-                                                      image: widget
-                                                          .data.poster_image),
-                                            ),
+                                                builder: (context) =>
+                                                    PremiumMessage(
+                                                        onClick: onSubscribe,
+                                                        type: "101",
+                                                        id: appState.item.id)),
                                           );
                                         }
                                       },
@@ -319,15 +345,28 @@ class _OneZOneDetailScreenState extends State<OneZOneDetailScreen> {
                                                 Colors.blue),
                                       ),
                                       onPressed: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) => PdfListScreen(
-                                              type: "101",
-                                              files: appState.item.pdfFiles,
+                                        if (appState.item.isSub) {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  PdfListScreen(
+                                                type: "101",
+                                                files: appState.item.pdfFiles,
+                                              ),
                                             ),
-                                          ),
-                                        );
+                                          );
+                                        } else {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    PremiumMessage(
+                                                        onClick: onSubscribe,
+                                                        type: "101",
+                                                        id: appState.item.id)),
+                                          );
+                                        }
                                       },
                                       child: Column(
                                         children: [
@@ -356,16 +395,28 @@ class _OneZOneDetailScreenState extends State<OneZOneDetailScreen> {
                                                 Colors.blue),
                                       ),
                                       onPressed: () {
-                                        Navigator.push(
+                                        if (appState.item.isSub) {
+                                          Navigator.push(
                                             context,
                                             MaterialPageRoute(
                                               builder: (context) =>
                                                   VideoListScreen(
                                                 type: "101",
-                                                subTitle: appState.item.title,
                                                 files: appState.item.videoFiles,
                                               ),
-                                            ));
+                                            ),
+                                          );
+                                        } else {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    PremiumMessage(
+                                                        onClick: onSubscribe,
+                                                        type: "101",
+                                                        id: appState.item.id)),
+                                          );
+                                        }
                                       },
                                       child: Column(
                                         children: [

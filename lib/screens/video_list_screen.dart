@@ -7,13 +7,9 @@ import 'package:optimize/screens/video_view_screen.dart';
 
 class VideoListScreen extends StatelessWidget {
   List<VideoFile> files = [];
-  String subTitle;
+
   String type;
-  VideoListScreen(
-      {Key? key,
-      required this.files,
-      required this.subTitle,
-      required this.type})
+  VideoListScreen({Key? key, required this.files, required this.type})
       : super(key: key);
 
   @override
@@ -40,8 +36,9 @@ class VideoListScreen extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) =>
-                          VideoViewScreen(url: files[index].url),
+                      builder: (context) => VideoViewScreen(
+                          url: files[index].url,
+                          isUbube: files[index].isYouTube),
                     ),
                   );
                 },
@@ -58,8 +55,9 @@ class VideoListScreen extends StatelessWidget {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) =>
-                                    VideoViewScreen(url: files[index].url),
+                                builder: (context) => VideoViewScreen(
+                                    url: files[index].url,
+                                    isUbube: files[index].isYouTube),
                               ),
                             );
                           },
@@ -95,7 +93,7 @@ class VideoListScreen extends StatelessWidget {
                             SizedBox(
                               width: 180.0,
                               child: Text(
-                                subTitle,
+                                files[index].subTitle,
                                 style: activeTextStyles.caption,
                               ),
                             ),

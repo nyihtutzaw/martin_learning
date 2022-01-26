@@ -74,8 +74,10 @@ class _PlusOneDetailState extends State<PlusOneDetail> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) =>
-                                      VideoViewScreen(url: appState.item.video),
+                                  builder: (context) => VideoViewScreen(
+                                    url: appState.item.video,
+                                    isUbube: appState.item.isUtube,
+                                  ),
                                 ),
                               );
                             }

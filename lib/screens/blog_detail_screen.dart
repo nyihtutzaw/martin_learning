@@ -17,7 +17,12 @@ class BlogDetailScreen extends StatelessWidget {
           children: [
             FadeInImage.memoryNetwork(
                 placeholder: kTransparentImage, image: this.blog.image),
-            Html(data: this.blog.content),
+            Html(data: this.blog.content, style: {
+              // tables will have the below background color
+              "p": Style(
+                lineHeight: LineHeight.number(2),
+              ),
+            }),
           ],
         )),
       ),

@@ -37,6 +37,10 @@ class MyListProvider with ChangeNotifier {
       OneZOne data = OneZOne(
         id: response["data"][i]["id"],
         title: response["data"][i]["title"],
+        video: response["data"][i]["video"] != null
+            ? response["data"][i]["video"]
+            : "",
+        isUtube: response["data"][i]["isYoutube"],
         subtitle: response["data"][i]["subtitle"],
         description: response["data"][i]["description"],
         thumbnail: response["data"][i]["thumbnail"],
@@ -63,6 +67,7 @@ class MyListProvider with ChangeNotifier {
         description: response["data"][i]["description"],
         audio: response["data"][i]["audio"],
         video: response["data"][i]["video"],
+        isUtube: response["data"][i]["isYouTube"],
         thumbnail: response["data"][i]["thumbnail"],
         isBooked: response["data"][i]["isBooked"],
         isLiked: response["data"][i]["isLiked"],
@@ -108,6 +113,10 @@ class MyListProvider with ChangeNotifier {
     for (var i = 0; i < response["data"].length; i++) {
       OneZOne data = OneZOne(
         id: response["data"][i]["id"],
+        video: response["data"][i]["video"] != null
+            ? response["data"][i]["video"]
+            : "",
+        isUtube: response["data"]["is_youtube"],
         title: response["data"][i]["title"],
         subtitle: response["data"][i]["subtitle"],
         description: response["data"][i]["description"],
@@ -137,6 +146,7 @@ class MyListProvider with ChangeNotifier {
         video: response["data"][i]["video"],
         thumbnail: response["data"][i]["thumbnail"],
         isBooked: response["data"][i]["isBooked"],
+        isUtube: response["data"][i]["isYouTube"],
         isLiked: response["data"][i]["isLiked"],
         isTipped: response["data"][i]["isTiped"],
       );
@@ -180,6 +190,10 @@ class MyListProvider with ChangeNotifier {
     for (var i = 0; i < response["data"].length; i++) {
       OneZOne data = OneZOne(
         id: response["data"][i]["id"],
+        video: response["data"][i]["video"] != null
+            ? response["data"][i]["video"]
+            : "",
+        isUtube: response["data"][i]["isYoutube"],
         title: response["data"][i]["title"],
         subtitle: response["data"][i]["subtitle"],
         description: response["data"][i]["description"],
@@ -207,6 +221,7 @@ class MyListProvider with ChangeNotifier {
         description: response["data"][i]["description"],
         audio: response["data"][i]["audio"],
         video: response["data"][i]["video"],
+        isUtube: response["data"][i]["isYouTube"],
         thumbnail: response["data"][i]["thumbnail"],
         isBooked: response["data"][i]["isBooked"],
         isLiked: response["data"][i]["isLiked"],

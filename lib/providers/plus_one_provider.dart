@@ -25,6 +25,7 @@ class PlusOneProvider with ChangeNotifier {
         video: response["data"][i]["video"] != null
             ? response["data"][i]["video"]
             : "",
+        isUtube: response["data"][i]["isYoutube"],
         thumbnail: response["data"][i]["thumbnail"] != null
             ? response["data"][i]["thumbnail"]
             : "",
@@ -55,6 +56,7 @@ class PlusOneProvider with ChangeNotifier {
           : "",
       audio: response["data"]["audio"] != null ? response["data"]["audio"] : "",
       video: response["data"]["video"] != null ? response["data"]["video"] : "",
+      isUtube: response["data"]["isYoutube"],
       thumbnail: response["data"]["thumbnail"] != null
           ? response["data"]["thumbnail"]
           : "",

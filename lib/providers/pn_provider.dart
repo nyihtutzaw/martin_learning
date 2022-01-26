@@ -85,7 +85,11 @@ class PnProvider with ChangeNotifier {
     for (var y = 0; y < response["data"]["videos"].length; y++) {
       videoFiles.add(VideoFile(
           id: response["data"]["videos"][y]["id"],
+          isYouTube: response["data"]["videos"][y]["is_youtube"],
           name: response["data"]["videos"][y]["title"],
+          subTitle: response["data"]["videos"][y]["subtitle"] != null
+              ? response["data"]["videos"][y]["subtitle"]
+              : "",
           thumbnail: response["data"]["videos"][y]["thumbnail"],
           url: response["data"]["videos"][y]["video"]));
     }
@@ -125,7 +129,9 @@ class PnProvider with ChangeNotifier {
         isBooked: response["data"]["isBooked"],
         isLiked: response["data"]["isLiked"],
         isTipped: response["data"]["isTiped"],
-        isSub: response["data"]["isSubscribed"],
+        isSub: response["data"]["isSubscribed"] != null
+            ? response["data"]["isSubscribed"]
+            : false,
         pdfFiles: pdfFiles,
         audioFiles: audioFiles,
         videoFiles: videoFiles,

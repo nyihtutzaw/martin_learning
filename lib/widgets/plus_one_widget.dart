@@ -41,7 +41,8 @@ class PlusOneWidget extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => VideoViewScreen(url: data.video),
+                        builder: (context) => VideoViewScreen(
+                            url: data.video, isUbube: data.isUtube),
                       ),
                     );
                   }
