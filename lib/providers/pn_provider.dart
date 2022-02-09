@@ -78,7 +78,12 @@ class PnProvider with ChangeNotifier {
     for (var y = 0; y < response["data"]["audios"].length; y++) {
       audioFiles.add(AudioFile(
           id: response["data"]["audios"][y]["id"],
-          name: response["data"]["audios"][y]["title"],
+          name: response["data"]["audios"][y]["title"] != null
+              ? response["data"]["audios"][y]["title"]
+              : "",
+          thumbnail: response["data"]["audios"][y]["thumbnail"] != null
+              ? response["data"]["audios"][y]["thumbnail"]
+              : "",
           url: response["data"]["audios"][y]["audio"]));
     }
 

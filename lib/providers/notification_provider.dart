@@ -6,6 +6,7 @@ class NotificationProvider with ChangeNotifier {
   List<Noti> items = [];
 
   Future<void> getAll() async {
+    items.clear();
     var response = await NotiService.getAll();
     for (int i = 0; i < response["data"].length; i++) {
       items.add(Noti(

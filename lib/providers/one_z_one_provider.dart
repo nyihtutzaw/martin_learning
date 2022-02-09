@@ -71,6 +71,7 @@ class OneZOneProvider with ChangeNotifier {
       audioFiles.add(AudioFile(
           id: response["data"]["audios"][y]["id"],
           name: response["data"]["audios"][y]["title"],
+          thumbnail: response["data"]["audios"][y]["thumbnail"],
           url: response["data"]["audios"][y]["audio"]));
     }
 

@@ -39,7 +39,7 @@ class AudioListScreen extends StatelessWidget {
                   MaterialPageRoute(
                     builder: (context) => MusicPlayerScreen(
                       link: files[index].url,
-                      cover: cover,
+                      cover: files[index].thumbnail,
                       title: files[index].name,
                       subTitle: subTitle,
                     ),
