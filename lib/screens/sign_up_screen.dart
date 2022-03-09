@@ -1,4 +1,6 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:optimize/constants/active_constants.dart';
 import 'package:optimize/providers/auth_provider.dart';
@@ -14,6 +16,9 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
+
+  FirebaseMessaging messaging = FirebaseMessaging.instance;
+  FlutterLocalNotificationsPlugin? fltNotification;
   bool _passwordVisible = false;
   bool _actionLoading = false;
   Map<String, String> _authData = {
@@ -42,6 +47,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
   @override
   void initState() {
     _passwordVisible = false;
+    notitficationPermission();
+    initMessaging();
   }
 
   Future<void> _submit() async {
@@ -80,6 +87,89 @@ class _SignUpScreenState extends State<SignUpScreen> {
         return;
       }
     }
+  }
+
+
+
+  void initMessaging() async {
+    // NotificationController? notificationController = Get.lazyPut();
+
+    var androiInit = AndroidInitializationSettings('@mipmap/ic_launcher');
+
+    var iosInit = IOSInitializationSettings(requestAlertPermission: true,requestBadgePermission: true,requestSoundPermission: true,);
+
+    var initSetting = InitializationSettings(android: androiInit, iOS: iosInit);
+
+    fltNotification = FlutterLocalNotificationsPlugin();
+
+    fltNotification!.initialize(initSetting);
+
+    //register topic
+    messaging.subscribeToTopic("all");
+
+    if (messaging != null) {
+      print('vvvvvvv');
+    }
+
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+      showNotification(message);
+    });
+
+    FirebaseMessaging.onMessageOpenedApp.listen((event) {
+    });
+  }
+
+  // Future selectNotification(String payload) async {
+  //   if (payload != null) {
+  //     debugPrint('notification payload: $payload');
+  //   }
+  //   await Navigator.push(
+  //     context,
+  //     MaterialPageRoute<void>(builder: (context) => SecondScreen(payload)),
+  //   );
+  // }
+
+  void showNotification(RemoteMessage message) async {
+    // var initializationSettingsAndroid = new AndroidInitializationSettings('logovtc');
+
+    // final InitializationSettings initializationSettings = InitializationSettings(
+    //     android: initializationSettingsAndroid,);
+
+    var androidDetails = AndroidNotificationDetails('1', message.notification!.title ?? '',icon: '@mipmap/ic_launcher',color:  Color(0xFF0f90f3),);
+
+    // await fltNotification!.initialize(initializationSettings,
+    //     onSelectNotification: selectNotification );
+
+    var iosDetails = IOSNotificationDetails();
+
+    var generalNotificationDetails = NotificationDetails(android: androidDetails, iOS: iosDetails);
+
+    await fltNotification!.show(0, message.notification!.title ?? '',
+        message.notification!.body ?? '',generalNotificationDetails,
+        payload: 'Notification');
+  }
+
+  Future selectNotification(String? payload) async {
+    if (payload != null) {
+      print('notification payload: $payload');
+    }
+    // await Navigator.push(
+    //   context,
+    //   MaterialPageRoute<void>(builder: (context) => SecondScreen(payload)),
+    // );
+  }
+
+
+  void notitficationPermission() async {
+    await messaging.requestPermission(
+      alert: true,
+      announcement: false,
+      badge: true,
+      carPlay: false,
+      criticalAlert: false,
+      provisional: false,
+      sound: true,
+    );
   }
 
   @override
