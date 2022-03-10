@@ -139,7 +139,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
     // await fltNotification!.initialize(initializationSettings,
     //     onSelectNotification: selectNotification );
-
     var iosDetails = IOSNotificationDetails();
 
     var generalNotificationDetails = NotificationDetails(android: androidDetails, iOS: iosDetails);
