@@ -13,6 +13,7 @@ import 'package:optimize/providers/one_z_one_provider.dart';
 import 'package:optimize/providers/pn_provider.dart';
 import 'package:optimize/providers/sort_provider.dart';
 import 'package:optimize/providers/subscription_provider.dart';
+import 'package:optimize/providers/three_minutes_provider.dart';
 import 'package:optimize/screens/sign_in_screen.dart';
 import 'package:optimize/screens/sign_up_screen.dart';
 import 'package:provider/provider.dart';
@@ -103,6 +104,9 @@ class MyApp extends StatelessWidget {
           ),
           ChangeNotifierProvider.value(
             value: BlogProvider(),
+          ),
+          ChangeNotifierProvider.value(
+            value: ThreeMinutesProvider(),
           ),
         ],
         child: MaterialApp(
