@@ -47,6 +47,8 @@ class _HomeState extends State<Home> {
     super.initState();
 
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+      print("FirebaseMessaging.onMessage.listen remoteMessage");
+      print(message);
       RemoteNotification? notification = message.notification;
       AndroidNotification? android = message.notification?.android;
       if (notification != null && android != null) {
@@ -67,6 +69,8 @@ class _HomeState extends State<Home> {
     });
 
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+      print("FirebaseMessaging.onMessageOpenedApp.listen remoteMessage");
+      print(message);
       RemoteNotification? notification = message.notification;
       AndroidNotification? android = message.notification?.android;
       if (notification != null && android != null) {
@@ -85,6 +89,19 @@ class _HomeState extends State<Home> {
             });
       }
     });
+    _fcmSubscribe();
+  }
+
+  void _fcmSubscribe()async{
+    print("fcm_build_3 ...");
+    try{
+      await FirebaseMessaging.instance.subscribeToTopic('fcm_build_3');
+      print("fcm_build_3 subscribed");
+    }
+    catch(exp){
+      print("fcm_build_3 subscribe fail exp");
+      print(exp);
+    }
   }
 
   @override
