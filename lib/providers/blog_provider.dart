@@ -13,10 +13,11 @@ class BlogProvider with ChangeNotifier {
       baseUrl: "https://mar-thin.com/wp-json/wp/v2/",
     );
     Dio dio = new Dio(options);
-    Response response = await dio.get('posts?page=${page.toString()}');
+    Response response = await dio.get('posts?_embed&page=${page.toString()}');
     var data = response.data;
 
     for (int k = 0; k < data.length; k++) {
+
       String image =
           'https://www.elegantthemes.com/blog/wp-content/uploads/2019/04/change-wordpress-thumbnail-size-featured-image.jpg';
       if (data[k]["featured_media"] != 0) {
@@ -26,11 +27,15 @@ class BlogProvider with ChangeNotifier {
         image = imageData["source_url"];
       }
 
+
+      /*
       blogs.add(BlogModel(
           id: data[k]["id"],
           title: data[k]["title"]["rendered"],
           content: data[k]["content"]["rendered"],
-          image: image));
+          image: data[k]["_embedded"]["wp:featuredmedia"].first));
+
+       */
     }
 
     if (data.length == 0) {
