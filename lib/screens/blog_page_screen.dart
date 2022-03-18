@@ -49,6 +49,8 @@ class _BlogPageScreenState extends State<BlogPageScreen> {
       children: [
         Expanded(
             child: Consumer<BlogProvider>(builder: (context, blogState, child) {
+
+          if(blogState.blogs.length == 0 ) return Container(child: Center(child: CircularProgressIndicator(),),);
           return ListView.builder(
             itemCount: blogState.blogs.length,
             itemBuilder: (context, index) {

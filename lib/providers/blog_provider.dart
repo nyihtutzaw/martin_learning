@@ -30,6 +30,7 @@ class BlogProvider with ChangeNotifier {
 
     }
     notifyListeners();
+    /*
     if (page==1){
       blogs.clear();
     }
@@ -53,6 +54,8 @@ class BlogProvider with ChangeNotifier {
       ));
 
     }
+
+     */
     if (data.length == 0) {
       isExisted = true;
     }
