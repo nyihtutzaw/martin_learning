@@ -13,7 +13,7 @@ class BlogProvider with ChangeNotifier {
       baseUrl: "https://mar-thin.com/wp-json/wp/v2/",
     );
     Dio dio = new Dio(options);
-    Response response = await dio.get('posts?_embed&page=${page.toString()}');
+    Response response = await dio.get('posts?page=${page.toString()}');
     var data = response.data;
 
     for (int k = 0; k < data.length; k++) {
