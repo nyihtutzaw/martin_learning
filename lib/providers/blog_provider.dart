@@ -20,6 +20,23 @@ class BlogProvider with ChangeNotifier {
 
       String image =
           'https://www.elegantthemes.com/blog/wp-content/uploads/2019/04/change-wordpress-thumbnail-size-featured-image.jpg';
+
+      blogs.add(BlogModel(
+          id: data[k]["id"],
+          title: data[k]["title"]["rendered"],
+          content: data[k]["content"]["rendered"],
+          image: image
+      ));
+
+    }
+    notifyListeners();
+    if (page==1){
+      blogs.clear();
+    }
+    for (int k = 0; k < data.length; k++) {
+
+      String image =
+          'https://www.elegantthemes.com/blog/wp-content/uploads/2019/04/change-wordpress-thumbnail-size-featured-image.jpg';
       if (data[k]["featured_media"] != 0) {
         Response imageResponse = await dio
             .get(imageUrl + "/" + data[k]["featured_media"].toString());
@@ -28,16 +45,14 @@ class BlogProvider with ChangeNotifier {
       }
 
 
-      /*
       blogs.add(BlogModel(
           id: data[k]["id"],
           title: data[k]["title"]["rendered"],
           content: data[k]["content"]["rendered"],
-          image: data[k]["_embedded"]["wp:featuredmedia"].first));
+          image: image
+      ));
 
-       */
     }
-
     if (data.length == 0) {
       isExisted = true;
     }
