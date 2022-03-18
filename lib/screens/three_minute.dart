@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:optimize/models/PlusOne.dart';
 import 'package:optimize/providers/plus_one_provider.dart';
 import 'package:optimize/providers/sort_provider.dart';
+import 'package:optimize/providers/three_minutes_provider.dart';
 import 'package:optimize/widgets/full_screen_preloader.dart';
+import 'package:optimize/widgets/three_minutes_widget.dart';
 import 'package:provider/provider.dart';
 
 import '../constants/active_constants.dart';
@@ -24,8 +26,8 @@ class _ThreeMintureState extends State<ThreeMinture> {
       _isPreloading = true;
     });
     bool sorted = Provider.of<SortProvider>(context, listen: true).sort;
-    await Provider.of<PlusOneProvider>(context, listen: false)
-        .getAll(0, sorted);
+    await Provider.of<ThreeMinutesProvider>(context, listen: false)
+        .getAll(sorted);
 
     setState(() {
       _isPreloading = false;
@@ -45,14 +47,14 @@ class _ThreeMintureState extends State<ThreeMinture> {
     return Scaffold(
         body: _isPreloading
             ? FullScreenPreloader()
-            : Consumer<PlusOneProvider>(builder: (context, appState, child) {
+            : Consumer<ThreeMinutesProvider>(builder: (context, appState, child) {
                 return ListView.builder(
                   itemCount: appState.items.length,
                   itemBuilder: (context, index) {
                     return Column(
                       children: [
                         const SizedBox(height: 20.0),
-                        PlusOneWidget(data: appState.items[index]),
+                        ThreeMinutesWidget(data: appState.items[index]),
                         const SizedBox(height: 10.0),
                         Divider(
                           height: 2.0,
