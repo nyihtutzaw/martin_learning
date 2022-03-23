@@ -6,7 +6,8 @@ class ApiService {
   static Dio getApiHandler(String token) {
     BaseOptions options = new BaseOptions(
       //baseUrl: "http://54.255.18.148/marthin/public/api/v1/",
-      baseUrl: "http://yourlink.mar-thin.com/api/v1/",
+      baseUrl: "http://52.47.68.101/marthin/public/api/v1/",
+      //baseUrl: "http://yourlink.mar-thin.com/api/v1/",
     );
 
     if (token != null) options.headers["Authorization"] = "Bearer " + token;
