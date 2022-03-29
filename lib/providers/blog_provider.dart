@@ -27,7 +27,7 @@ class BlogProvider with ChangeNotifier {
           id: data[k]["id"],
           title: data[k]["title"]["rendered"],
           content: data[k]["content"]["rendered"],
-          image: image
+          image: data[k]["_embedded"]["wp:featuredmedia"][0]["source_url"]
       ));
 
     }
