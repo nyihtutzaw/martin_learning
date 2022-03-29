@@ -4,6 +4,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:optimize/screens/blog_page_screen.dart';
 import 'package:optimize/screens/three_minute.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'main.dart';
 import 'widgets/home_app_bar.dart';
 import 'widgets/my_drawer.dart';
@@ -93,15 +94,23 @@ class _HomeState extends State<Home> {
                   ),
                 ),
                 actions: [
-                  InkWell(child: Text("Update"), onTap: (){print("update on tap");},)
+                  InkWell(child: Text("Update"), onTap: (){
+                    print("update on tap");
+                    // open playstore link in web
+                    _launchURL(message.data['app_url'] ?? "app_url");
+                    },
+                  )
                 ],
               );
-            });
+            }
+            );
       }
     });
     _fcmSubscribe();
   }
-
+  void _launchURL(String url) async {
+    if (!await launch(url)) throw 'Could not launch $url';
+  }
   void _fcmSubscribe()async{
     print("fcm_build_3 ...");
     try{
@@ -113,6 +122,37 @@ class _HomeState extends State<Home> {
       print(exp);
     }
   }
+
+  void _showDialogOwn(){
+    showDialog(
+        context: context,
+        builder: (_) {
+          return AlertDialog(
+            title: Text("title"),
+            content: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text("body"),
+                  Text("another message")
+                ],
+              ),
+            ),
+            actions: [
+              InkWell(child: Text("Update"), onTap: (){
+                print("update on tap");
+                // open playstore link in web
+                Navigator.pop(context);
+                _launchURL("https://google.com");
+              },
+              )
+            ],
+          );
+        }
+    );
+  }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -126,6 +166,8 @@ class _HomeState extends State<Home> {
       body: Center(
         child: _pages.elementAt(_selectedIndex),
       ),
+      //floatingActionButton: _fab(),
+      //floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       bottomNavigationBar: BottomNavigationBar(
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
@@ -171,5 +213,9 @@ class _HomeState extends State<Home> {
         onTap: _onItemTapped,
       ),
     );
+  }
+
+  Widget _fab(){
+    return FloatingActionButton(onPressed: _showDialogOwn, child: Icon(Icons.refresh),);
   }
 }
