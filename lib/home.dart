@@ -50,6 +50,9 @@ class _HomeState extends State<Home> {
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
       print("FirebaseMessaging.onMessage.listen remoteMessage");
       print(message);
+      print(message.data.toString());
+      print("app_url");
+      print(message.data['app_url']);
       RemoteNotification? notification = message.notification;
       AndroidNotification? android = message.notification?.android;
       if (notification != null && android != null) {
@@ -83,9 +86,15 @@ class _HomeState extends State<Home> {
                 content: SingleChildScrollView(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [Text(notification.body!)],
+                    children: [
+                      Text(notification.body!),
+                      Text(message.data['app_url'] ?? "app_url")
+                    ],
                   ),
                 ),
+                actions: [
+                  InkWell(child: Text("Update"), onTap: (){print("update on tap");},)
+                ],
               );
             });
       }
