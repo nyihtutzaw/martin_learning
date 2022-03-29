@@ -1,4 +1,4 @@
-package com.mmsoftware100.marthin
+package com.rcsmm.optimize
 
 import io.flutter.embedding.android.FlutterActivity
 
