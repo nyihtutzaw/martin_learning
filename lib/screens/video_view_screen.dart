@@ -46,6 +46,9 @@ class _VideoViewScreenState extends State<VideoViewScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text("Mar Thin"),
+      ),
       backgroundColor: Colors.black,
       body: Container(
         child: widget.isUbube
