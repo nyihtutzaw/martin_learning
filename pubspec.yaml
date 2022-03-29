@@ -30,6 +30,7 @@ dependencies:
   firebase_auth: ^3.3.4
   transparent_image: ^2.0.0
   youtube_player_flutter: ^8.0.0
+  firebase_app_check: ^0.0.6+7
 
 dev_dependencies:
   change_app_package_name: ^0.1.3
