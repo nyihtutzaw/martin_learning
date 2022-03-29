@@ -10,10 +10,12 @@ class BlogProvider with ChangeNotifier {
       blogs.clear();
     }
     BaseOptions options = new BaseOptions(
-      baseUrl: "https://mar-thin.com/wp-json/wp/v2/",
+      // http://52.47.68.101/wp/wp-json/wp/v2/posts?_embed&page=1
+      //baseUrl: "https://mar-thin.com/wp-json/wp/v2/",
+      baseUrl: "http://52.47.68.101/wp/wp-json/wp/v2/",
     );
     Dio dio = new Dio(options);
-    Response response = await dio.get('posts?page=${page.toString()}');
+    Response response = await dio.get('posts?_embed&page=${page.toString()}');
     var data = response.data;
 
     for (int k = 0; k < data.length; k++) {
