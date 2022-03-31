@@ -13,6 +13,11 @@ PODS:
   - Firebase/Messaging (8.9.0):
     - Firebase/CoreOnly
     - FirebaseMessaging (~> 8.9.0)
+  - firebase_app_check (0.0.6-7):
+    - Firebase/CoreOnly (~> 8.9.0)
+    - firebase_core
+    - FirebaseAppCheck (~> 8.9.0-beta)
+    - Flutter
   - firebase_auth (3.3.4):
     - Firebase/Auth (= 8.9.0)
     - firebase_core
@@ -24,6 +29,10 @@ PODS:
     - Firebase/Messaging (= 8.9.0)
     - firebase_core
     - Flutter
+  - FirebaseAppCheck (8.9.0-beta):
+    - FirebaseCore (~> 8.0)
+    - GoogleUtilities/Environment (~> 7.6)
+    - PromisesObjC (< 3.0, >= 1.2)
   - FirebaseAuth (8.9.0):
     - FirebaseCore (~> 8.0)
     - GoogleUtilities/AppDelegateSwizzler (~> 7.6)
@@ -119,6 +128,7 @@ PODS:
 DEPENDENCIES:
   - audioplayers (from `.symlinks/plugins/audioplayers/ios`)
   - fijkplayer (from `.symlinks/plugins/fijkplayer/ios`)
+  - firebase_app_check (from `.symlinks/plugins/firebase_app_check/ios`)
   - firebase_auth (from `.symlinks/plugins/firebase_auth/ios`)
   - firebase_core (from `.symlinks/plugins/firebase_core/ios`)
   - firebase_messaging (from `.symlinks/plugins/firebase_messaging/ios`)
@@ -139,6 +149,7 @@ SPEC REPOS:
   trunk:
     - BIJKPlayer
     - Firebase
+    - FirebaseAppCheck
     - FirebaseAuth
     - FirebaseCore
     - FirebaseCoreDiagnostics
@@ -158,6 +169,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/audioplayers/ios"
   fijkplayer:
     :path: ".symlinks/plugins/fijkplayer/ios"
+  firebase_app_check:
+    :path: ".symlinks/plugins/firebase_app_check/ios"
   firebase_auth:
     :path: ".symlinks/plugins/firebase_auth/ios"
   firebase_core:
@@ -194,9 +207,11 @@ SPEC CHECKSUMS:
   BIJKPlayer: 4c5d66e5cb99ae5bade6f22a4fcc031722a81c64
   fijkplayer: 5ecf78e80cb97eed64cc170b094a4f691d9b9691
   Firebase: 13d8d96499e2635428d5bf0ec675df21f95d9a95
+  firebase_app_check: 016c2a55d61055ec0478362321fd3469cf8a5772
   firebase_auth: e875a50b81aefb20f305dfede425647e9675c19e
   firebase_core: c263d7daf1dc92fcd9895e6abdc04872b0ee07ff
   firebase_messaging: dff5cd08781ee1de988565a83c977e435405cd7e
+  FirebaseAppCheck: eb4c5c6984804b728f71ae89711455dcf6a21054
   FirebaseAuth: 2b78b2a32c07b3ecfa4970bdf1d3632b8304099b
   FirebaseCore: 599ee609343eaf4941bd188f85e3aa077ffe325b
   FirebaseCoreDiagnostics: 3b40dfadef5b90433a60ae01f01e90fe87aa76aa
