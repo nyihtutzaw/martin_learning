@@ -57,24 +57,32 @@ class OneZOneProvider with ChangeNotifier {
   }
 
   Future<void> getEach(int id) async {
+    print("OneZoneProvider->getEach $id");
     var response = await OneZOneService.getEach(id);
+
     List<PdfFile> pdfFiles = [];
+    print("gettingPdfFiles");
     for (var y = 0; y < response["data"]["workbooks"].length; y++) {
       pdfFiles.add(PdfFile(
           id: response["data"]["workbooks"][y]["id"],
           name: response["data"]["workbooks"][y]["title"],
           url: response["data"]["workbooks"][y]["work_book"]));
     }
+    print(pdfFiles);
 
+    print("gettingAudioFiles");
     List<AudioFile> audioFiles = [];
     for (var y = 0; y < response["data"]["audios"].length; y++) {
       audioFiles.add(AudioFile(
           id: response["data"]["audios"][y]["id"],
-          name: response["data"]["audios"][y]["title"],
-          thumbnail: response["data"]["audios"][y]["thumbnail"],
+          name: response["data"]["audios"][y]["title"] ,
+          thumbnail: response["data"]["audios"][y]["thumbnail"] != null ?  response["data"]["audios"][y]["thumbnail"] : "",
           url: response["data"]["audios"][y]["audio"]));
     }
+    print(audioFiles);
+    print(audioFiles.first.thumbnail);
 
+    print("Getting videoFiles");
     List<VideoFile> videoFiles = [];
     for (var y = 0; y < response["data"]["videos"].length; y++) {
       print(response["data"]["videos"][y]["is_youtube"]);
@@ -92,11 +100,12 @@ class OneZOneProvider with ChangeNotifier {
               ? response["data"]["videos"][y]["video"]
               : ""));
     }
+    print(videoFiles);
 
     item = OneZOne(
       id: response["data"]["id"],
-      title: response["data"]["title"],
-      subtitle: response["data"]["subtitle"],
+      title: response["data"]["title"] != null ? response["data"]["title"] : "title",
+      subtitle: response["data"]["subtitle"] != null ? response["data"]["subtitle"] : "subtitle",
       video: response["data"]["video"] != null ? response["data"]["video"] : "",
       isUtube: response["data"]["isYoutube"],
       description: response["data"]["description"] != null
@@ -116,12 +125,14 @@ class OneZOneProvider with ChangeNotifier {
       audioFiles: audioFiles,
       videoFiles: videoFiles,
     );
+    print(item);
     // for detail screen when it reached from my list
     if (items.length == 0) {
       items.add(item);
     }
     notifyListeners();
   }
+
 
   Future<void> markData(String type, int id, int value) async {
     var response = await OneZOneService.markData(type, id, value);

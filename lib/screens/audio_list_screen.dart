@@ -13,7 +13,8 @@ class AudioListScreen extends StatelessWidget {
       required this.files,
       required this.type,
       required this.cover,
-      required this.subTitle})
+      required this.subTitle
+      })
       : super(key: key);
 
   @override
@@ -34,6 +35,8 @@ class AudioListScreen extends StatelessWidget {
           itemBuilder: (context, index) {
             return GestureDetector(
               onTap: () {
+                print("audio_list_screen->thubmnail is ");
+                print(files[index].thumbnail);
                 Navigator.push(
                   context,
                   MaterialPageRoute(

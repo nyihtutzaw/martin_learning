@@ -91,7 +91,7 @@ class _MusicPlayerScreenState extends State<MusicPlayerScreen> {
                       alignment: Alignment.center,
                       child: Image.network(
                         widget.cover,
-                        width: screenWidth * 0.35,
+                        width: screenWidth ,
                         height: 200,
                         fit: BoxFit.cover,
                       ),

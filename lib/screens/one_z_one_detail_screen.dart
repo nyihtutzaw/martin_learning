@@ -38,6 +38,7 @@ class _OneZOneDetailScreenState extends State<OneZOneDetailScreen> {
     } catch (error) {
       print(error);
     } finally {
+      print("finally");
       setState(() {
         _isPreloading = false;
       });
@@ -102,7 +103,7 @@ class _OneZOneDetailScreenState extends State<OneZOneDetailScreen> {
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(5),
                                 image: DecorationImage(
-                                  image: NetworkImage(appState.item.thumbnail),
+                                  image: NetworkImage(appState?.item?.thumbnail ?? "thumbnailUrl"),
                                   fit: BoxFit.fill,
                                 ),
                               ),
@@ -240,6 +241,12 @@ class _OneZOneDetailScreenState extends State<OneZOneDetailScreen> {
                                       ),
                                       onPressed: () {
                                         if (appState.item.isSub) {
+                                          print("OneZOneDetailScreen->musicPlayer tap");
+                                          print(appState.item.id);
+                                          print(appState.item.audioFiles.first.thumbnail);
+                                          print(appState.item.audioFiles.first.name);
+                                          print(appState.item.audioFiles.first.url);
+                                          print(appState.item.audioFiles.first.id);
                                           Navigator.push(
                                             context,
                                             MaterialPageRoute(
