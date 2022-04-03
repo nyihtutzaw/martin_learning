@@ -2,6 +2,8 @@ import 'package:fijkplayer/fijkplayer.dart';
 import 'package:flutter/material.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
+import '../constants/active_constants.dart';
+
 // import 'custom_ui.dart';
 
 class VideoViewScreen extends StatefulWidget {
@@ -47,7 +49,7 @@ class _VideoViewScreenState extends State<VideoViewScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Mar Thin"),
+        title: Text(appName),
       ),
       backgroundColor: Colors.black,
       body: Container(

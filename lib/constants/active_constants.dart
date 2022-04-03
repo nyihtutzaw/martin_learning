@@ -5,3 +5,5 @@ import 'text_styles.dart';
 KColors activeColors = colorScheme1;
 KIcons activeIcons = icon1;
 KTextStyles activeTextStyles = textStyles1;
+
+const String appName = "မာသင်";
