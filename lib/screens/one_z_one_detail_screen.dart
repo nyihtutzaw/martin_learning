@@ -5,6 +5,7 @@ import 'package:optimize/providers/one_z_one_provider.dart';
 import 'package:optimize/screens/pdf_list_screen.dart';
 import 'package:optimize/screens/pdf_viewer.dart';
 import 'package:optimize/screens/photo_view_screen.dart';
+import 'package:optimize/screens/poster_list_screen.dart';
 import 'package:optimize/screens/video_list_screen.dart';
 import 'package:optimize/screens/video_view_screen.dart';
 import 'package:optimize/widgets/full_screen_preloader.dart';
@@ -284,6 +285,7 @@ class _OneZOneDetailScreenState extends State<OneZOneDetailScreen> {
                                       ),
                                     ),
                                   ),
+                                  // posters
                                   SizedBox(
                                     width:
                                         MediaQuery.of(context).size.width * 0.2,
@@ -306,10 +308,10 @@ class _OneZOneDetailScreenState extends State<OneZOneDetailScreen> {
                                             Navigator.push(
                                               context,
                                               MaterialPageRoute(
-                                                builder: (context) =>
-                                                    PhotoViewScreen(
-                                                        image: widget
-                                                            .data.poster_image),
+                                                builder: (context) => PosterListScreen(
+                                                    type: "101",
+                                                    files: appState.item.posters
+                                                ),
                                               ),
                                             );
                                           }
@@ -336,6 +338,7 @@ class _OneZOneDetailScreenState extends State<OneZOneDetailScreen> {
                                       ),
                                     ),
                                   ),
+                                  // work book
                                   SizedBox(
                                     width:
                                         MediaQuery.of(context).size.width * 0.2,
@@ -386,6 +389,7 @@ class _OneZOneDetailScreenState extends State<OneZOneDetailScreen> {
                                       ),
                                     ),
                                   ),
+                                  // videos
                                   SizedBox(
                                     width:
                                         MediaQuery.of(context).size.width * 0.2,
