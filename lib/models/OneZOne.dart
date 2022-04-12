@@ -2,6 +2,7 @@
 import 'package:optimize/models/PdfFile.dart';
 
 import 'AudioFile.dart';
+import 'Poster.dart';
 import 'VideoFile.dart';
 
 class OneZOne {
@@ -13,6 +14,7 @@ class OneZOne {
   List<PdfFile> pdfFiles;
   List<AudioFile> audioFiles;
   List<VideoFile> videoFiles;
+  List<Poster> posters;
   String poster_image;
   bool isLiked;
   bool isTipped;
@@ -32,7 +34,8 @@ class OneZOne {
       required this.isLiked,
       required this.pdfFiles,
       required this.audioFiles,
-      required this.videoFiles,
+        required this.videoFiles,
+        required this.posters,
       required this.isSub,
       required this.video,
       required this.isUtube,

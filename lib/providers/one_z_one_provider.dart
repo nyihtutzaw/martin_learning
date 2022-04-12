@@ -3,6 +3,7 @@ import 'package:optimize/models/AudioFile.dart';
 import 'package:optimize/models/OneZOne.dart';
 import 'package:optimize/models/PdfFile.dart';
 import 'package:optimize/models/PlusOne.dart';
+import 'package:optimize/models/Poster.dart';
 import 'package:optimize/models/VideoFile.dart';
 import 'package:optimize/network/one_z_one_service.dart';
 import 'package:optimize/network/plus_one_service.dart';
@@ -45,6 +46,7 @@ class OneZOneProvider with ChangeNotifier {
         pdfFiles: [],
         audioFiles: [],
         videoFiles: [],
+        posters: [],
       );
       items.add(data);
     }
@@ -66,9 +68,22 @@ class OneZOneProvider with ChangeNotifier {
       pdfFiles.add(PdfFile(
           id: response["data"]["workbooks"][y]["id"],
           name: response["data"]["workbooks"][y]["title"],
-          url: response["data"]["workbooks"][y]["work_book"]));
+          url: response["data"]["workbooks"][y]["work_book"])
+      );
     }
     print(pdfFiles);
+
+
+    List<Poster> posters = [];
+    for (var y = 0; y < response["data"]["posters"].length; y++) {
+      posters.add(
+          Poster(
+            id: response["data"]["posters"][y]["id"],
+            name: response["data"]["posters"][y]["title"],
+            url: response["data"]["posters"][y]["poster"]
+          )
+      );
+    }
 
     print("gettingAudioFiles");
     List<AudioFile> audioFiles = [];
@@ -124,6 +139,7 @@ class OneZOneProvider with ChangeNotifier {
       pdfFiles: pdfFiles,
       audioFiles: audioFiles,
       videoFiles: videoFiles,
+      posters: posters,
     );
     print(item);
     // for detail screen when it reached from my list

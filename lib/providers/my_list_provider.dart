@@ -52,6 +52,7 @@ class MyListProvider with ChangeNotifier {
         pdfFiles: [],
         audioFiles: [],
         videoFiles: [],
+        posters: [],
       );
       favOneZOnes.add(data);
     }
@@ -129,6 +130,7 @@ class MyListProvider with ChangeNotifier {
         pdfFiles: [],
         audioFiles: [],
         videoFiles: [],
+        posters: [],
       );
       tipOneZOnes.add(data);
     }
@@ -206,6 +208,7 @@ class MyListProvider with ChangeNotifier {
         pdfFiles: [],
         audioFiles: [],
         videoFiles: [],
+        posters: [],
       );
       bookOneZOnes.add(data);
     }

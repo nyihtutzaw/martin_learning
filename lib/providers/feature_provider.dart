@@ -42,6 +42,7 @@ class FeatureProvider with ChangeNotifier {
         pdfFiles: [],
         audioFiles: [],
         videoFiles: [],
+        posters: [],
       );
       ozOnes.add(data);
     }
