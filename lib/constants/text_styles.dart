@@ -39,7 +39,7 @@ KTextStyles textStyles1 = KTextStyles(
   ),
   title: TextStyle(
     fontWeight: FontWeight.w600,
-    fontSize: 18.0,
+    fontSize: 14.0,
     color: activeColors.black,
   ),
   description: TextStyle(
@@ -50,7 +50,7 @@ KTextStyles textStyles1 = KTextStyles(
   ),
   caption: TextStyle(
     height: 1.4,
-    fontSize: 16.0,
+    fontSize: 12.0,
     color: Colors.grey.shade700,
   ),
   author: TextStyle(
