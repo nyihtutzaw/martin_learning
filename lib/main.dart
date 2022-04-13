@@ -8,6 +8,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:optimize/providers/blog_provider.dart';
 import 'package:optimize/providers/feature_provider.dart';
+import 'package:optimize/providers/greeting_provider.dart';
 import 'package:optimize/providers/my_list_provider.dart';
 import 'package:optimize/providers/notification_provider.dart';
 import 'package:optimize/providers/one_z_one_provider.dart';
@@ -123,10 +124,13 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider.value(
             value: ThreeMinutesProvider(),
           ),
+          ChangeNotifierProvider.value(
+            value: GreetingProvider(),
+          ),
         ],
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
-          title: 'Real Code Solutions',
+          title: 'Mar Thin',
           theme: ThemeData(
             // fontFamily: 'Acumin',
             primarySwatch: Colors.blue,

@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:optimize/models/OneZOne.dart';
 import 'package:optimize/providers/feature_provider.dart';
+import 'package:optimize/providers/greeting_provider.dart';
 import 'package:optimize/widgets/full_screen_preloader.dart';
 import 'package:provider/provider.dart';
 
@@ -28,6 +29,8 @@ class _FeaturedState extends State<Featured> {
 
     await Provider.of<FeatureProvider>(context, listen: false).getAll();
 
+    await Provider.of<GreetingProvider>(context, listen: false).getAll();
+
     setState(() {
       _isPreloading = false;
     });
@@ -53,14 +56,16 @@ class _FeaturedState extends State<Featured> {
                       const SizedBox(height: 25.0),
                       Center(
                         child: Text(
-                          'Today Special !',
+                          //'Today Special !',
+                          (Provider.of<GreetingProvider>(context, listen: true).items.isEmpty) ? "Today Special" : Provider.of<GreetingProvider>(context, listen: true).items.last.title,
                           style: activeTextStyles.header,
                         ),
                       ),
                       const SizedBox(height: 10.0),
                       Center(
                         child: Text(
-                          'New idea everyday for your business.',
+                          //'New idea everyday for your business.',
+                          (Provider.of<GreetingProvider>(context, listen: true).items.isEmpty) ? "New idea everyday for your business." : Provider.of<GreetingProvider>(context, listen: true).items.last.body
                           style: activeTextStyles.description,
                         ),
                       ),
