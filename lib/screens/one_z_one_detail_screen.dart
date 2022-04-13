@@ -85,6 +85,7 @@ class _OneZOneDetailScreenState extends State<OneZOneDetailScreen> {
                     return Container(
                       child: Column(
                         children: [
+                          // video thumbnail
                           GestureDetector(
                             onTap: () {
                               Navigator.push(
