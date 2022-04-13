@@ -65,7 +65,7 @@ class _FeaturedState extends State<Featured> {
                       Center(
                         child: Text(
                           //'New idea everyday for your business.',
-                          (Provider.of<GreetingProvider>(context, listen: true).items.isEmpty) ? "New idea everyday for your business." : Provider.of<GreetingProvider>(context, listen: true).items.last.body
+                          (Provider.of<GreetingProvider>(context, listen: true).items.isEmpty) ? "New idea everyday for your business." : Provider.of<GreetingProvider>(context, listen: true).items.last.body,
                           style: activeTextStyles.description,
                         ),
                       ),
