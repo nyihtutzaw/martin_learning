@@ -55,18 +55,24 @@ class _FeaturedState extends State<Featured> {
                     children: [
                       const SizedBox(height: 25.0),
                       Center(
-                        child: Text(
-                          //'Today Special !',
-                          (Provider.of<GreetingProvider>(context, listen: true).items.isEmpty) ? "Today Special" : Provider.of<GreetingProvider>(context, listen: true).items.last.title,
-                          style: activeTextStyles.header,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            //'Today Special !',
+                            (Provider.of<GreetingProvider>(context, listen: true).items.isEmpty) ? "Today Special" : Provider.of<GreetingProvider>(context, listen: true).items.last.title,
+                            style: activeTextStyles.header,
+                          ),
                         ),
                       ),
                       const SizedBox(height: 10.0),
                       Center(
-                        child: Text(
-                          //'New idea everyday for your business.',
-                          (Provider.of<GreetingProvider>(context, listen: true).items.isEmpty) ? "New idea everyday for your business." : Provider.of<GreetingProvider>(context, listen: true).items.last.body,
-                          style: activeTextStyles.description,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            //'New idea everyday for your business.',
+                            (Provider.of<GreetingProvider>(context, listen: true).items.isEmpty) ? "New idea everyday for your business." : Provider.of<GreetingProvider>(context, listen: true).items.last.body,
+                            style: activeTextStyles.description,
+                          ),
                         ),
                       ),
                       const SizedBox(height: 36.0),
