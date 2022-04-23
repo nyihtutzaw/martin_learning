@@ -140,6 +140,7 @@ class _MyListsState extends State<MyLists> with SingleTickerProviderStateMixin {
                                       PNWidget(data: item),
                                   ],
                                 ),
+                                appState.favOneZOnes.isEmpty ? Center(child: Text("No Fav Item"),) :
                                 Column(
                                   children: [
                                     for (var item in appState.favOneZOnes)
@@ -158,6 +159,8 @@ class _MyListsState extends State<MyLists> with SingleTickerProviderStateMixin {
                             child: Column(
                               children: [
                                 SizedBox(height: 20),
+
+                                appState.tipPlusOnes.isEmpty ? Center(child: Text("No Completed Item"),) :
                                 Column(
                                   children: [
                                     for (var item in appState.tipPlusOnes)
@@ -188,6 +191,7 @@ class _MyListsState extends State<MyLists> with SingleTickerProviderStateMixin {
                             child: Column(
                               children: [
                                 SizedBox(height: 20),
+                                appState.bookPlusOnes.isEmpty ? Center(child: Text("No Saved Item"),) :
                                 Column(
                                   children: [
                                     for (var item in appState.bookPlusOnes)
