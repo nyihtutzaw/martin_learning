@@ -158,7 +158,7 @@ class _ThreeMinutesDetailState extends State<ThreeMinutesDetail> {
                                         child: activeIcons.checkCircleFill)
                                         : GestureDetector(
                                         onTap: () async {
-                                          await Provider.of<PlusOneProvider>(
+                                          await Provider.of<ThreeMinutesProvider>(
                                               context,
                                               listen: false)
                                               .markData(
@@ -169,7 +169,7 @@ class _ThreeMinutesDetailState extends State<ThreeMinutesDetail> {
                                     appState.item.isBooked
                                         ? GestureDetector(
                                         onTap: () async {
-                                          await Provider.of<PlusOneProvider>(
+                                          await Provider.of<ThreeMinutesProvider>(
                                               context,
                                               listen: false)
                                               .markData("bookmark",
@@ -178,7 +178,7 @@ class _ThreeMinutesDetailState extends State<ThreeMinutesDetail> {
                                         child: activeIcons.saveCircleFill)
                                         : GestureDetector(
                                         onTap: () async {
-                                          await Provider.of<PlusOneProvider>(
+                                          await Provider.of<ThreeMinutesProvider>(
                                               context,
                                               listen: false)
                                               .markData("bookmark",

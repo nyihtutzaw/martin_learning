@@ -7,6 +7,7 @@ import 'package:optimize/models/ThreeMintues.dart';
 import 'package:optimize/network/one_z_one_service.dart';
 import 'package:optimize/network/plus_one_service.dart';
 import 'package:optimize/network/pn_service.dart';
+import 'package:optimize/network/three_minutes_service.dart';
 
 class MyListProvider with ChangeNotifier {
   List<OneZOne> favOneZOnes = [];
@@ -117,7 +118,7 @@ class MyListProvider with ChangeNotifier {
     }
 
 
-    response = await PlusOneService.getAllLikes();
+    response = await ThreeMinutesService.getAllLikes();
     for (var i = 0; i < response["data"].length; i++) {
       try{
         ThreeMinutes data = ThreeMinutes(
@@ -238,7 +239,7 @@ class MyListProvider with ChangeNotifier {
 
 
 
-    response = await PlusOneService.getAllTips();
+    response = await ThreeMinutesService.getAllTips();
     for (var i = 0; i < response["data"].length; i++) {
       try{
         ThreeMinutes data = ThreeMinutes(
@@ -352,7 +353,7 @@ class MyListProvider with ChangeNotifier {
 
     // book
 
-    response = await PlusOneService.getAllBooks();
+    response = await ThreeMinutesService.getAllBooks();
     for (var i = 0; i < response["data"].length; i++) {
       try{
         ThreeMinutes data = ThreeMinutes(
