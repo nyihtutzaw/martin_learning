@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:optimize/models/ThreeMintues.dart';
 import 'package:optimize/providers/my_list_provider.dart';
 import 'package:optimize/widgets/full_screen_preloader.dart';
 
@@ -6,6 +7,7 @@ import 'package:optimize/widgets/one_z_one_widget.dart';
 import 'package:optimize/widgets/plus_one_widget.dart';
 
 import 'package:optimize/widgets/pn_widget.dart';
+import 'package:optimize/widgets/three_minutes_widget.dart';
 import 'package:provider/provider.dart';
 
 import '../constants/active_constants.dart';
@@ -146,7 +148,14 @@ class _MyListsState extends State<MyLists> with SingleTickerProviderStateMixin {
                                     for (var item in appState.favOneZOnes)
                                       OneZOneWidget(data: item),
                                   ],
-                                )
+                                ),
+                                SizedBox(height: 20),
+                                Column(
+                                  children: [
+                                    for (var item in appState.favThreeMinutes)
+                                      ThreeMinutesWidget(data: item),
+                                  ],
+                                ),
                               ],
                             ),
                           ),
@@ -178,7 +187,14 @@ class _MyListsState extends State<MyLists> with SingleTickerProviderStateMixin {
                                     for (var item in appState.tipOneZOnes)
                                       OneZOneWidget(data: item),
                                   ],
-                                )
+                                ),
+                                SizedBox(height: 20),
+                                Column(
+                                  children: [
+                                    for (var item in appState.tipThreeMinutes)
+                                      ThreeMinutesWidget(data: item),
+                                  ],
+                                ),
                               ],
                             ),
                           ),
@@ -209,7 +225,14 @@ class _MyListsState extends State<MyLists> with SingleTickerProviderStateMixin {
                                     for (var item in appState.bookOneZOnes)
                                       OneZOneWidget(data: item),
                                   ],
-                                )
+                                ),
+                                SizedBox(height: 20),
+                                Column(
+                                  children: [
+                                    for (var item in appState.bookThreeMinutes)
+                                      ThreeMinutesWidget(data: item),
+                                  ],
+                                ),
                               ],
                             ),
                           ),

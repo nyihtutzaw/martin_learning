@@ -22,7 +22,7 @@ class MyListProvider with ChangeNotifier {
   List<OneZOne> bookOneZOnes = [];
   List<Pn> bookPns = [];
   List<PlusOne> bookPlusOnes = [];
-  List<ThreeMinutes> bookThreeMinute = [];
+  List<ThreeMinutes> bookThreeMinutes = [];
 
   Future<void> getAll() async {
     favOneZOnes.clear();
@@ -38,7 +38,7 @@ class MyListProvider with ChangeNotifier {
     bookOneZOnes.clear();
     bookPns.clear();
     bookPlusOnes.clear();
-    bookThreeMinute.clear();
+    bookThreeMinutes.clear();
 
     // fav
     var response = await OneZOneService.getAllLikes();
@@ -377,10 +377,10 @@ class MyListProvider with ChangeNotifier {
           isLiked: response["data"][i]["isLiked"],
           isTipped: response["data"][i]["isTiped"],
         );
-        bookThreeMinute.add(data);
+        bookThreeMinutes.add(data);
       }
       catch(exp, stackTrace){
-        print("MyListProvider-> plus one serivce -> get All books inner exp");
+        print("MyListProvider-> plus one service -> get All books inner exp");
         print(exp);
         print(stackTrace);
       }
