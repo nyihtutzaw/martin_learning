@@ -129,7 +129,7 @@ class _ThreeMinutesDetailState extends State<ThreeMinutesDetail> {
                                     appState.item.isLiked
                                         ? GestureDetector(
                                         onTap: () async {
-                                          await Provider.of<PlusOneProvider>(
+                                          await Provider.of<ThreeMinutesProvider>(
                                               context,
                                               listen: false)
                                               .markData("like",
@@ -138,7 +138,7 @@ class _ThreeMinutesDetailState extends State<ThreeMinutesDetail> {
                                         child: activeIcons.heartCircleFill)
                                         : GestureDetector(
                                         onTap: () async {
-                                          await Provider.of<PlusOneProvider>(
+                                          await Provider.of<ThreeMinutesProvider>(
                                               context,
                                               listen: false)
                                               .markData("like",
@@ -149,7 +149,7 @@ class _ThreeMinutesDetailState extends State<ThreeMinutesDetail> {
                                     appState.item.isTipped
                                         ? GestureDetector(
                                         onTap: () async {
-                                          await Provider.of<PlusOneProvider>(
+                                          await Provider.of<ThreeMinutesProvider>(
                                               context,
                                               listen: false)
                                               .markData(
