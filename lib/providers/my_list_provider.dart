@@ -3,6 +3,7 @@ import 'package:optimize/models/Category.dart';
 import 'package:optimize/models/OneZOne.dart';
 import 'package:optimize/models/PlusOne.dart';
 import 'package:optimize/models/Pn.dart';
+import 'package:optimize/models/ThreeMintues.dart';
 import 'package:optimize/network/one_z_one_service.dart';
 import 'package:optimize/network/plus_one_service.dart';
 import 'package:optimize/network/pn_service.dart';
@@ -11,25 +12,33 @@ class MyListProvider with ChangeNotifier {
   List<OneZOne> favOneZOnes = [];
   List<Pn> favPns = [];
   List<PlusOne> favPlusOnes = [];
+  List<ThreeMinutes> favThreeMinutes = [];
 
   List<OneZOne> tipOneZOnes = [];
   List<Pn> tipPns = [];
   List<PlusOne> tipPlusOnes = [];
+  List<ThreeMinutes> tipThreeMinutes = [];
 
   List<OneZOne> bookOneZOnes = [];
   List<Pn> bookPns = [];
   List<PlusOne> bookPlusOnes = [];
+  List<ThreeMinutes> bookThreeMinute = [];
 
   Future<void> getAll() async {
     favOneZOnes.clear();
     favPns.clear();
     favPlusOnes.clear();
+    favThreeMinutes.clear();
+
     tipOneZOnes.clear();
     tipPns.clear();
     tipPlusOnes.clear();
+    tipThreeMinutes.clear();
+
     bookOneZOnes.clear();
     bookPns.clear();
     bookPlusOnes.clear();
+    bookThreeMinute.clear();
 
     // fav
     var response = await OneZOneService.getAllLikes();
@@ -106,6 +115,42 @@ class MyListProvider with ChangeNotifier {
           categories: categories);
       favPns.add(data);
     }
+
+
+    response = await PlusOneService.getAllLikes();
+    for (var i = 0; i < response["data"].length; i++) {
+      try{
+        ThreeMinutes data = ThreeMinutes(
+          id: response["data"][i]["id"],
+          title: response["data"][i]["title"],
+          code: response["data"][i]["code"],
+          subtitle: response["data"][i]["subtitle"],
+          description: response["data"][i]["description"] != null
+              ? response["data"][i]["description"]
+              : "",
+          audio: response["data"][i]["audio"] != null
+              ? response["data"][i]["audio"]
+              : "",
+          video: response["data"][i]["video"] != null
+              ? response["data"][i]["video"]
+              : "",
+          isUtube: response["data"][i]["isYoutube"],
+          thumbnail: response["data"][i]["thumbnail"] != null
+              ? response["data"][i]["thumbnail"]
+              : "",
+          isBooked: response["data"][i]["isBooked"],
+          isLiked: response["data"][i]["isLiked"],
+          isTipped: response["data"][i]["isTiped"],
+        );
+        favThreeMinutes.add(data);
+      }
+      catch(exp, stackTrace){
+        print("MyListProvider-> plus one serivce -> get All likes inner exp");
+        print(exp);
+        print(stackTrace);
+      }
+    }
+
 
     // fav
 
@@ -191,6 +236,42 @@ class MyListProvider with ChangeNotifier {
       tipPns.add(data);
     }
 
+
+
+    response = await PlusOneService.getAllTips();
+    for (var i = 0; i < response["data"].length; i++) {
+      try{
+        ThreeMinutes data = ThreeMinutes(
+          id: response["data"][i]["id"],
+          title: response["data"][i]["title"],
+          code: response["data"][i]["code"],
+          subtitle: response["data"][i]["subtitle"],
+          description: response["data"][i]["description"] != null
+              ? response["data"][i]["description"]
+              : "",
+          audio: response["data"][i]["audio"] != null
+              ? response["data"][i]["audio"]
+              : "",
+          video: response["data"][i]["video"] != null
+              ? response["data"][i]["video"]
+              : "",
+          isUtube: response["data"][i]["isYoutube"],
+          thumbnail: response["data"][i]["thumbnail"] != null
+              ? response["data"][i]["thumbnail"]
+              : "",
+          isBooked: response["data"][i]["isBooked"],
+          isLiked: response["data"][i]["isLiked"],
+          isTipped: response["data"][i]["isTiped"],
+        );
+        tipThreeMinutes.add(data);
+      }
+      catch(exp, stackTrace){
+        print("MyListProvider-> plus one serivce -> get All tips inner exp");
+        print(exp);
+        print(stackTrace);
+      }
+    }
+
     // tip
 
     // book
@@ -271,6 +352,39 @@ class MyListProvider with ChangeNotifier {
 
     // book
 
+    response = await PlusOneService.getAllBooks();
+    for (var i = 0; i < response["data"].length; i++) {
+      try{
+        ThreeMinutes data = ThreeMinutes(
+          id: response["data"][i]["id"],
+          title: response["data"][i]["title"],
+          code: response["data"][i]["code"],
+          subtitle: response["data"][i]["subtitle"],
+          description: response["data"][i]["description"] != null
+              ? response["data"][i]["description"]
+              : "",
+          audio: response["data"][i]["audio"] != null
+              ? response["data"][i]["audio"]
+              : "",
+          video: response["data"][i]["video"] != null
+              ? response["data"][i]["video"]
+              : "",
+          isUtube: response["data"][i]["isYoutube"],
+          thumbnail: response["data"][i]["thumbnail"] != null
+              ? response["data"][i]["thumbnail"]
+              : "",
+          isBooked: response["data"][i]["isBooked"],
+          isLiked: response["data"][i]["isLiked"],
+          isTipped: response["data"][i]["isTiped"],
+        );
+        bookThreeMinute.add(data);
+      }
+      catch(exp, stackTrace){
+        print("MyListProvider-> plus one serivce -> get All books inner exp");
+        print(exp);
+        print(stackTrace);
+      }
+    }
     notifyListeners();
   }
 }
