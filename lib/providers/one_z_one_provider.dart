@@ -95,7 +95,7 @@ class OneZOneProvider with ChangeNotifier {
           url: response["data"]["audios"][y]["audio"]));
     }
     print(audioFiles);
-    print(audioFiles.first.thumbnail);
+    //print(audioFiles.first.thumbnail);
 
     print("Getting videoFiles");
     List<VideoFile> videoFiles = [];
