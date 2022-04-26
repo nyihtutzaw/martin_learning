@@ -86,10 +86,12 @@ class Auth with ChangeNotifier {
   Future<void> getUserSubscription() async {
     var response = await AuthService.getUserSubscription();
     for (int i = 0; i < response["data"].length; i++) {
-      subscribedCourses.add(SubscribedCourse(
-        id: response["data"][i]["subscription"]["id"],
-        name: response["data"][i]["subscription"]["title"],
-      ));
+      if(response["data"]["i"]["subscription"] != null){
+        subscribedCourses.add(SubscribedCourse(
+          id: response["data"][i]["subscription"]["id"],
+          name: response["data"][i]["subscription"]["title"],
+        ));
+      }
     }
   }
 }
