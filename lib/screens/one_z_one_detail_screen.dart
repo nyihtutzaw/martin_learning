@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:optimize/models/OneZOne.dart';
@@ -28,6 +30,8 @@ class OneZOneDetailScreen extends StatefulWidget {
 class _OneZOneDetailScreenState extends State<OneZOneDetailScreen> {
   bool _isInit = false;
   bool _isPreloading = false;
+
+  
 
   void loadData() async {
     setState(() {
@@ -82,6 +86,7 @@ class _OneZOneDetailScreenState extends State<OneZOneDetailScreen> {
                 ? FullScreenPreloader()
                 : Consumer<OneZOneProvider>(
                     builder: (context, appState, child) {
+                   
                     return Container(
                       child: Column(
                         children: [
@@ -105,7 +110,8 @@ class _OneZOneDetailScreenState extends State<OneZOneDetailScreen> {
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(5),
                                 image: DecorationImage(
-                                  image: NetworkImage(appState?.item?.thumbnail ?? "thumbnailUrl"),
+                                  image: NetworkImage(
+                                      appState.item.thumbnail ?? "thumbnailUrl"),
                                   fit: BoxFit.fill,
                                 ),
                               ),
@@ -243,12 +249,17 @@ class _OneZOneDetailScreenState extends State<OneZOneDetailScreen> {
                                       ),
                                       onPressed: () {
                                         if (appState.item.isSub) {
-                                          print("OneZOneDetailScreen->musicPlayer tap");
+                                          print(
+                                              "OneZOneDetailScreen->musicPlayer tap");
                                           print(appState.item.id);
-                                          print(appState.item.audioFiles.first.thumbnail);
-                                          print(appState.item.audioFiles.first.name);
-                                          print(appState.item.audioFiles.first.url);
-                                          print(appState.item.audioFiles.first.id);
+                                          print(appState
+                                              .item.audioFiles.first.thumbnail);
+                                          print(appState
+                                              .item.audioFiles.first.name);
+                                          print(appState
+                                              .item.audioFiles.first.url);
+                                          print(appState
+                                              .item.audioFiles.first.id);
                                           Navigator.push(
                                             context,
                                             MaterialPageRoute(
@@ -309,10 +320,11 @@ class _OneZOneDetailScreenState extends State<OneZOneDetailScreen> {
                                             Navigator.push(
                                               context,
                                               MaterialPageRoute(
-                                                builder: (context) => PosterListScreen(
-                                                    type: "101",
-                                                    files: appState.item.posters
-                                                ),
+                                                builder: (context) =>
+                                                    PosterListScreen(
+                                                        type: "101",
+                                                        files: appState
+                                                            .item.posters),
                                               ),
                                             );
                                           }
@@ -330,9 +342,9 @@ class _OneZOneDetailScreenState extends State<OneZOneDetailScreen> {
                                       },
                                       child: Column(
                                         children: [
-                                          const Icon(Icons.book),
+                                          const Icon(Icons.image),
                                           Text(
-                                            "Poster",
+                                            "Image",
                                             style: TextStyle(fontSize: 10),
                                           ),
                                         ],
@@ -449,6 +461,7 @@ class _OneZOneDetailScreenState extends State<OneZOneDetailScreen> {
                                     MediaQuery.of(context).size.width * 0.1),
                             child: Html(
                               data: appState.item.description,
+                              tagsList: Html.tags,
                             ),
                           ),
                         ],

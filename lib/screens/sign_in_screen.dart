@@ -58,28 +58,28 @@ class _SignInScreenState extends State<SignInScreen> {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
+              const Text(
                 "Sign In",
                 style: TextStyle(color: Colors.white, fontSize: 35),
               ),
               Container(
-                padding: EdgeInsets.symmetric(horizontal: 30),
+                padding: const EdgeInsets.symmetric(horizontal: 30),
                 child: Form(
                   key: _formKey,
                   child: Container(
                     child: Column(
                       children: <Widget>[
                         Container(
-                          margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
+                          margin: const EdgeInsets.fromLTRB(0, 20, 0, 0),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
-                              Text(
+                            const   Text(
                                 "Email",
                                 style: TextStyle(
                                     color: Colors.white, fontSize: 16),
                               ),
-                              SizedBox(height: 10),
+                              const SizedBox(height: 10),
                               TextFormField(
                                 initialValue: _initValues['email'],
                                 validator: (value) {
@@ -155,23 +155,23 @@ class _SignInScreenState extends State<SignInScreen> {
                                     ),
                                   ),
                                 ])),
-                        SizedBox(
+                        const SizedBox(
                           height: 30,
                         ),
                         FlatButton(
                           child: Text(
                             _actionLoading ? 'Loading..' : 'Let\'s gooo!',
-                            style: TextStyle(
+                            style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold),
                           ),
                           color: activeColors.primary,
                           onPressed: _submit,
-                          padding: EdgeInsets.symmetric(
+                          padding: const EdgeInsets.symmetric(
                               horizontal: 60, vertical: 15),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 30,
                         ),
                       ],
