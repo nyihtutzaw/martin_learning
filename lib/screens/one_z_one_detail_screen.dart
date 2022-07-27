@@ -443,8 +443,8 @@ class _OneZOneDetailScreenState extends State<OneZOneDetailScreen> {
                                         }
                                       },
                                       child: Column(
-                                        children: [
-                                          const Icon(Icons.tv),
+                                        children:const [
+                                           Icon(Icons.tv),
                                           Text(
                                             "Videos",
                                             style: TextStyle(fontSize: 10),
