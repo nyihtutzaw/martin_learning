@@ -1,20 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
-import 'package:optimize/models/PlusOne.dart';
 import 'package:optimize/models/ThreeMintues.dart';
-import 'package:optimize/providers/plus_one_provider.dart';
 import 'package:optimize/providers/three_minutes_provider.dart';
 import 'package:optimize/screens/music_player_screen.dart';
 import 'package:optimize/screens/video_view_screen.dart';
 import 'package:optimize/widgets/full_screen_preloader.dart';
 
-import 'package:optimize/widgets/home_app_bar.dart';
 import 'package:provider/provider.dart';
 import '../constants/active_constants.dart';
 
 class ThreeMinutesDetail extends StatefulWidget {
   final ThreeMinutes data;
-  ThreeMinutesDetail({
+  const ThreeMinutesDetail({
     Key? key,
     required this.data,
   }) : super(key: key);
@@ -40,6 +37,7 @@ class _ThreeMinutesDetailState extends State<ThreeMinutesDetail> {
     });
   }
 
+  @override
   void didChangeDependencies() {
     if (!_isInit) {
       loadData();
@@ -72,7 +70,7 @@ class _ThreeMinutesDetailState extends State<ThreeMinutesDetail> {
                       children: [
                         GestureDetector(
                           onTap: () {
-                            if (appState.item.video.length > 0) {
+                            if (appState.item.video.isNotEmpty) {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
@@ -115,12 +113,12 @@ class _ThreeMinutesDetailState extends State<ThreeMinutesDetail> {
                               ),
                               Text(
                                 appState.item.subtitle,
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontSize: 13,
                                 ),
                                 textAlign: TextAlign.center,
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 10,
                               ),
                               Row(
@@ -196,7 +194,7 @@ class _ThreeMinutesDetailState extends State<ThreeMinutesDetail> {
                             ],
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
                         Container(
@@ -217,7 +215,7 @@ class _ThreeMinutesDetailState extends State<ThreeMinutesDetail> {
                                   style: ButtonStyle(
                                     padding:
                                         MaterialStateProperty.all<EdgeInsets>(
-                                            EdgeInsets.symmetric(vertical: 5)),
+                                            const EdgeInsets.symmetric(vertical: 5)),
                                     backgroundColor:
                                         MaterialStateProperty.all<Color>(
                                             Colors.white),
@@ -226,7 +224,7 @@ class _ThreeMinutesDetailState extends State<ThreeMinutesDetail> {
                                             Colors.blue),
                                   ),
                                   onPressed: () {
-                                    if (appState.item.audio.length > 0) {
+                                    if (appState.item.audio.isNotEmpty) {
                                       Navigator.push(
                                         context,
                                         MaterialPageRoute(
@@ -256,7 +254,7 @@ class _ThreeMinutesDetailState extends State<ThreeMinutesDetail> {
                                   style: ButtonStyle(
                                     padding:
                                         MaterialStateProperty.all<EdgeInsets>(
-                                            EdgeInsets.symmetric(vertical: 5)),
+                                            const EdgeInsets.symmetric(vertical: 5)),
                                     backgroundColor:
                                         MaterialStateProperty.all<Color>(
                                             Colors.white),
@@ -265,7 +263,7 @@ class _ThreeMinutesDetailState extends State<ThreeMinutesDetail> {
                                             Colors.blue),
                                   ),
                                   onPressed: () {
-                                    if (appState.item.video.length > 0) {
+                                    if (appState.item.video.isNotEmpty) {
                                       Navigator.push(
                                         context,
                                         MaterialPageRoute(
