@@ -18,6 +18,10 @@ class Auth with ChangeNotifier {
     return _token;
   }
 
+  Auth() {
+    getUser();
+  }
+
   Future<bool> tryAutoLogin() async {
     final prefs = await SharedPreferences.getInstance();
     if (!prefs.containsKey('userToken')) {
@@ -86,7 +90,7 @@ class Auth with ChangeNotifier {
   Future<void> getUserSubscription() async {
     var response = await AuthService.getUserSubscription();
     for (int i = 0; i < response["data"].length; i++) {
-      if(response["data"][i]["subscription"] != null){
+      if (response["data"][i]["subscription"] != null) {
         subscribedCourses.add(SubscribedCourse(
           id: response["data"][i]["subscription"]["id"],
           name: response["data"][i]["subscription"]["title"],
