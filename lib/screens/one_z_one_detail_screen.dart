@@ -1,23 +1,18 @@
-import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:optimize/models/OneZOne.dart';
 import 'package:optimize/providers/one_z_one_provider.dart';
 import 'package:optimize/screens/pdf_list_screen.dart';
-import 'package:optimize/screens/pdf_viewer.dart';
-import 'package:optimize/screens/photo_view_screen.dart';
 import 'package:optimize/screens/poster_list_screen.dart';
 import 'package:optimize/screens/video_list_screen.dart';
 import 'package:optimize/screens/video_view_screen.dart';
 import 'package:optimize/widgets/full_screen_preloader.dart';
-import 'package:optimize/widgets/home_app_bar.dart';
 import 'package:optimize/widgets/message_dialog.dart';
 import 'package:optimize/widgets/premium_message.dart';
 import 'package:provider/provider.dart';
 import '../constants/active_constants.dart';
 import 'audio_list_screen.dart';
-import 'music_player_screen.dart';
 
 class OneZOneDetailScreen extends StatefulWidget {
   final OneZOne data;
@@ -30,8 +25,6 @@ class OneZOneDetailScreen extends StatefulWidget {
 class _OneZOneDetailScreenState extends State<OneZOneDetailScreen> {
   bool _isInit = false;
   bool _isPreloading = false;
-
-  
 
   void loadData() async {
     setState(() {
@@ -50,6 +43,7 @@ class _OneZOneDetailScreenState extends State<OneZOneDetailScreen> {
     }
   }
 
+  @override
   void didChangeDependencies() {
     if (!_isInit) {
       loadData();
@@ -86,7 +80,6 @@ class _OneZOneDetailScreenState extends State<OneZOneDetailScreen> {
                 ? FullScreenPreloader()
                 : Consumer<OneZOneProvider>(
                     builder: (context, appState, child) {
-                   
                     return Container(
                       child: Column(
                         children: [
@@ -110,8 +103,7 @@ class _OneZOneDetailScreenState extends State<OneZOneDetailScreen> {
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(5),
                                 image: DecorationImage(
-                                  image: NetworkImage(
-                                      appState.item.thumbnail ?? "thumbnailUrl"),
+                                  image: NetworkImage(appState.item.thumbnail),
                                   fit: BoxFit.fill,
                                 ),
                               ),
@@ -135,12 +127,12 @@ class _OneZOneDetailScreenState extends State<OneZOneDetailScreen> {
                                 ),
                                 Text(
                                   appState.item.subtitle,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontSize: 13,
                                   ),
                                   textAlign: TextAlign.center,
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 10,
                                 ),
                                 Row(
@@ -216,7 +208,7 @@ class _OneZOneDetailScreenState extends State<OneZOneDetailScreen> {
                               ],
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 10,
                           ),
                           Container(
@@ -239,7 +231,7 @@ class _OneZOneDetailScreenState extends State<OneZOneDetailScreen> {
                                       style: ButtonStyle(
                                         padding: MaterialStateProperty.all<
                                                 EdgeInsets>(
-                                            EdgeInsets.symmetric(vertical: 5)),
+                                            const EdgeInsets.symmetric(vertical: 5)),
                                         backgroundColor:
                                             MaterialStateProperty.all<Color>(
                                                 Colors.white),
@@ -287,8 +279,8 @@ class _OneZOneDetailScreenState extends State<OneZOneDetailScreen> {
                                         }
                                       },
                                       child: Column(
-                                        children: [
-                                          const Icon(Icons.music_note),
+                                        children: const [
+                                          Icon(Icons.music_note),
                                           Text(
                                             "Listen",
                                             style: TextStyle(fontSize: 10),
@@ -305,7 +297,7 @@ class _OneZOneDetailScreenState extends State<OneZOneDetailScreen> {
                                       style: ButtonStyle(
                                         padding: MaterialStateProperty.all<
                                                 EdgeInsets>(
-                                            EdgeInsets.symmetric(vertical: 5)),
+                                            const EdgeInsets.symmetric(vertical: 5)),
                                         backgroundColor:
                                             MaterialStateProperty.all<Color>(
                                                 Colors.white),
@@ -315,8 +307,7 @@ class _OneZOneDetailScreenState extends State<OneZOneDetailScreen> {
                                       ),
                                       onPressed: () {
                                         if (appState.item.isSub) {
-                                          if (widget.data.poster_image.length >
-                                              0) {
+                                          if (widget.data.poster_image.isNotEmpty) {
                                             Navigator.push(
                                               context,
                                               MaterialPageRoute(
@@ -341,8 +332,8 @@ class _OneZOneDetailScreenState extends State<OneZOneDetailScreen> {
                                         }
                                       },
                                       child: Column(
-                                        children: [
-                                          const Icon(Icons.image),
+                                        children: const [
+                                          Icon(Icons.image),
                                           Text(
                                             "Image",
                                             style: TextStyle(fontSize: 10),
@@ -359,7 +350,7 @@ class _OneZOneDetailScreenState extends State<OneZOneDetailScreen> {
                                       style: ButtonStyle(
                                         padding: MaterialStateProperty.all<
                                                 EdgeInsets>(
-                                            EdgeInsets.symmetric(vertical: 5)),
+                                            const EdgeInsets.symmetric(vertical: 5)),
                                         backgroundColor:
                                             MaterialStateProperty.all<Color>(
                                                 Colors.white),
@@ -392,8 +383,8 @@ class _OneZOneDetailScreenState extends State<OneZOneDetailScreen> {
                                         }
                                       },
                                       child: Column(
-                                        children: [
-                                          const Icon(Icons.document_scanner),
+                                        children: const [
+                                          Icon(Icons.document_scanner),
                                           Text(
                                             "Workbook",
                                             style: TextStyle(fontSize: 10),
@@ -410,7 +401,7 @@ class _OneZOneDetailScreenState extends State<OneZOneDetailScreen> {
                                       style: ButtonStyle(
                                         padding: MaterialStateProperty.all<
                                                 EdgeInsets>(
-                                            EdgeInsets.symmetric(vertical: 5)),
+                                            const EdgeInsets.symmetric(vertical: 5)),
                                         backgroundColor:
                                             MaterialStateProperty.all<Color>(
                                                 Colors.white),
@@ -443,8 +434,8 @@ class _OneZOneDetailScreenState extends State<OneZOneDetailScreen> {
                                         }
                                       },
                                       child: Column(
-                                        children:const [
-                                           Icon(Icons.tv),
+                                        children: const [
+                                          Icon(Icons.tv),
                                           Text(
                                             "Videos",
                                             style: TextStyle(fontSize: 10),
