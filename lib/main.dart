@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:optimize/providers/blog_provider.dart';
+import 'package:optimize/providers/comment_provider.dart';
 import 'package:optimize/providers/feature_provider.dart';
 import 'package:optimize/providers/greeting_provider.dart';
 import 'package:optimize/providers/my_list_provider.dart';
@@ -120,6 +121,9 @@ class MyApp extends StatelessWidget {
           ),
           ChangeNotifierProvider.value(
             value: GreetingProvider(),
+          ),
+          ChangeNotifierProvider.value(
+            value: CommentProvider(),
           ),
         ],
         child: MaterialApp(
