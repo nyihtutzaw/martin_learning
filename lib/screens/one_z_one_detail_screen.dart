@@ -91,9 +91,9 @@ class _OneZOneDetailScreenState extends State<OneZOneDetailScreen> {
                                 builder: (context) => VideoViewScreen(
                                   url: appState.item.video,
                                   isUbube: appState.item.isUtube,
-                                ),
                               ),
-                            );
+                            ),
+                          );
                           },
                           child: Container(
                             width: MediaQuery.of(context).size.width * 0.95,
