@@ -52,6 +52,7 @@ class Auth with ChangeNotifier {
     final prefs = await SharedPreferences.getInstance();
     final storedData = json.encode({'token': _token});
     prefs.setString('userToken', storedData);
+    await getUser();
     notifyListeners();
   }
 
@@ -80,6 +81,7 @@ class Auth with ChangeNotifier {
       username: response["data"]["name"],
       email: response["data"]["email"],
     );
+    notifyListeners();
     return currentUser;
   }
 
