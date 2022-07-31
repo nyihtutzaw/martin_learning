@@ -12,7 +12,9 @@ class ApiService {
       // http://192.168.98.174/
     );
 
+
  options.headers["Authorization"] = "Bearer $token";
+
 
     options.headers["Accept"] = "application/json";
 
