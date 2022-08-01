@@ -46,6 +46,7 @@ class Auth with ChangeNotifier {
 
   Future<void> login(var data) async {
     String? fireBaseToken = await FirebaseMessaging.instance.getToken();
+    print(fireBaseToken);
     data["register_id"] = fireBaseToken;
     var response = await AuthService.login(data);
     _token = response["data"]["access_token"];

@@ -1,41 +1,40 @@
 {
   "project_info": {
-    "project_number": "1086840022181",
-    "project_id": "marthin-app-ios",
-    "storage_bucket": "marthin-app-ios.appspot.com"
+    "project_number": "930127590428",
+    "project_id": "optimze-noti",
+    "storage_bucket": "optimze-noti.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1086840022181:android:86c3676d63104c681a594c",
+        "mobilesdk_app_id": "1:930127590428:android:7d3a1ee950c0856aa89bd9",
         "android_client_info": {
           "package_name": "com.rcsmm.optimize"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1086840022181-mabtji4ksf84cshhj8sf7j744cq49nd5.apps.googleusercontent.com",
+          "client_id": "930127590428-gviqepnuf81o5eua0dek2crsojiu742o.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBhL-FBVP6N6y0fibYtLK0GFK0dPsMlq_g"
+          "current_key": "AIzaSyCxzkH_IIeuX9381-pzhs3iAHOOcsuw8IM"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "1086840022181-mabtji4ksf84cshhj8sf7j744cq49nd5.apps.googleusercontent.com",
+              "client_id": "930127590428-gviqepnuf81o5eua0dek2crsojiu742o.apps.googleusercontent.com",
               "client_type": 3
             },
             {
-              "client_id": "1086840022181-stcdo6veumkskmsl6bl42r1vmgvps1n9.apps.googleusercontent.com",
+              "client_id": "930127590428-voo1nk7jbt0albp6jjq7t4ok3undl7t0.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.rcsmm.optimize",
-                "app_store_id": "1612063792"
+                "bundle_id": "com.rcsmm.optimize"
               }
             }
           ]
