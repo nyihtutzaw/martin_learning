@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:optimize/providers/auth_provider.dart';
+import 'package:optimize/screens/featured.dart';
 import 'package:optimize/screens/my_lists.dart';
 import 'package:optimize/screens/noti.dart';
 import 'package:optimize/screens/user_profile_screen.dart';
@@ -32,6 +33,17 @@ class MyDrawer extends StatelessWidget {
               context,
               MaterialPageRoute(
                 builder: (context) => const Home(),
+              ),
+            );
+          }),
+      DrawerItem(
+          icon: activeIcons.noti,
+          pageName: 'Featured',
+          onPress: () {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const Featured(),
               ),
             );
           }),

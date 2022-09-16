@@ -4,6 +4,8 @@ import 'package:optimize/providers/greeting_provider.dart';
 import 'package:optimize/widgets/full_screen_preloader.dart';
 import 'package:provider/provider.dart';
 
+import '../widgets/minor_app_bar.dart';
+import '../widgets/my_drawer.dart';
 import '../widgets/plus_one_widget.dart';
 import '../widgets/pn_widget.dart';
 import '../widgets/one_z_one_widget.dart';
@@ -46,6 +48,8 @@ class _FeaturedState extends State<Featured> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: const MinorAppBar(title: 'Featured'),
+      drawer: const MyDrawer(),
       body: SingleChildScrollView(
           child: _isPreloading
               ? FullScreenPreloader()
@@ -58,7 +62,16 @@ class _FeaturedState extends State<Featured> {
                           padding: const EdgeInsets.all(8.0),
                           child: Text(
                             //'Today Special !',
-                            (Provider.of<GreetingProvider>(context, listen: true).items.isEmpty) ? "Today Special" : Provider.of<GreetingProvider>(context, listen: true).items.last.title,
+                            (Provider.of<GreetingProvider>(context,
+                                        listen: true)
+                                    .items
+                                    .isEmpty)
+                                ? "Today Special"
+                                : Provider.of<GreetingProvider>(context,
+                                        listen: true)
+                                    .items
+                                    .last
+                                    .title,
                             style: activeTextStyles.header,
                           ),
                         ),
@@ -69,7 +82,16 @@ class _FeaturedState extends State<Featured> {
                           padding: const EdgeInsets.all(8.0),
                           child: Text(
                             //'New idea everyday for your business.',
-                            (Provider.of<GreetingProvider>(context, listen: true).items.isEmpty) ? "New idea everyday for your business." : Provider.of<GreetingProvider>(context, listen: true).items.last.body,
+                            (Provider.of<GreetingProvider>(context,
+                                        listen: true)
+                                    .items
+                                    .isEmpty)
+                                ? "New idea everyday for your business."
+                                : Provider.of<GreetingProvider>(context,
+                                        listen: true)
+                                    .items
+                                    .last
+                                    .body,
                             style: activeTextStyles.description,
                           ),
                         ),

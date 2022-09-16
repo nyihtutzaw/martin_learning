@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:optimize/screens/blog_page_screen.dart';
+import 'package:optimize/screens/men.dart';
 import 'package:optimize/screens/three_minute.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'main.dart';
@@ -10,7 +11,6 @@ import 'widgets/my_drawer.dart';
 import 'constants/active_constants.dart';
 
 // screens
-import 'screens/featured.dart';
 import 'screens/plus_one.dart';
 import 'screens/pn.dart';
 import 'screens/one_z_one.dart';
@@ -27,7 +27,7 @@ class _HomeState extends State<Home> {
   final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
       FlutterLocalNotificationsPlugin();
   static const List<Widget> _pages = <Widget>[
-    Featured(),
+    Men(),
     PlusOne(),
     ThreeMinture(),
     PN(),
@@ -44,7 +44,6 @@ class _HomeState extends State<Home> {
   @override
   void initState() {
     super.initState();
-
 
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
       print("FirebaseMessaging.onMessage.listen remoteMessage");
@@ -92,36 +91,38 @@ class _HomeState extends State<Home> {
                   ),
                 ),
                 actions: [
-                  InkWell(child: const Text("Update"), onTap: (){
-                    print("update on tap");
-                    // open playstore link in web
-                    _launchURL(message.data['app_url'] ?? "app_url");
+                  InkWell(
+                    child: const Text("Update"),
+                    onTap: () {
+                      print("update on tap");
+                      // open playstore link in web
+                      _launchURL(message.data['app_url'] ?? "app_url");
                     },
                   )
                 ],
               );
-            }
-            );
+            });
       }
     });
     _fcmSubscribe();
   }
+
   void _launchURL(String url) async {
     if (!await launch(url)) throw 'Could not launch $url';
   }
-  void _fcmSubscribe()async{
+
+  void _fcmSubscribe() async {
     print("fcm_build_3 ...");
-    try{
+    try {
       await FirebaseMessaging.instance.subscribeToTopic('fcm_build_3');
       print("fcm_build_3 subscribed");
-    }
-    catch(exp){
+    } catch (exp) {
       print("fcm_build_3 subscribe fail exp");
       print(exp);
     }
   }
 
-  void _showDialogOwn(){
+  void _showDialogOwn() {
     showDialog(
         context: context,
         builder: (_) {
@@ -130,27 +131,23 @@ class _HomeState extends State<Home> {
             content: SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
-                  Text("body"),
-                  Text("another message")
-                ],
+                children: const [Text("body"), Text("another message")],
               ),
             ),
             actions: [
-              InkWell(child: const Text("Update"), onTap: (){
-                print("update on tap");
-                // open playstore link in web
-                Navigator.pop(context);
-                _launchURL("https://google.com");
-              },
+              InkWell(
+                child: const Text("Update"),
+                onTap: () {
+                  print("update on tap");
+                  // open playstore link in web
+                  Navigator.pop(context);
+                  _launchURL("https://google.com");
+                },
               )
             ],
           );
-        }
-    );
+        });
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -170,7 +167,7 @@ class _HomeState extends State<Home> {
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: activeIcons.diamond,
-            label: 'Featured',
+            label: 'Men',
           ),
           BottomNavigationBarItem(
             icon: activeIcons.calendar,
@@ -213,7 +210,10 @@ class _HomeState extends State<Home> {
     );
   }
 
-  Widget _fab(){
-    return FloatingActionButton(onPressed: _showDialogOwn, child: const Icon(Icons.refresh),);
+  Widget _fab() {
+    return FloatingActionButton(
+      onPressed: _showDialogOwn,
+      child: const Icon(Icons.refresh),
+    );
   }
 }
