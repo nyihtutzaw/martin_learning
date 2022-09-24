@@ -27,12 +27,12 @@ class _HomeState extends State<Home> {
   final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
       FlutterLocalNotificationsPlugin();
   static const List<Widget> _pages = <Widget>[
-    Men(),
     PlusOne(),
     ThreeMinture(),
     PN(),
     OneZeroOne(),
     BlogPageScreen(),
+    Men(),
   ];
 
   void _onItemTapped(int index) {
@@ -166,10 +166,6 @@ class _HomeState extends State<Home> {
       bottomNavigationBar: BottomNavigationBar(
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: activeIcons.diamond,
-            label: 'Men',
-          ),
-          BottomNavigationBarItem(
             icon: activeIcons.calendar,
             label: '+1',
           ),
@@ -188,6 +184,10 @@ class _HomeState extends State<Home> {
           const BottomNavigationBarItem(
             icon: Icon(Icons.article),
             label: 'Blog',
+          ),
+          BottomNavigationBarItem(
+            icon: activeIcons.diamond,
+            label: 'M.E.N',
           ),
         ],
         backgroundColor: activeColors.black,

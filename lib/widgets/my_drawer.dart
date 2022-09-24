@@ -37,7 +37,7 @@ class MyDrawer extends StatelessWidget {
             );
           }),
       DrawerItem(
-          icon: activeIcons.noti,
+          icon: activeIcons.diam,
           pageName: 'Featured',
           onPress: () {
             Navigator.pushReplacement(
@@ -72,7 +72,7 @@ class MyDrawer extends StatelessWidget {
             );
           }),
       DrawerItem(
-          icon: activeIcons.profile,
+          icon: activeIcons.doc,
           pageName: 'My List',
           onPress: () {
             Navigator.pushReplacement(
