@@ -9,7 +9,7 @@ class MessageDialog {
         title: Text(title),
         content: Text(message),
         actions: <Widget>[
-          FlatButton(
+          TextButton(
             onPressed: () => Navigator.of(ctx).pop(),
             child: Text(buttonText),
           ),

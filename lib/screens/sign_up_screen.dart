@@ -16,10 +16,10 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
-
   FirebaseMessaging messaging = FirebaseMessaging.instance;
   FlutterLocalNotificationsPlugin? fltNotification;
   bool _passwordVisible = false;
+  bool _confirmPasswordVisible = false;
   bool _actionLoading = false;
   final Map<String, String> _authData = {
     'name': '',
@@ -51,52 +51,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
     initMessaging();
   }
 
-  Future<void> _submit() async {
-    if (!_actionLoading) {
-      if (_formKey.currentState!.validate()) {
-        _formKey.currentState!.save();
-        try {
-          setState(() {
-            _actionLoading = true;
-          });
-          await Provider.of<Auth>(context, listen: false).register(_authData);
-          setState(() {
-            _actionLoading = false;
-          });
-          Fluttertoast.showToast(
-            msg: "Success. You can login now",
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.CENTER,
-          );
-
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const SignInScreen(),
-            ),
-          );
-        } catch (error) {
-          print(error);
-          setState(() {
-            _actionLoading = false;
-          });
-          MessageDialog.show(
-              context, error.toString(), "Sign Up Fails", "Try Again");
-        }
-      } else {
-        return;
-      }
-    }
-  }
-
-
-
   void initMessaging() async {
     // NotificationController? notificationController = Get.lazyPut();
 
     var androiInit = const AndroidInitializationSettings('@mipmap/ic_launcher');
 
-    var iosInit = const IOSInitializationSettings(requestAlertPermission: true,requestBadgePermission: true,requestSoundPermission: true,);
+    var iosInit = const IOSInitializationSettings(
+      requestAlertPermission: true,
+      requestBadgePermission: true,
+      requestSoundPermission: true,
+    );
 
     var initSetting = InitializationSettings(android: androiInit, iOS: iosInit);
 
@@ -113,8 +77,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       showNotification(message);
     });
 
-    FirebaseMessaging.onMessageOpenedApp.listen((event) {
-    });
+    FirebaseMessaging.onMessageOpenedApp.listen((event) {});
   }
 
   // Future selectNotification(String payload) async {
@@ -133,16 +96,22 @@ class _SignUpScreenState extends State<SignUpScreen> {
     // final InitializationSettings initializationSettings = InitializationSettings(
     //     android: initializationSettingsAndroid,);
 
-    var androidDetails = AndroidNotificationDetails('1', message.notification!.title ?? '',icon: '@mipmap/ic_launcher',color:  const Color(0xFF0f90f3),);
+    var androidDetails = AndroidNotificationDetails(
+      '1',
+      message.notification!.title ?? '',
+      icon: '@mipmap/ic_launcher',
+      color: const Color(0xFF0f90f3),
+    );
 
     // await fltNotification!.initialize(initializationSettings,
     //     onSelectNotification: selectNotification );
     var iosDetails = const IOSNotificationDetails();
 
-    var generalNotificationDetails = NotificationDetails(android: androidDetails, iOS: iosDetails);
+    var generalNotificationDetails =
+        NotificationDetails(android: androidDetails, iOS: iosDetails);
 
     await fltNotification!.show(0, message.notification!.title ?? '',
-        message.notification!.body ?? '',generalNotificationDetails,
+        message.notification!.body ?? '', generalNotificationDetails,
         payload: 'Notification');
   }
 
@@ -155,7 +124,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
     //   MaterialPageRoute<void>(builder: (context) => SecondScreen(payload)),
     // );
   }
-
 
   void notitficationPermission() async {
     await messaging.requestPermission(
@@ -171,6 +139,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final Auth authProvider = Provider.of<Auth>(context);
+
     return Scaffold(
         resizeToAvoidBottomInset: false,
         backgroundColor: Colors.black,
@@ -324,7 +294,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                         _authData['password_confirmation'] =
                                             value!,
                                     obscureText:
-                                        !_passwordVisible, //This will obscure text dynamically
+                                        !_confirmPasswordVisible, //This will obscure text dynamically
                                     decoration: InputDecoration(
                                       filled: true,
                                       fillColor: Colors.white,
@@ -346,7 +316,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                       suffixIcon: IconButton(
                                         icon: Icon(
                                           // Based on passwordVisible state choose the icon
-                                          _passwordVisible
+                                          _confirmPasswordVisible
                                               ? Icons.visibility
                                               : Icons.visibility_off,
                                           color: Theme.of(context).primaryColor,
@@ -354,8 +324,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                         onPressed: () {
                                           // Update the state i.e. toogle the state of passwordVisible variable
                                           setState(() {
-                                            _passwordVisible =
-                                                !_passwordVisible;
+                                            _confirmPasswordVisible =
+                                                !_confirmPasswordVisible;
                                           });
                                         },
                                       ),
@@ -365,7 +335,61 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         const SizedBox(
                           height: 30,
                         ),
-                        FlatButton(
+                        TextButton(
+                          style: TextButton.styleFrom(
+                            backgroundColor: activeColors.primary,
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 60, vertical: 15),
+                          ),
+                          onPressed: () async {
+                            if (!_actionLoading) {
+                              if (_formKey.currentState!.validate()) {
+                                _formKey.currentState!.save();
+                                try {
+                                  setState(() {
+                                    _actionLoading = true;
+                                  });
+                                  await Provider.of<Auth>(context,
+                                          listen: false)
+                                      .register(_authData);
+                                  setState(() {
+                                    _actionLoading = false;
+                                  });
+                                  if (authProvider.errorMessage == null) {
+                                    Fluttertoast.showToast(
+                                      msg: "Success. You can login now",
+                                      toastLength: Toast.LENGTH_SHORT,
+                                      gravity: ToastGravity.CENTER,
+                                    );
+                                    if (!mounted) return;
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            const SignInScreen(),
+                                      ),
+                                    );
+                                  } else {
+                                    if (!mounted) return;
+                                    MessageDialog.show(
+                                        context,
+                                        authProvider.errorMessage ?? '',
+                                        "Sign Up Fails",
+                                        "Try Again");
+                                  }
+                                } catch (error) {
+                                  print(error);
+                                  setState(() {
+                                    _actionLoading = false;
+                                  });
+                                  MessageDialog.show(context, error.toString(),
+                                      "Sign Up Fails", "Try Again");
+                                }
+                              } else {
+                                return;
+                              }
+                            }
+                          },
                           child: Text(
                             _actionLoading ? 'Loading...' : 'Create Account',
                             style: const TextStyle(
@@ -373,10 +397,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold),
                           ),
-                          color: activeColors.primary,
-                          onPressed: _submit,
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 60, vertical: 15),
                         ),
                         const SizedBox(
                           height: 30,

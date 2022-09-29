@@ -108,7 +108,8 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
           ? FullScreenPreloader()
           : Consumer<Auth>(builder: (context, authState, child) {
               return Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
                   child: Form(
                       key: _formKey,
                       child: Container(
@@ -142,8 +143,9 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                                           hintStyle: const TextStyle(
                                             color: Colors.black,
                                           ),
-                                          contentPadding: const EdgeInsets.fromLTRB(
-                                              20.0, 15.0, 20.0, 15.0),
+                                          contentPadding:
+                                              const EdgeInsets.fromLTRB(
+                                                  20.0, 15.0, 20.0, 15.0),
 
                                           border: OutlineInputBorder(
                                               borderSide: const BorderSide(
@@ -201,8 +203,9 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                                           hintStyle: const TextStyle(
                                             color: Colors.black,
                                           ),
-                                          contentPadding: const EdgeInsets.fromLTRB(
-                                              20.0, 15.0, 20.0, 15.0),
+                                          contentPadding:
+                                              const EdgeInsets.fromLTRB(
+                                                  20.0, 15.0, 20.0, 15.0),
 
                                           border: OutlineInputBorder(
                                               borderSide: const BorderSide(
@@ -260,8 +263,9 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                                           hintStyle: const TextStyle(
                                             color: Colors.black,
                                           ),
-                                          contentPadding: const EdgeInsets.fromLTRB(
-                                              20.0, 15.0, 20.0, 15.0),
+                                          contentPadding:
+                                              const EdgeInsets.fromLTRB(
+                                                  20.0, 15.0, 20.0, 15.0),
 
                                           border: OutlineInputBorder(
                                               borderSide: const BorderSide(
@@ -292,7 +296,13 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                                       ),
                                     ])),
                             const SizedBox(height: 30),
-                            FlatButton(
+                            TextButton(
+                              style: TextButton.styleFrom(
+                                backgroundColor: activeColors.primary,
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 60, vertical: 15),
+                              ),
+                              onPressed: _submit,
                               child: Text(
                                 _actionLoading ? 'Loading...' : 'Update',
                                 style: const TextStyle(
@@ -300,10 +310,6 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                                     fontSize: 16,
                                     fontWeight: FontWeight.bold),
                               ),
-                              color: activeColors.primary,
-                              onPressed: _submit,
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 60, vertical: 15),
                             ),
                             const SizedBox(
                               height: 30,

@@ -23,7 +23,7 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
     'Book',
     'Course',
     'Blog',
-    'Marthin entrepreneur Network',
+    'Marthin Entrepreneur Network',
   ];
 
   @override

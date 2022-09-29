@@ -73,7 +73,7 @@ class _SignInScreenState extends State<SignInScreen> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
-                            const   Text(
+                              const Text(
                                 "Email",
                                 style: TextStyle(
                                     color: Colors.white, fontSize: 16),
@@ -157,7 +157,13 @@ class _SignInScreenState extends State<SignInScreen> {
                         const SizedBox(
                           height: 30,
                         ),
-                        FlatButton(
+                        TextButton(
+                          style: TextButton.styleFrom(
+                            backgroundColor: activeColors.primary,
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 60, vertical: 15),
+                          ),
+                          onPressed: _submit,
                           child: Text(
                             _actionLoading ? 'Loading..' : 'Let\'s gooo!',
                             style: const TextStyle(
@@ -165,10 +171,6 @@ class _SignInScreenState extends State<SignInScreen> {
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold),
                           ),
-                          color: activeColors.primary,
-                          onPressed: _submit,
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 60, vertical: 15),
                         ),
                         const SizedBox(
                           height: 30,
