@@ -56,7 +56,7 @@ class _OneZOneDetailScreenState extends State<OneZOneDetailScreen> {
         .subscribeCourse(widget.data.id);
     MessageDialog.show(
         context,
-        "You have subcribed successfully. Please wait for admin confirmiation",
+        "admin မှ လက်ခံပေးပါမယ် ခဏစောင့်ပြီး ပြန်ဝင်ကြည့်ပါ",
         "Success",
         "Close");
   }
