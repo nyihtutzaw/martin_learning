@@ -19,16 +19,20 @@ class _ThreeMintureState extends State<ThreeMinture> {
   bool _isPreloading = false;
 
   void loadData() async {
-    setState(() {
-      _isPreloading = true;
-    });
-    bool sorted = Provider.of<SortProvider>(context, listen: true).sort;
-    await Provider.of<ThreeMinutesProvider>(context, listen: false)
-        .getAll(sorted);
+    if (Provider.of<ThreeMinutesProvider>(context, listen: true)
+        .items
+        .isEmpty) {
+      setState(() {
+        _isPreloading = true;
+      });
+      bool sorted = Provider.of<SortProvider>(context, listen: true).sort;
+      await Provider.of<ThreeMinutesProvider>(context, listen: false)
+          .getAll(sorted);
 
-    setState(() {
-      _isPreloading = false;
-    });
+      setState(() {
+        _isPreloading = false;
+      });
+    }
   }
 
   @override
@@ -45,7 +49,8 @@ class _ThreeMintureState extends State<ThreeMinture> {
     return Scaffold(
         body: _isPreloading
             ? FullScreenPreloader()
-            : Consumer<ThreeMinutesProvider>(builder: (context, appState, child) {
+            : Consumer<ThreeMinutesProvider>(
+                builder: (context, appState, child) {
                 return ListView.builder(
                   itemCount: appState.items.length,
                   itemBuilder: (context, index) {

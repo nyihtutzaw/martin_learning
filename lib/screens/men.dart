@@ -20,15 +20,17 @@ class _MenState extends State<Men> {
   int page = 1;
 
   void loadData() async {
-    setState(() {
-      _isPreloading = true;
-    });
+    if (Provider.of<MenProvider>(context, listen: true).mens.isEmpty) {
+      setState(() {
+        _isPreloading = true;
+      });
 
-    await Provider.of<MenProvider>(context, listen: false).getAll();
+      await Provider.of<MenProvider>(context, listen: false).getAll();
 
-    setState(() {
-      _isPreloading = false;
-    });
+      setState(() {
+        _isPreloading = false;
+      });
+    }
   }
 
   @override
