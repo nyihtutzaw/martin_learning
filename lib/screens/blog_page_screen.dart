@@ -15,6 +15,7 @@ class BlogPageScreen extends StatefulWidget {
 }
 
 class _BlogPageScreenState extends State<BlogPageScreen> {
+  final controller = ScrollController();
   bool _isInit = false;
   bool _isPreloading = false;
   int page = 1;
@@ -41,43 +42,37 @@ class _BlogPageScreenState extends State<BlogPageScreen> {
   }
 
   @override
+  void initState() {
+    controller.addListener(() {
+      if (controller.position.maxScrollExtent == controller.offset) {
+        setState(() {
+          page += 1;
+        });
+        loadData();
+      }
+    });
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
         body: Column(
       children: [
         Expanded(
             child: Consumer<BlogProvider>(builder: (context, blogState, child) {
-
-          if(blogState.blogs.isEmpty ) return Container(child: const Center(child: CircularProgressIndicator(),),);
+          if (blogState.blogs.isEmpty) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
           return ListView.builder(
+            controller: controller,
             itemCount: blogState.blogs.length,
             itemBuilder: (context, index) {
               if (blogState.isExisted && index == blogState.blogs.length - 1) {
-                return Column(
-                  children: [
-                    _isPreloading
-                        ? const CircularProgressIndicator()
-                        : Container(
-                            alignment: Alignment.center,
-                            padding: const EdgeInsets.symmetric(vertical: 20),
-                            child: FlatButton(
-                              child: const Text(
-                                "Load More",
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                              color: activeColors.primary,
-                              onPressed: () {
-                                setState(() {
-                                  page += 1;
-                                });
-                                loadData();
-                              },
-                            ),
-                          ),
-                  ],
+                return const Center(
+                  child: CircularProgressIndicator(),
                 );
               } else {
                 return Padding(

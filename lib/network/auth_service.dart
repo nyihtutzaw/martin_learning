@@ -19,15 +19,13 @@ class AuthService {
     }
   }
 
-  static register(data) async {
+  static Future<Response?> register(data) async {
     try {
       Response response =
           await ApiService.getApiHandler('').post("io-register", data: data);
-      return response.data;
+      return response;
     } on DioError catch (e) {
-      if (e.response!.statusCode != 200) {
-        throw e.response!.data["errors"];
-      }
+      return e.response;
     }
   }
 

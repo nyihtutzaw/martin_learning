@@ -12,7 +12,7 @@ class BlogDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Mar Thin"),
+        title: const Text("မာသင်"),
       ),
       body: SingleChildScrollView(
         child: Container(

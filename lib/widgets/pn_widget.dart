@@ -45,7 +45,12 @@ class PNWidget extends StatelessWidget {
             children: [
               GestureDetector(
                 onTap: () {
-                  print('PN!');
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => PnDetail(data: data),
+                    ),
+                  );
                 },
                 child: Container(
                   width: deviceWidth < 400.0 ? 100.0 : 120.0,

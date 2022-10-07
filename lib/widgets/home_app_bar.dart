@@ -18,12 +18,12 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Color bgColor;
 
   static const List<String> _pageNames = [
-    'Featured',
     '+1s',
     '3min',
     'Book',
     'Course',
     'Blog',
+    'Marthin Entrepreneur Network',
   ];
 
   @override

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:optimize/providers/auth_provider.dart';
+import 'package:optimize/screens/featured.dart';
 import 'package:optimize/screens/my_lists.dart';
 import 'package:optimize/screens/noti.dart';
 import 'package:optimize/screens/user_profile_screen.dart';
@@ -36,6 +37,17 @@ class MyDrawer extends StatelessWidget {
             );
           }),
       DrawerItem(
+          icon: activeIcons.diam,
+          pageName: 'Featured',
+          onPress: () {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const Featured(),
+              ),
+            );
+          }),
+      DrawerItem(
           icon: activeIcons.noti,
           pageName: 'Notifications',
           onPress: () {
@@ -60,7 +72,7 @@ class MyDrawer extends StatelessWidget {
             );
           }),
       DrawerItem(
-          icon: activeIcons.profile,
+          icon: activeIcons.doc,
           pageName: 'My List',
           onPress: () {
             Navigator.pushReplacement(

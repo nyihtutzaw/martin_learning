@@ -144,7 +144,13 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                             const SizedBox(
                               height: 30,
                             ),
-                            FlatButton(
+                            TextButton(
+                              style: TextButton.styleFrom(
+                                backgroundColor: activeColors.primary,
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 60, vertical: 15),
+                              ),
+                              onPressed: _submit,
                               child: Text(
                                 _actionLoading ? 'Loading...' : 'Update',
                                 style: const TextStyle(
@@ -152,10 +158,6 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                                     fontSize: 16,
                                     fontWeight: FontWeight.bold),
                               ),
-                              color: activeColors.primary,
-                              onPressed: _submit,
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 60, vertical: 15),
                             ),
                             const SizedBox(
                               height: 30,

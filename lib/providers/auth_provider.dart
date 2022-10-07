@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:optimize/models/SubscribedCourse.dart';
@@ -10,6 +11,7 @@ class Auth with ChangeNotifier {
   String _token = "";
   List<SubscribedCourse> subscribedCourses = [];
   late User currentUser;
+  String? errorMessage;
 
   String get token {
     if (_token == "") {
@@ -60,7 +62,15 @@ class Auth with ChangeNotifier {
   Future<void> register(Map<String, String> _authData) async {
     String? fireBaseToken = await FirebaseMessaging.instance.getToken();
     _authData["register_id"] = fireBaseToken!;
-    await AuthService.register(_authData);
+    Response? result = await AuthService.register(_authData);
+    if (result?.statusCode == 201) {
+      errorMessage = null;
+    } else if (result?.statusCode == 400) {
+      String key = result?.data['data'].keys.toList()[0];
+      errorMessage = result?.data['data'][key];
+    } else {
+      errorMessage = 'Something was wrong!';
+    }
   }
 
   Future<void> updateProfile(Map<String, String> _authData) async {

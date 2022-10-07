@@ -29,8 +29,7 @@ class MinorAppBar extends StatelessWidget implements PreferredSizeWidget {
           title: Column(
             children: [
               const SizedBox(height: 3.0),
-              const Text('Martin'),
-              const SizedBox(height: 3.0),
+              const Text('မာသင်'),
               Text(
                 title,
                 style: const TextStyle(

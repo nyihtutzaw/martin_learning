@@ -23,7 +23,7 @@ class _PremiumMessageState extends State<PremiumMessage> {
         child: Column(
           children: [
             const Text(
-              "You need to subscribe",
+              "သင်ခန်းစာရယူရန် နှိပ်ပါ",
               style: TextStyle(fontSize: 22),
             ),
             TextButton(
