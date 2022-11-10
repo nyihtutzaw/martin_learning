@@ -20,7 +20,7 @@ class _MenState extends State<Men> {
   int page = 1;
 
   void loadData() async {
-    if (Provider.of<MenProvider>(context, listen: true).mens.isEmpty) {
+    if (Provider.of<MenProvider>(context, listen: false).mens.isEmpty) {
       setState(() {
         _isPreloading = true;
       });

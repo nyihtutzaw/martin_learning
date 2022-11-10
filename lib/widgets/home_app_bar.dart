@@ -6,6 +6,9 @@ import 'package:optimize/providers/sort_provider.dart';
 import 'package:provider/provider.dart';
 
 import '../constants/active_constants.dart';
+import '../providers/blog_provider.dart';
+import '../providers/men_provider.dart';
+import '../providers/three_minutes_provider.dart';
 
 class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
   const HomeAppBar({
@@ -30,6 +33,8 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
   Size get preferredSize => const Size.fromHeight(56.0);
   @override
   Widget build(BuildContext context) {
+    bool sorted = Provider.of<SortProvider>(context, listen: true).sort;
+
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -85,7 +90,39 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
               const SizedBox(width: 5.0),
               const SizedBox(width: 5.0),
               const SizedBox(width: 5.0),
-              const SizedBox(width: 5.0),
+              GestureDetector(
+                onTap: () async {
+                  if (currentIndex == 0) {
+                    await Provider.of<PlusOneProvider>(context, listen: false)
+                        .getAll(1, sorted);
+                    print('+1s');
+                  } else if (currentIndex == 1) {
+                    await Provider.of<ThreeMinutesProvider>(context,
+                            listen: false)
+                        .getAll(sorted);
+                    print('3min');
+                  } else if (currentIndex == 2) {
+                    await Provider.of<PnProvider>(context, listen: false)
+                        .getAll(sorted);
+                    print('Book');
+                  } else if (currentIndex == 3) {
+                    await Provider.of<OneZOneProvider>(context, listen: false)
+                        .getAll(sorted);
+                    print('Course');
+                  } else if (currentIndex == 4) {
+                    await Provider.of<BlogProvider>(context, listen: false)
+                        .getAll(1);
+                    print('Blog');
+                  } else if (currentIndex == 5) {
+                    await Provider.of<MenProvider>(context, listen: false)
+                        .getAll();
+                    print('Men');
+                  }
+                },
+                child: const Icon(
+                  Icons.refresh,
+                ),
+              ),
               currentIndex == 0 || currentIndex == 4 || currentIndex == 5
                   ? const SizedBox()
                   : Consumer<SortProvider>(

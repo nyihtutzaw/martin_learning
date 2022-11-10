@@ -19,11 +19,11 @@ class _PNState extends State<PN> {
   bool _isPreloading = false;
 
   void loadData() async {
-    if (Provider.of<PnProvider>(context, listen: true).items.isEmpty) {
+    if (Provider.of<PnProvider>(context, listen: false).items.isEmpty) {
       setState(() {
         _isPreloading = true;
       });
-      bool sorted = Provider.of<SortProvider>(context, listen: true).sort;
+      bool sorted = Provider.of<SortProvider>(context, listen: false).sort;
       await Provider.of<PnProvider>(context, listen: false).getAll(sorted);
 
       setState(() {

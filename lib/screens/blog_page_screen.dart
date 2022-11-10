@@ -21,7 +21,7 @@ class _BlogPageScreenState extends State<BlogPageScreen> {
   int page = 1;
 
   void loadData() async {
-    if (Provider.of<BlogProvider>(context, listen: true).blogs.isEmpty) {
+    if (Provider.of<BlogProvider>(context, listen: false).blogs.isEmpty) {
       setState(() {
         _isPreloading = true;
       });

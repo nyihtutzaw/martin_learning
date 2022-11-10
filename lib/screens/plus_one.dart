@@ -19,11 +19,11 @@ class _PlusOneState extends State<PlusOne> {
   bool _isPreloading = false;
 
   void loadData() async {
-    if (Provider.of<PlusOneProvider>(context, listen: true).items.isEmpty) {
+    if (Provider.of<PlusOneProvider>(context, listen: false).items.isEmpty) {
       setState(() {
         _isPreloading = true;
       });
-      bool sorted = Provider.of<SortProvider>(context, listen: true).sort;
+      bool sorted = Provider.of<SortProvider>(context, listen: false).sort;
       await Provider.of<PlusOneProvider>(context, listen: false)
           .getAll(1, sorted);
 

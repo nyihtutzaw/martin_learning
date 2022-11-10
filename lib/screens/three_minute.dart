@@ -19,13 +19,13 @@ class _ThreeMintureState extends State<ThreeMinture> {
   bool _isPreloading = false;
 
   void loadData() async {
-    if (Provider.of<ThreeMinutesProvider>(context, listen: true)
+    if (Provider.of<ThreeMinutesProvider>(context, listen: false)
         .items
         .isEmpty) {
       setState(() {
         _isPreloading = true;
       });
-      bool sorted = Provider.of<SortProvider>(context, listen: true).sort;
+      bool sorted = Provider.of<SortProvider>(context, listen: false).sort;
       await Provider.of<ThreeMinutesProvider>(context, listen: false)
           .getAll(sorted);
 
