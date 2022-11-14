@@ -19,15 +19,17 @@ class _OneZeroOneState extends State<OneZeroOne> {
   bool _isPreloading = false;
 
   void loadData() async {
-    setState(() {
-      _isPreloading = true;
-    });
-    bool sorted = Provider.of<SortProvider>(context, listen: true).sort;
-    await Provider.of<OneZOneProvider>(context, listen: false).getAll(sorted);
+    if (Provider.of<OneZOneProvider>(context, listen: false).items.isEmpty) {
+      setState(() {
+        _isPreloading = true;
+      });
+      bool sorted = Provider.of<SortProvider>(context, listen: false).sort;
+      await Provider.of<OneZOneProvider>(context, listen: false).getAll(sorted);
 
-    setState(() {
-      _isPreloading = false;
-    });
+      setState(() {
+        _isPreloading = false;
+      });
+    }
   }
 
   @override
