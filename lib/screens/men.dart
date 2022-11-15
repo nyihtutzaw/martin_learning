@@ -16,20 +16,10 @@ class Men extends StatefulWidget {
 
 class _MenState extends State<Men> {
   bool _isInit = false;
-  bool _isPreloading = false;
-  int page = 1;
 
   void loadData() async {
     if (Provider.of<MenProvider>(context, listen: false).mens.isEmpty) {
-      setState(() {
-        _isPreloading = true;
-      });
-
       await Provider.of<MenProvider>(context, listen: false).getAll();
-
-      setState(() {
-        _isPreloading = false;
-      });
     }
   }
 
@@ -44,53 +34,51 @@ class _MenState extends State<Men> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: _isPreloading
-          ? FullScreenPreloader()
-          : Consumer<MenProvider>(
-              builder: (context, appState, child) {
-                return ListView.builder(
-                  itemCount: appState.mens.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
-                      child: Column(
-                        children: [
-                          const SizedBox(height: 20.0),
-                          GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) =>
-                                      MenDetail(menModel: appState.mens[index]),
-                                ),
-                              );
-                            },
-                            child: Card(
-                              child: Column(
-                                children: [
-                                  FadeInImage.memoryNetwork(
-                                      placeholder: kTransparentImage,
-                                      image: appState.mens[index].image),
-                                  Html(data: appState.mens[index].title),
-                                ],
+    return Consumer<MenProvider>(builder: (context, appState, child) {
+      return Scaffold(
+        body: appState.menLoading
+            ? FullScreenPreloader()
+            : ListView.builder(
+                itemCount: appState.mens.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: Column(
+                      children: [
+                        const SizedBox(height: 20.0),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    MenDetail(menModel: appState.mens[index]),
                               ),
+                            );
+                          },
+                          child: Card(
+                            child: Column(
+                              children: [
+                                FadeInImage.memoryNetwork(
+                                    placeholder: kTransparentImage,
+                                    image: appState.mens[index].image),
+                                Html(data: appState.mens[index].title),
+                              ],
                             ),
                           ),
-                          const SizedBox(height: 10.0),
-                          Divider(
-                            height: 2.0,
-                            thickness: 1.0,
-                            color: activeColors.grey,
-                          ),
-                        ],
-                      ),
-                    );
-                  },
-                );
-              },
-            ),
-    );
+                        ),
+                        const SizedBox(height: 10.0),
+                        Divider(
+                          height: 2.0,
+                          thickness: 1.0,
+                          color: activeColors.grey,
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              ),
+      );
+    });
   }
 }

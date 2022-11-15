@@ -16,20 +16,12 @@ class PlusOne extends StatefulWidget {
 
 class _PlusOneState extends State<PlusOne> {
   bool _isInit = false;
-  bool _isPreloading = false;
 
   void loadData() async {
     if (Provider.of<PlusOneProvider>(context, listen: false).items.isEmpty) {
-      setState(() {
-        _isPreloading = true;
-      });
       bool sorted = Provider.of<SortProvider>(context, listen: false).sort;
       await Provider.of<PlusOneProvider>(context, listen: false)
           .getAll(1, sorted);
-
-      setState(() {
-        _isPreloading = false;
-      });
     }
   }
 
@@ -44,27 +36,30 @@ class _PlusOneState extends State<PlusOne> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: _isPreloading
-            ? FullScreenPreloader()
-            : Consumer<PlusOneProvider>(builder: (context, appState, child) {
-                return ListView.builder(
-                  itemCount: appState.items.length,
-                  itemBuilder: (context, index) {
-                    return Column(
-                      children: [
-                        const SizedBox(height: 20.0),
-                        PlusOneWidget(data: appState.items[index]),
-                        const SizedBox(height: 10.0),
-                        Divider(
-                          height: 2.0,
-                          thickness: 1.0,
-                          color: activeColors.grey,
-                        ),
-                      ],
-                    );
-                  },
+    return Consumer<PlusOneProvider>(
+        builder: (context, appState, child) {
+          return Scaffold(
+            body: appState.plusOneLoading
+                ? FullScreenPreloader()
+                : ListView.builder(
+              itemCount: appState.items.length,
+              itemBuilder: (context, index) {
+                return Column(
+                  children: [
+                    const SizedBox(height: 20.0),
+                    PlusOneWidget(data: appState.items[index]),
+                    const SizedBox(height: 10.0),
+                    Divider(
+                      height: 2.0,
+                      thickness: 1.0,
+                      color: activeColors.grey,
+                    ),
+                  ],
                 );
-              }));
+              },
+            ),
+          );
+        }
+    );
   }
 }
