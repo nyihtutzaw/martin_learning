@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:optimize/providers/auth_provider.dart';
+import 'package:optimize/screens/chat_screen.dart';
 import 'package:optimize/screens/featured.dart';
 import 'package:optimize/screens/my_lists.dart';
 import 'package:optimize/screens/noti.dart';
@@ -60,6 +61,17 @@ class MyDrawer extends StatelessWidget {
           }),
       // DrawerItem(
       //     icon: activeIcons.cloud, pageName: 'Offline content', onPress: () {}),
+      DrawerItem(
+          icon: activeIcons.chat,
+          pageName: 'Chat',
+          onPress: () {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const ChatScreen(),
+              ),
+            );
+          }),
       DrawerItem(
           icon: activeIcons.profile,
           pageName: 'Manage Profile',
@@ -128,7 +140,7 @@ class MyDrawer extends StatelessWidget {
               ),
               SizedBox(
                 width: double.maxFinite,
-                height: 300.0,
+                height: 320.0,
                 child: ListView(
                   padding: const EdgeInsets.only(top: 20, left: 16, right: 16),
                   children: drawerItems

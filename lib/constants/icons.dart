@@ -14,6 +14,7 @@ class KIcons {
   final IconData profile;
   final IconData walker;
   final IconData podcast;
+  final IconData chat;
   final Widget search;
   final Widget diamond;
   final Widget calendar;
@@ -42,6 +43,7 @@ class KIcons {
     required this.profile,
     required this.walker,
     required this.podcast,
+    required this.chat,
     required this.search,
     required this.diamond,
     required this.calendar,
@@ -73,6 +75,7 @@ KIcons icon1 = KIcons(
   profile: CupertinoIcons.profile_circled,
   walker: Icons.directions_walk_rounded,
   podcast: Icons.podcasts_rounded,
+  chat: Icons.chat,
   search: const Icon(
     CupertinoIcons.search,
     color: Colors.white,

@@ -56,10 +56,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
     var androiInit = const AndroidInitializationSettings('@mipmap/ic_launcher');
 
-    var iosInit = const IOSInitializationSettings(
-      requestAlertPermission: true,
-      requestBadgePermission: true,
-      requestSoundPermission: true,
+    var iosInit = const DarwinInitializationSettings(
+      requestSoundPermission: false,
+      requestBadgePermission: false,
+      requestAlertPermission: false,
     );
 
     var initSetting = InitializationSettings(android: androiInit, iOS: iosInit);
@@ -105,7 +105,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
     // await fltNotification!.initialize(initializationSettings,
     //     onSelectNotification: selectNotification );
-    var iosDetails = const IOSNotificationDetails();
+    var iosDetails = const DarwinNotificationDetails();
 
     var generalNotificationDetails =
         NotificationDetails(android: androidDetails, iOS: iosDetails);
