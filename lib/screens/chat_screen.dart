@@ -309,36 +309,39 @@ class MessageBubble extends StatelessWidget {
                   width: media != '' ? 150.0 : 130,
                   child: Column(
                     children: [
-                      media != '' ? GestureDetector(
-                        onTap: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (ctx) {
-                                return SingleViewImage(
-                                    image: '$path/api/messages/view/$media');
+                      media != ''
+                          ? GestureDetector(
+                              onTap: () {
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (ctx) {
+                                      return SingleViewImage(
+                                          image:
+                                              '$path/api/messages/view/$media');
+                                    },
+                                  ),
+                                );
                               },
-                            ),
-                          );
-                        },
-                        child: Container(
-                          width: 150.0,
-                          height: 200.0,
-                          decoration: BoxDecoration(
-                            borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(15.0),
-                              topRight: Radius.zero,
-                              bottomLeft: Radius.circular(15.0),
-                              bottomRight: Radius.circular(15.0),
-                            ),
-                            image: DecorationImage(
-                              image: NetworkImage(
-                                '$path/api/messages/view/$media',
+                              child: Container(
+                                width: 150.0,
+                                height: 200.0,
+                                decoration: BoxDecoration(
+                                  borderRadius: const BorderRadius.only(
+                                    topLeft: Radius.circular(15.0),
+                                    topRight: Radius.zero,
+                                    bottomLeft: Radius.circular(15.0),
+                                    bottomRight: Radius.circular(15.0),
+                                  ),
+                                  image: DecorationImage(
+                                    image: NetworkImage(
+                                      '$path/api/messages/view/$media',
+                                    ),
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
                               ),
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
-                      ) : Container(),
+                            )
+                          : Container(),
                       Center(
                         child: Text(
                           text,
