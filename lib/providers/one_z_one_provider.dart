@@ -7,10 +7,15 @@ import 'package:optimize/models/VideoFile.dart';
 import 'package:optimize/network/one_z_one_service.dart';
 
 class OneZOneProvider with ChangeNotifier {
+  bool oneZOneLoading = false;
   List<OneZOne> items = [];
   late OneZOne item;
 
   Future<void> getAll(bool sorted) async {
+    oneZOneLoading = true;
+    await Future.delayed(const Duration(milliseconds: 100), () {
+      notifyListeners();
+    });
     items.clear();
     var response = await OneZOneService.getAll();
 
@@ -39,7 +44,7 @@ class OneZOneProvider with ChangeNotifier {
     if (sorted) {
       items = List.from(items.reversed);
     }
-
+    oneZOneLoading = false;
     notifyListeners();
   }
 

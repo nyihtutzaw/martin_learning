@@ -4,11 +4,14 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:optimize/screens/blog_page_screen.dart';
 import 'package:optimize/screens/men.dart';
 import 'package:optimize/screens/three_minute.dart';
+import 'package:optimize/services/local_notification_service.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'constants/chat_api.dart';
 import 'main.dart';
 import 'widgets/home_app_bar.dart';
 import 'widgets/my_drawer.dart';
 import 'constants/active_constants.dart';
+import 'package:socket_io_client/socket_io_client.dart' as io;
 
 // screens
 import 'screens/plus_one.dart';
@@ -23,6 +26,9 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  late final LocalNotificationService service;
+  late io.Socket socket;
+
   int _selectedIndex = 0;
   final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
       FlutterLocalNotificationsPlugin();
@@ -43,6 +49,16 @@ class _HomeState extends State<Home> {
 
   @override
   void initState() {
+    socket = io.io(
+        path,
+        io.OptionBuilder()
+            .setTransports(['websocket'])
+            .disableAutoConnect()
+            .build());
+    socket.connect();
+    service = LocalNotificationService();
+    service.intialize();
+    showNotification();
     super.initState();
 
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
@@ -105,6 +121,13 @@ class _HomeState extends State<Home> {
       }
     });
     _fcmSubscribe();
+  }
+
+  void showNotification() {
+    socket.on('notification-receive', (data) async {
+      await service.showNotification(
+          id: 0, title: data['title'], body: data['body']);
+    });
   }
 
   void _launchURL(String url) async {
