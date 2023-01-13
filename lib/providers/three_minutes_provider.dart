@@ -3,10 +3,15 @@ import 'package:optimize/models/ThreeMintues.dart';
 import 'package:optimize/network/three_minutes_service.dart';
 
 class ThreeMinutesProvider with ChangeNotifier {
+  bool threeMinuteLoading = false;
   List<ThreeMinutes> items = [];
   late ThreeMinutes item;
 
   Future<void> getAll(bool sorted) async {
+    threeMinuteLoading = true;
+    await Future.delayed(const Duration(milliseconds: 100), () {
+      notifyListeners();
+    });
     items.clear();
     var response = await ThreeMinutesService.getAll();
 
@@ -32,7 +37,7 @@ class ThreeMinutesProvider with ChangeNotifier {
       print("hi");
       items = List.from(items.reversed);
     }
-
+    threeMinuteLoading = false;
     notifyListeners();
   }
 

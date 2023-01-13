@@ -3,10 +3,15 @@ import 'package:optimize/models/PlusOne.dart';
 import 'package:optimize/network/plus_one_service.dart';
 
 class PlusOneProvider with ChangeNotifier {
+  bool plusOneLoading = false;
   List<PlusOne> items = [];
   late PlusOne item;
 
   Future<void> getAll(int isPlusOne, bool sorted) async {
+    plusOneLoading = true;
+    await Future.delayed(const Duration(milliseconds: 100), () {
+      notifyListeners();
+    });
     items.clear();
     var response = await PlusOneService.getAll(isPlusOne);
 
@@ -32,7 +37,7 @@ class PlusOneProvider with ChangeNotifier {
       print("hi");
       items = List.from(items.reversed);
     }
-
+    plusOneLoading = false;
     notifyListeners();
   }
 

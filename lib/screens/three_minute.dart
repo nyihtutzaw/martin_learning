@@ -16,22 +16,14 @@ class ThreeMinture extends StatefulWidget {
 
 class _ThreeMintureState extends State<ThreeMinture> {
   bool _isInit = false;
-  bool _isPreloading = false;
 
   void loadData() async {
     if (Provider.of<ThreeMinutesProvider>(context, listen: false)
         .items
         .isEmpty) {
-      setState(() {
-        _isPreloading = true;
-      });
       bool sorted = Provider.of<SortProvider>(context, listen: false).sort;
       await Provider.of<ThreeMinutesProvider>(context, listen: false)
           .getAll(sorted);
-
-      setState(() {
-        _isPreloading = false;
-      });
     }
   }
 
@@ -46,28 +38,28 @@ class _ThreeMintureState extends State<ThreeMinture> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: _isPreloading
+    return Consumer<ThreeMinutesProvider>(builder: (context, appState, child) {
+      return Scaffold(
+        body: appState.threeMinuteLoading
             ? FullScreenPreloader()
-            : Consumer<ThreeMinutesProvider>(
-                builder: (context, appState, child) {
-                return ListView.builder(
-                  itemCount: appState.items.length,
-                  itemBuilder: (context, index) {
-                    return Column(
-                      children: [
-                        const SizedBox(height: 20.0),
-                        ThreeMinutesWidget(data: appState.items[index]),
-                        const SizedBox(height: 10.0),
-                        Divider(
-                          height: 2.0,
-                          thickness: 1.0,
-                          color: activeColors.grey,
-                        ),
-                      ],
-                    );
-                  },
-                );
-              }));
+            : ListView.builder(
+                itemCount: appState.items.length,
+                itemBuilder: (context, index) {
+                  return Column(
+                    children: [
+                      const SizedBox(height: 20.0),
+                      ThreeMinutesWidget(data: appState.items[index]),
+                      const SizedBox(height: 10.0),
+                      Divider(
+                        height: 2.0,
+                        thickness: 1.0,
+                        color: activeColors.grey,
+                      ),
+                    ],
+                  );
+                },
+              ),
+      );
+    });
   }
 }

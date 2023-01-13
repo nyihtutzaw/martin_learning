@@ -16,19 +16,11 @@ class PN extends StatefulWidget {
 
 class _PNState extends State<PN> {
   bool _isInit = false;
-  bool _isPreloading = false;
 
   void loadData() async {
     if (Provider.of<PnProvider>(context, listen: false).items.isEmpty) {
-      setState(() {
-        _isPreloading = true;
-      });
       bool sorted = Provider.of<SortProvider>(context, listen: false).sort;
       await Provider.of<PnProvider>(context, listen: false).getAll(sorted);
-
-      setState(() {
-        _isPreloading = false;
-      });
     }
   }
 
@@ -43,27 +35,28 @@ class _PNState extends State<PN> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: _isPreloading
+    return Consumer<PnProvider>(builder: (context, appState, child) {
+      return Scaffold(
+        body: appState.pnLoading
             ? FullScreenPreloader()
-            : Consumer<PnProvider>(builder: (context, appState, child) {
-                return ListView.builder(
-                  itemCount: appState.items.length,
-                  itemBuilder: (context, index) {
-                    return Column(
-                      children: [
-                        const SizedBox(height: 20.0),
-                        PNWidget(data: appState.items[index]),
-                        const SizedBox(height: 10.0),
-                        Divider(
-                          height: 2.0,
-                          thickness: 1.0,
-                          color: activeColors.grey,
-                        ),
-                      ],
-                    );
-                  },
-                );
-              }));
+            : ListView.builder(
+                itemCount: appState.items.length,
+                itemBuilder: (context, index) {
+                  return Column(
+                    children: [
+                      const SizedBox(height: 20.0),
+                      PNWidget(data: appState.items[index]),
+                      const SizedBox(height: 10.0),
+                      Divider(
+                        height: 2.0,
+                        thickness: 1.0,
+                        color: activeColors.grey,
+                      ),
+                    ],
+                  );
+                },
+              ),
+      );
+    });
   }
 }

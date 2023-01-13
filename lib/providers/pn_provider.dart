@@ -8,10 +8,15 @@ import 'package:optimize/models/VideoFile.dart';
 import 'package:optimize/network/pn_service.dart';
 
 class PnProvider with ChangeNotifier {
+  bool pnLoading = false;
   List<Pn> items = [];
   late Pn item;
 
   Future<void> getAll(bool sorted) async {
+    pnLoading = true;
+    await Future.delayed(const Duration(milliseconds: 100), () {
+      notifyListeners();
+    });
     items.clear();
     var response = await PnService.getAll();
 
@@ -46,6 +51,7 @@ class PnProvider with ChangeNotifier {
     if (sorted) {
       items = List.from(items.reversed);
     }
+    pnLoading = false;
     notifyListeners();
   }
 

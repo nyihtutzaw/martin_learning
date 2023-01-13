@@ -17,21 +17,16 @@ class BlogPageScreen extends StatefulWidget {
 class _BlogPageScreenState extends State<BlogPageScreen> {
   final controller = ScrollController();
   bool _isInit = false;
-  bool _isPreloading = false;
   int page = 1;
 
   void loadData() async {
     if (Provider.of<BlogProvider>(context, listen: false).blogs.isEmpty) {
-      setState(() {
-        _isPreloading = true;
-      });
-
       await Provider.of<BlogProvider>(context, listen: false).getAll(page);
-
-      setState(() {
-        _isPreloading = false;
-      });
     }
+  }
+
+  void fetchData() async {
+    await Provider.of<BlogProvider>(context, listen: false).getAll(page);
   }
 
   @override
@@ -50,75 +45,86 @@ class _BlogPageScreenState extends State<BlogPageScreen> {
         setState(() {
           page += 1;
         });
-        loadData();
+        fetchData();
       }
     });
     super.initState();
   }
 
   @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Column(
-      children: [
-        Expanded(
-            child: Consumer<BlogProvider>(builder: (context, blogState, child) {
-          if (blogState.blogs.isEmpty) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-          return ListView.builder(
-            controller: controller,
-            itemCount: blogState.blogs.length,
-            itemBuilder: (context, index) {
-              if (blogState.isExisted && index == blogState.blogs.length - 1) {
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
-              } else {
-                return Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Column(
-                    children: [
-                      const SizedBox(height: 20.0),
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => BlogDetailScreen(
-                                  blog: blogState.blogs[index]),
+      body: Column(
+        children: [
+          Expanded(
+            child: Consumer<BlogProvider>(
+              builder: (context, blogState, child) {
+                if (blogState.blogLoading) {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
+                return ListView.builder(
+                  controller: controller,
+                  itemCount: blogState.blogs.length,
+                  itemBuilder: (context, index) {
+                    if (blogState.isExisted &&
+                        index == blogState.blogs.length - 1) {
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    } else {
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        child: Column(
+                          children: [
+                            const SizedBox(height: 20.0),
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => BlogDetailScreen(
+                                        blog: blogState.blogs[index]),
+                                  ),
+                                );
+                              },
+                              child: Card(
+                                child: Container(
+                                  child: Column(
+                                    children: [
+                                      FadeInImage.memoryNetwork(
+                                          placeholder: kTransparentImage,
+                                          image: blogState.blogs[index].image),
+                                      Html(data: blogState.blogs[index].title),
+                                    ],
+                                  ),
+                                ),
+                              ),
                             ),
-                          );
-                        },
-                        child: Card(
-                          child: Container(
-                            child: Column(
-                              children: [
-                                FadeInImage.memoryNetwork(
-                                    placeholder: kTransparentImage,
-                                    image: blogState.blogs[index].image),
-                                Html(data: blogState.blogs[index].title),
-                              ],
+                            const SizedBox(height: 10.0),
+                            Divider(
+                              height: 2.0,
+                              thickness: 1.0,
+                              color: activeColors.grey,
                             ),
-                          ),
+                          ],
                         ),
-                      ),
-                      const SizedBox(height: 10.0),
-                      Divider(
-                        height: 2.0,
-                        thickness: 1.0,
-                        color: activeColors.grey,
-                      ),
-                    ],
-                  ),
+                      );
+                    }
+                  },
                 );
-              }
-            },
-          );
-        })),
-      ],
-    ));
+              },
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
