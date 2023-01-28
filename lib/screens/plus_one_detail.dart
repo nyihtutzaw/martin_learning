@@ -220,39 +220,90 @@ class _PlusOneDetailState extends State<PlusOneDetail> {
                                 MediaQuery.of(context).size.width * 0.1),
                         child: SizedBox(
                           width: MediaQuery.of(context).size.width * 0.9,
-                          child: ElevatedButton(
-                            style: ButtonStyle(
-                              padding: MaterialStateProperty.all<EdgeInsets>(
-                                  const EdgeInsets.symmetric(vertical: 5)),
-                              backgroundColor: MaterialStateProperty.all<Color>(
-                                  Colors.white),
-                              foregroundColor:
-                                  MaterialStateProperty.all<Color>(Colors.blue),
-                            ),
-                            onPressed: () {
-                              if (appState.item.audio.isNotEmpty) {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => MusicPlayerScreen(
-                                      link: appState.item.audio,
-                                      cover: appState.item.thumbnail,
-                                      title: appState.item.title,
-                                      subTitle: appState.item.subtitle,
-                                    ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Expanded(
+                                child: ElevatedButton(
+                                  style: ButtonStyle(
+                                    padding:
+                                        MaterialStateProperty.all<EdgeInsets>(
+                                            const EdgeInsets.symmetric(
+                                                vertical: 5)),
+                                    backgroundColor:
+                                        MaterialStateProperty.all<Color>(
+                                            Colors.white),
+                                    foregroundColor:
+                                        MaterialStateProperty.all<Color>(
+                                            Colors.blue),
                                   ),
-                                );
-                              }
-                            },
-                            child: Column(
-                              children: const [
-                                Icon(Icons.music_note),
-                                Text(
-                                  "Listen",
-                                  style: TextStyle(fontSize: 10),
+                                  onPressed: () {
+                                    if (appState.item.audio.isNotEmpty) {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              MusicPlayerScreen(
+                                            link: appState.item.audio,
+                                            cover: appState.item.thumbnail,
+                                            title: appState.item.title,
+                                            subTitle: appState.item.subtitle,
+                                          ),
+                                        ),
+                                      );
+                                    }
+                                  },
+                                  child: Column(
+                                    children: const [
+                                      Icon(Icons.music_note),
+                                      Text(
+                                        "Listen",
+                                        style: TextStyle(fontSize: 10),
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                              ],
-                            ),
+                              ),
+                              const SizedBox(width: 10.0),
+                              Expanded(
+                                child: ElevatedButton(
+                                  style: ButtonStyle(
+                                    padding:
+                                        MaterialStateProperty.all<EdgeInsets>(
+                                            const EdgeInsets.symmetric(
+                                                vertical: 5)),
+                                    backgroundColor:
+                                        MaterialStateProperty.all<Color>(
+                                            Colors.white),
+                                    foregroundColor:
+                                        MaterialStateProperty.all<Color>(
+                                            Colors.blue),
+                                  ),
+                                  onPressed: () {
+                                    if (appState.item.video.isNotEmpty) {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => VideoViewScreen(
+                                            url: appState.item.video,
+                                            isUbube: appState.item.isUtube,
+                                          ),
+                                        ),
+                                      );
+                                    }
+                                  },
+                                  child: Column(
+                                    children: const [
+                                      Icon(Icons.tv),
+                                      Text(
+                                        "Video",
+                                        style: TextStyle(fontSize: 10),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       ),

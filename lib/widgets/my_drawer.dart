@@ -61,17 +61,7 @@ class MyDrawer extends StatelessWidget {
           }),
       // DrawerItem(
       //     icon: activeIcons.cloud, pageName: 'Offline content', onPress: () {}),
-      DrawerItem(
-          icon: activeIcons.chat,
-          pageName: 'Chat',
-          onPress: () {
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const ChatScreen(),
-              ),
-            );
-          }),
+
       DrawerItem(
           icon: activeIcons.profile,
           pageName: 'Manage Profile',

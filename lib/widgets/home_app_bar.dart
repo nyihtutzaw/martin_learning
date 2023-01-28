@@ -9,6 +9,7 @@ import '../constants/active_constants.dart';
 import '../providers/blog_provider.dart';
 import '../providers/men_provider.dart';
 import '../providers/three_minutes_provider.dart';
+import '../screens/chat_screen.dart';
 
 class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
   const HomeAppBar({
@@ -90,6 +91,16 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
               const SizedBox(width: 5.0),
               const SizedBox(width: 5.0),
               const SizedBox(width: 5.0),
+              GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const ChatScreen(),
+                      ),
+                    );
+                  },
+                  child: Icon(Icons.notifications)),
               GestureDetector(
                 onTap: () async {
                   if (currentIndex == 0) {

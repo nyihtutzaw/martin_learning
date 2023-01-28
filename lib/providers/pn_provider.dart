@@ -11,6 +11,7 @@ class PnProvider with ChangeNotifier {
   bool pnLoading = false;
   List<Pn> items = [];
   late Pn item;
+  late Pn pinnedPn;
 
   Future<void> getAll(bool sorted) async {
     pnLoading = true;
@@ -51,6 +52,9 @@ class PnProvider with ChangeNotifier {
     if (sorted) {
       items = List.from(items.reversed);
     }
+
+    pinnedPn = sorted ? items[items.length - 1] : items[0];
+
     pnLoading = false;
     notifyListeners();
   }
@@ -94,8 +98,7 @@ class PnProvider with ChangeNotifier {
 
     item = Pn(
         id: response["data"]["id"],
-        title:
-            response["data"]["title"] ?? "",
+        title: response["data"]["title"] ?? "",
         authorName: response["data"]["author_name"] ?? "",
         subtitle: response["data"]["subtitle"] ?? "",
         description: response["data"]["description"] ?? "",

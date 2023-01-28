@@ -5,6 +5,7 @@ import 'package:optimize/widgets/full_screen_preloader.dart';
 import 'package:provider/provider.dart';
 
 import '../constants/active_constants.dart';
+import '../models/Pn.dart';
 import '../widgets/pn_widget.dart';
 
 class PN extends StatefulWidget {
@@ -20,6 +21,7 @@ class _PNState extends State<PN> {
   void loadData() async {
     if (Provider.of<PnProvider>(context, listen: false).items.isEmpty) {
       bool sorted = Provider.of<SortProvider>(context, listen: false).sort;
+
       await Provider.of<PnProvider>(context, listen: false).getAll(sorted);
     }
   }
@@ -39,22 +41,35 @@ class _PNState extends State<PN> {
       return Scaffold(
         body: appState.pnLoading
             ? FullScreenPreloader()
-            : ListView.builder(
-                itemCount: appState.items.length,
-                itemBuilder: (context, index) {
-                  return Column(
-                    children: [
-                      const SizedBox(height: 20.0),
-                      PNWidget(data: appState.items[index]),
-                      const SizedBox(height: 10.0),
-                      Divider(
-                        height: 2.0,
-                        thickness: 1.0,
-                        color: activeColors.grey,
-                      ),
-                    ],
-                  );
-                },
+            : Column(
+                children: [
+                  Container(
+                      padding: EdgeInsets.symmetric(vertical: 10),
+                      child: PNWidget(data: appState.pinnedPn)),
+                  Expanded(
+                    child: ListView.builder(
+                      itemCount: appState.items.length,
+                      itemBuilder: (context, index) {
+                        if (appState.items[index].id != 1) {
+                          return Column(
+                            children: [
+                              const SizedBox(height: 20.0),
+                              PNWidget(data: appState.items[index]),
+                              const SizedBox(height: 10.0),
+                              Divider(
+                                height: 2.0,
+                                thickness: 1.0,
+                                color: activeColors.grey,
+                              ),
+                            ],
+                          );
+                        }
+
+                        return SizedBox();
+                      },
+                    ),
+                  ),
+                ],
               ),
       );
     });

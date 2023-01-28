@@ -32,11 +32,7 @@ apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
    }
    
 android {
-<<<<<<< HEAD
-    compileSdkVersion 32
-=======
     compileSdkVersion 33
->>>>>>> 304a4717a777c6c01fb11f8d07136cbb72c4239c
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -58,13 +54,8 @@ android {
         applicationId "com.rcsmm.optimize"
         minSdkVersion 21
         targetSdkVersion 30
-<<<<<<< HEAD
-        versionCode 7
-        versionName "1.0.6"
-=======
         versionCode 8
         versionName "1.0.7"
->>>>>>> 304a4717a777c6c01fb11f8d07136cbb72c4239c
         multiDexEnabled true
 
     }

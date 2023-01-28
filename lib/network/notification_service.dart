@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
+import 'package:optimize/network/chat_api_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'api_service.dart';
@@ -12,7 +13,7 @@ class NotiService {
     String? token = prefs.getString('userToken');
     final storedData = json.decode(token!);
 
-    Response response = await ApiService.getApiHandler(storedData['token'])
+    Response response = await ChatApiService.getApiHandler(storedData['token'])
         .get('notifications');
     return response.data;
   }

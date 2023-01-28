@@ -119,7 +119,10 @@ class _ChatScreenState extends State<ChatScreen> {
     Map<String, dynamic> message = {
       "chatId": chatId,
       "senderId": auth.currentUser.id,
+      "senderName": auth.currentUser.username,
+      "senderEmail": auth.currentUser.email,
       "receiverId": adminID,
+      "sender": "user",
       "message": _messageController.text,
       "media": '',
     };

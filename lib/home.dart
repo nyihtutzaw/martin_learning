@@ -58,15 +58,10 @@ class _HomeState extends State<Home> {
     socket.connect();
     service = LocalNotificationService();
     service.intialize();
-    showNotification();
+    // showNotification();
     super.initState();
 
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-      print("FirebaseMessaging.onMessage.listen remoteMessage");
-      print(message);
-      print(message.data.toString());
-      print("app_url");
-      print(message.data['app_url']);
       RemoteNotification? notification = message.notification;
       AndroidNotification? android = message.notification?.android;
       if (notification != null && android != null) {

@@ -47,15 +47,9 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  /*
-  await FirebaseAppCheck.instance.activate(
-    webRecaptchaSiteKey: 'recaptcha-v3-site-key',
-  );
-  String? token = await FirebaseAppCheck.instance.getToken();
-  print("AppCheckToken");
-  print(token);
-
-   */
+  final fcmToken = await FirebaseMessaging.instance.getToken();
+  print("fcm is");
+  print(fcmToken);
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
   await flutterLocalNotificationsPlugin
@@ -63,21 +57,10 @@ Future<void> main() async {
           AndroidFlutterLocalNotificationsPlugin>()
       ?.createNotificationChannel(channel);
 
-  FirebaseMessaging messaging = FirebaseMessaging.instance;
-  await messaging.requestPermission(
+  await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
     alert: true,
-    announcement: false,
     badge: true,
-    carPlay: false,
-    criticalAlert: false,
-    provisional: false,
     sound: true,
-  );
-  SystemChrome.setPreferredOrientations(
-    [
-      DeviceOrientation.portraitUp,
-      DeviceOrientation.portraitDown,
-    ],
   );
 
   runApp(const MyApp());
@@ -180,26 +163,7 @@ class MyApp extends StatelessWidget {
           },
         ),
         routes: <String, WidgetBuilder>{
-          //   "/": (BuildContext context) => const Onboarding(),
-          //   "/home": (BuildContext context) => const Home(),
-          //   "/featured": (BuildContext context) => const FeaturedFull(),
-          //   "/noti": (BuildContext context) => const Noti(),
-          //   "/offline_content": (BuildContext context) =>
-          //       const OfflineContent(),
-          //   "/plus_one_detail": (BuildContext context) => const PlusOneDetail(),
-          //   "/pn_detail_screen": (BuildContext context) => const PnDetail(),
           "/sign_in_screen": (BuildContext context) => const SignInScreen(),
-          //   "/sign_up_screen": (BuildContext context) => const SignUpScreen(),
-          //   "/one_z_one_detail_screen": (BuildContext context) =>
-          //       const OneZOneDetailScreen(),
-          //   "/photo_view_screen": (BuildContext context) =>
-          //       const PhotoViewScreen(),
-          //   "/pdf_viewer_screen": (BuildContext context) =>
-          //       const PDFViewScreen(),
-          //   "/video_view_screen": (BuildContext context) => VideoViewScreen(
-          //         url:
-          //             'http://adminonline.clovermandalay.org/videos/Moe%20Sensei%20Intro.mp4',
-          //       ),
         },
       ),
     );

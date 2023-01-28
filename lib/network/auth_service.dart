@@ -1,6 +1,8 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:optimize/network/chat_api_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'api_service.dart';
@@ -10,6 +12,8 @@ class AuthService {
     try {
       Response response =
           await ApiService.getApiHandler('').post("io-login", data: data);
+
+      response.data["register_id"] = data["register_id"];
 
       return response.data;
     } on DioError catch (e) {
@@ -36,6 +40,10 @@ class AuthService {
 
     Response response =
         await ApiService.getApiHandler(storedData['token']).get('user');
+    String? fireBaseToken = await FirebaseMessaging.instance.getToken();
+    response.data["data"]["register_id"] = fireBaseToken;
+    await ChatApiService.getApiHandler('')
+        .post("user/saveFCM", data: response.data["data"]);
     return response.data;
   }
 
