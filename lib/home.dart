@@ -87,32 +87,19 @@ class _HomeState extends State<Home> {
       RemoteNotification? notification = message.notification;
       AndroidNotification? android = message.notification?.android;
       if (notification != null && android != null) {
-        showDialog(
-            context: context,
-            builder: (_) {
-              return AlertDialog(
-                title: Text(notification.title!),
-                content: SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(notification.body!),
-                      Text(message.data['app_url'] ?? "app_url")
-                    ],
-                  ),
-                ),
-                actions: [
-                  InkWell(
-                    child: const Text("Update"),
-                    onTap: () {
-                      print("update on tap");
-                      // open playstore link in web
-                      _launchURL(message.data['app_url'] ?? "app_url");
-                    },
-                  )
-                ],
-              );
-            });
+        flutterLocalNotificationsPlugin.show(
+            notification.hashCode,
+            notification.title,
+            notification.body,
+            NotificationDetails(
+              android: AndroidNotificationDetails(
+                channel.id,
+                channel.name,
+                color: Colors.blue,
+                playSound: true,
+                icon: '@mipmap/ic_launcher',
+              ),
+            ));
       }
     });
     _fcmSubscribe();
