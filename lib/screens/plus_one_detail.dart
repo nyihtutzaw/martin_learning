@@ -372,10 +372,14 @@ class _PlusOneDetailState extends State<PlusOneDetail> {
                                   ),
                                 ),
                               ),
+
+                              // comment
                               Consumer<CommentProvider>(
                                 builder: (context, appState, child) {
                                   return ListView.builder(
                                     shrinkWrap: true,
+                                    physics:
+                                        const NeverScrollableScrollPhysics(),
                                     itemCount: appState.comments.length,
                                     itemBuilder: (context, index) {
                                       CommentModel comment =
