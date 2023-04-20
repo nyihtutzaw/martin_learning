@@ -385,33 +385,59 @@ class _PlusOneDetailState extends State<PlusOneDetail> {
                                       CommentModel comment =
                                           appState.comments[index];
 
-                                      return ListTile(
-                                        title: Text(
-                                          comment.user.username,
-                                          style: const TextStyle(
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                        subtitle: Text(
-                                          comment.body,
-                                        ),
-                                        trailing: auth.currentUser.id ==
-                                                comment.user.id
-                                            ? InkWell(
-                                                onTap: () async {
-                                                  await Provider.of<
-                                                              CommentProvider>(
-                                                          context,
-                                                          listen: false)
-                                                      .deleteComment(
-                                                          'plus-ones',
-                                                          comment.id);
-                                                },
-                                                child: const Icon(
-                                                  Icons.delete,
-                                                  color: Colors.red,
-                                                ),
-                                              )
-                                            : null,
+                                      return Column(
+                                        children: [
+                                          ListTile(
+                                            title: Text(
+                                              comment.user.username,
+                                              style: const TextStyle(
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                            subtitle: Text(
+                                              comment.body,
+                                            ),
+                                            trailing: auth.currentUser.id ==
+                                                    comment.user.id
+                                                ? InkWell(
+                                                    onTap: () async {
+                                                      await Provider.of<
+                                                                  CommentProvider>(
+                                                              context,
+                                                              listen: false)
+                                                          .deleteComment(
+                                                              'plus-ones',
+                                                              comment.id);
+                                                    },
+                                                    child: const Icon(
+                                                      Icons.delete,
+                                                      color: Colors.red,
+                                                    ),
+                                                  )
+                                                : null,
+                                          ),
+                                          Padding(
+                                            padding:
+                                                const EdgeInsets.only(left: 50),
+                                            child: Container(
+                                              alignment: Alignment.centerLeft,
+                                              child: const Text(
+                                                'Reply - Blah blah',
+                                                style: TextStyle(
+                                                    fontSize: 16,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                            ),
+                                          ),
+                                          const SizedBox(
+                                            height: 10,
+                                          ),
+                                          Divider(
+                                            height: 2.0,
+                                            thickness: 1.0,
+                                            color: activeColors.grey,
+                                          ),
+                                        ],
                                       );
                                     },
                                   );
