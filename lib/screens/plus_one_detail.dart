@@ -415,20 +415,21 @@ class _PlusOneDetailState extends State<PlusOneDetail> {
                                                   )
                                                 : null,
                                           ),
-                                          Padding(
+                                          comment.reply.trim().isNotEmpty?Padding(
                                             padding:
                                                 const EdgeInsets.only(left: 50),
                                             child: Container(
                                               alignment: Alignment.centerLeft,
-                                              child: const Text(
-                                                'Reply - Blah blah',
-                                                style: TextStyle(
-                                                    fontSize: 16,
-                                                    fontWeight:
-                                                        FontWeight.bold),
+                                              child: Text(
+                                                'Reply - '+ comment.reply,
+                                                style: const TextStyle(
+                                                    fontSize: 13,
+                                                    fontWeight: FontWeight.w600,
+                                                    color: Colors.blue
+                                                   ),
                                               ),
                                             ),
-                                          ),
+                                          ):SizedBox(),
                                           const SizedBox(
                                             height: 10,
                                           ),

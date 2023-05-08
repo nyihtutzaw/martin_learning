@@ -19,6 +19,7 @@ class CommentProvider with ChangeNotifier {
           email: response['data'][i]['user']['email'],
         ),
         body: response["data"][i]["body"],
+        reply: response["data"][i]["reply"]  ?? "",
       );
       comments.add(data);
     }
@@ -37,6 +38,7 @@ class CommentProvider with ChangeNotifier {
         email: response['data']['user']['email'],
       ),
       body: response["data"]["body"],
+       reply: response["data"]["reply"] ?? "",
     );
 
     comments.add(comment);
