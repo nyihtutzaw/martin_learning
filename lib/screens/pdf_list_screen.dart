@@ -2,12 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:optimize/constants/active_constants.dart';
 import 'package:optimize/models/PdfFile.dart';
 import 'package:optimize/screens/pdf_viewer.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class PdfListScreen extends StatelessWidget {
   List<PdfFile> files = [];
   String type;
   PdfListScreen({Key? key, required this.files, required this.type})
       : super(key: key);
+
+  void _launchURL(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +48,10 @@ class PdfListScreen extends StatelessWidget {
                 child: ListTile(
                     title: Text(files[index].name),
                     leading: const Icon(Icons.book),
-                    trailing: const Icon(Icons.arrow_forward)),
+                    trailing: TextButton(
+                      child: Text("Download"),
+                       onPressed: () => _launchURL(files[index].url),
+                    )),
               ),
             );
           },
