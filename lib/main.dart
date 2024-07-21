@@ -7,6 +7,7 @@ import 'package:optimize/providers/blog_provider.dart';
 import 'package:optimize/providers/comment_provider.dart';
 import 'package:optimize/providers/feature_provider.dart';
 import 'package:optimize/providers/greeting_provider.dart';
+import 'package:optimize/providers/idea_provider.dart';
 import 'package:optimize/providers/men_provider.dart';
 import 'package:optimize/providers/message_provider.dart';
 import 'package:optimize/providers/my_list_provider.dart';
@@ -118,6 +119,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider.value(
           value: MessageProvider(),
+        ),
+          ChangeNotifierProvider.value(
+          value: IdeaProvider(),
         ),
       ],
       child: MaterialApp(
