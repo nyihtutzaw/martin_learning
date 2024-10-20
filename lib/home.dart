@@ -3,6 +3,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:optimize/screens/blog_page_screen.dart';
 import 'package:optimize/screens/men.dart';
+import 'package:optimize/screens/one_z_one_detail_camp_screen.dart';
 import 'package:optimize/screens/three_minute.dart';
 import 'package:optimize/services/local_notification_service.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -38,7 +39,8 @@ class _HomeState extends State<Home> {
     PN(),
     OneZeroOne(),
     BlogPageScreen(),
-    Men(),
+    OneZOneDetailCampScreen(),
+    //Men(),
   ];
 
   void _onItemTapped(int index) {
@@ -193,7 +195,7 @@ class _HomeState extends State<Home> {
           ),
           BottomNavigationBarItem(
             icon: activeIcons.diamond,
-            label: 'M.E.N',
+            label: 'Biz Camp',
           ),
         ],
         backgroundColor: activeColors.black,

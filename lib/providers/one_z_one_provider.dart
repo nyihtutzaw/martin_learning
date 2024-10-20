@@ -10,6 +10,7 @@ class OneZOneProvider with ChangeNotifier {
   bool oneZOneLoading = false;
   List<OneZOne> items = [];
   late OneZOne item;
+  late OneZOne campItem;
 
   Future<void> getAll(bool sorted) async {
     oneZOneLoading = true;
@@ -45,6 +46,83 @@ class OneZOneProvider with ChangeNotifier {
       items = List.from(items.reversed);
     }
     oneZOneLoading = false;
+    notifyListeners();
+  }
+
+  
+
+  Future<void> getCampCourse() async {
+    var response = await OneZOneService.getCampCourse();
+
+    List<PdfFile> pdfFiles = [];
+    
+    for (var y = 0; y < response["data"]["workbooks"].length; y++) {
+      pdfFiles.add(PdfFile(
+          id: response["data"]["workbooks"][y]["id"],
+          name: response["data"]["workbooks"][y]["title"],
+          url: response["data"]["workbooks"][y]["work_book"])
+      );
+    }
+  
+
+
+    List<Poster> posters = [];
+    for (var y = 0; y < response["data"]["posters"].length; y++) {
+      posters.add(
+          Poster(
+            id: response["data"]["posters"][y]["id"],
+            name: response["data"]["posters"][y]["title"],
+            url: response["data"]["posters"][y]["poster"]
+          )
+      );
+    }
+    List<AudioFile> audioFiles = [];
+    for (var y = 0; y < response["data"]["audios"].length; y++) {
+      audioFiles.add(AudioFile(
+          id: response["data"]["audios"][y]["id"],
+          name: response["data"]["audios"][y]["title"] ,
+          thumbnail: response["data"]["audios"][y]["thumbnail"] ?? "",
+          url: response["data"]["audios"][y]["audio"]));
+    }
+    print(audioFiles);
+    //print(audioFiles.first.thumbnail);
+
+    print("Getting videoFiles");
+    List<VideoFile> videoFiles = [];
+    for (var y = 0; y < response["data"]["videos"].length; y++) {
+    
+      videoFiles.add(VideoFile(
+          id: response["data"]["videos"][y]["id"],
+          isYouTube: response["data"]["videos"][y]["is_youtube"],
+          name: response["data"]["videos"][y]["title"],
+          subTitle: response["data"]["videos"][y]["subtitle"] ?? "",
+          thumbnail: response["data"]["videos"][y]["thumbnail"] ?? "",
+          url: response["data"]["videos"][y]["video"] ?? ""));
+    }
+  
+
+    campItem = OneZOne(
+      id: response["data"]["id"],
+      title: response["data"]["title"] ?? "title",
+      subtitle: response["data"]["subtitle"] ?? "subtitle",
+      video: response["data"]["video"] ?? "",
+      isUtube: response["data"]["isYoutube"],
+      description: response["data"]["description"] ?? "",
+      thumbnail: response["data"]["thumbnail"] ?? "",
+      poster_image: response["data"]["poster_image"] ?? "",
+      isBooked: response["data"]["isBooked"],
+      isLiked: response["data"]["isLiked"],
+      isTipped: response["data"]["isTiped"],
+      isSub: response["data"]["isSubscribed"],
+      pdfFiles: pdfFiles,
+      audioFiles: audioFiles,
+      videoFiles: videoFiles,
+      posters: posters,
+    );
+   
+    if (items.isEmpty) {
+      items.add(campItem);
+    }
     notifyListeners();
   }
 

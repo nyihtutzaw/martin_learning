@@ -26,6 +26,18 @@ class OneZOneService {
     return response.data;
   }
 
+    static getCampCourse() async {
+    final prefs = await SharedPreferences.getInstance();
+    String? token = prefs.getString('userToken');
+    final storedData = json.decode(token!);
+
+    Response response = await ApiService.getApiHandler(storedData['token'])
+        .get('one-zero-ones-camp');
+    return response.data;
+  }
+
+  
+
   static getAllF() async {
     final prefs = await SharedPreferences.getInstance();
     String? token = prefs.getString('userToken');
