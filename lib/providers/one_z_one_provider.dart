@@ -9,6 +9,7 @@ import 'package:optimize/network/one_z_one_service.dart';
 class OneZOneProvider with ChangeNotifier {
   bool oneZOneLoading = false;
   List<OneZOne> items = [];
+    List<OneZOne> campItems= [];
   late OneZOne item;
   late OneZOne campItem;
 
@@ -84,10 +85,7 @@ class OneZOneProvider with ChangeNotifier {
           thumbnail: response["data"]["audios"][y]["thumbnail"] ?? "",
           url: response["data"]["audios"][y]["audio"]));
     }
-    print(audioFiles);
-    //print(audioFiles.first.thumbnail);
-
-    print("Getting videoFiles");
+  
     List<VideoFile> videoFiles = [];
     for (var y = 0; y < response["data"]["videos"].length; y++) {
     
@@ -120,8 +118,8 @@ class OneZOneProvider with ChangeNotifier {
       posters: posters,
     );
    
-    if (items.isEmpty) {
-      items.add(campItem);
+    if (campItems.isEmpty) {
+      campItems.add(campItem);
     }
     notifyListeners();
   }

@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:optimize/models/Poster.dart';
 import 'package:optimize/screens/photo_view_screen.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 
 import '../constants/active_constants.dart';
@@ -43,7 +44,19 @@ class PosterListScreen extends StatelessWidget {
                 child: ListTile(
                     title: Text(files[index].name),
                     leading: const Icon(Icons.photo),
-                    trailing: const Icon(Icons.arrow_forward)),
+                    trailing: TextButton(
+                    child: Text("Download"),
+                    onPressed: () async {
+                      final url = files[index].url;
+                      if (await canLaunch(url)) {
+                        await launch(url);
+                      } else {
+                        throw 'Could not launch $url';
+                      }
+                    },
+                  ),
+                    
+                    ),
               ),
             );
           },
